@@ -57,18 +57,23 @@ const IntelligentChatbot: React.FC<ChatbotProps> = ({ isDark = false }) => {
   }, [isOpen]);
 
   const quickActions = [
-    { text: "Show me AI solutions for my industry", icon: Brain },
+    { text: "Tell me about Hotel am Kochbrunnen project", icon: Brain },
     { text: "What's the EA Method?", icon: Zap },
     { text: "Book a strategy call", icon: ArrowRight },
-    { text: "Calculate potential ROI", icon: Sparkles }
+    { text: "Show me AI solutions for my industry", icon: Sparkles }
   ];
 
   const getIntelligentResponse = (userMessage: string): string => {
     const message = userMessage.toLowerCase();
     
+    // Hotel am Kochbrunnen specific responses
+    if (message.includes('hotel am kochbrunnen') || message.includes('kochbrunnen')) {
+      return "🏨 Hotel am Kochbrunnen is our flagship hospitality transformation! We implemented a complete AI ecosystem across 8 integrated pillars:\n\n🔑 **Friction-Free Guest Journey**: Keyless check-in/out via QR & NFC, AI-concierge available in-room, at reception, and on WhatsApp with multilingual voice commands\n\n📊 **Fully-Automated Back Office**: e-Invoice generator, GoBD-compliant workflows, real-time PMS & OTA sync, saving ~40 hrs/month\n\n🌡️ **Smart Building Control**: IoT occupancy-based HVAC, cutting energy costs by 25%\n\n🔒 **Security & Compliance**: Zero-trust network, GDPR-proof data lake with automatic PII masking\n\n💰 **Revenue-Driving AI**: Context-aware RAG system, upsell engine, sentiment analysis\n\n📱 **Seamless Booking**: Mobile-first website with 99 Lighthouse score, one-tap booking\n\n👥 **Staff Orchestration**: AI-driven housekeeping routes, automated maintenance tickets\n\n⚡ **Scalable Architecture**: 99.9% uptime guarantee, DSGVO-compliant\n\nResult: Complete transformation from traditional hospitality to AI-driven guest perfection!";
+    }
+    
     // Industry-specific responses
     if (message.includes('hotel') || message.includes('hospitality') || message.includes('restaurant')) {
-      return "🏨 Perfect! For hospitality businesses, we specialize in intelligent reservation systems, automated guest services, and predictive analytics. Our Hotel am Kochbrunnen client saw a 40% reduction in no-shows and 25% increase in customer satisfaction. We can implement smart booking optimization, automated customer service, and revenue forecasting systems. Would you like to see a demo tailored to your specific hospitality needs?";
+      return "🏨 Perfect! For hospitality businesses, we specialize in intelligent reservation systems, automated guest services, and predictive analytics. Our Hotel am Kochbrunnen client achieved complete AI transformation across 8 integrated pillars including keyless check-in, AI-concierge, automated back office (saving 40hrs/month), smart building control (25% energy savings), and 99.9% uptime. We can implement similar comprehensive solutions for your property. Would you like to see a demo tailored to your specific hospitality needs?";
     }
     
     if (message.includes('manufacturing') || message.includes('factory') || message.includes('industrial')) {
@@ -90,44 +95,49 @@ const IntelligentChatbot: React.FC<ChatbotProps> = ({ isDark = false }) => {
     if (message.includes('smart home') || message.includes('home automation') || message.includes('iot')) {
       return "🏠 Smart living solutions are incredibly exciting! We design personal AI assistants, adaptive climate control, intelligent lighting, and comprehensive home automation systems. Our clients save an average of 40% on energy costs while gaining 2 hours daily through automation. We create truly intelligent homes that learn and adapt to your lifestyle. Interested in transforming your living space?";
     }
+
+    // Klavierschule Glenn Miller responses
+    if (message.includes('klavierschule') || message.includes('glenn miller') || message.includes('piano school')) {
+      return "🎹 Klavierschule Glenn Miller is a perfect example of our AI-powered website development! We built a complete platform featuring:\n\n📅 **AI-Powered Booking System**: Intelligent scheduling that optimizes lesson times and teacher availability\n\n🎯 **Smart Schedule Creator**: Automated schedule optimization based on student preferences and teacher capacity\n\n👨‍🎓 **Student Management**: Automated progress tracking and personalized learning paths\n\n💰 **Cost Efficiency**: Delivered at 40-60% less cost than big companies while maintaining premium quality\n\nThe website showcases how we integrate AI seamlessly into educational platforms. Visit klavierschule-glennmiller.de to see it in action! Would you like us to build a similar intelligent platform for your business?";
+    }
     
     // EA Method and process questions
     if (message.includes('ea method') || message.includes('methodology') || message.includes('process')) {
-      return "🎯 The EA Method is our proven 4-stage approach: 1) Deep Dive & Discovery (2-4 weeks) - We embed with your team to map processes and identify opportunities. 2) Architectural Design (3-5 weeks) - Custom AI blueprint creation. 3) Seamless Implementation (6-12 weeks) - Precise deployment with minimal disruption. 4) Evolution & Enhancement (ongoing) - Continuous optimization. We maintain a 95% project success rate with this methodology. Want to see how it applies to your specific situation?";
+      return "🎯 The EA Method is our proven 4-stage approach that delivered the Hotel am Kochbrunnen transformation:\n\n**01. Deep Dive & Discovery (2-4 weeks)** - We embed with your team to map processes and identify opportunities\n\n**02. Architectural Design (3-5 weeks)** - Custom AI blueprint creation with optimal technology selection\n\n**03. Seamless Implementation (6-12 weeks)** - Precise deployment with minimal disruption and comprehensive training\n\n**04. Evolution & Enhancement (ongoing)** - Continuous optimization as your AI systems grow\n\nWe maintain a 95% project success rate with this methodology. Each stage unlocks dynamically as we progress, ensuring perfect execution. Want to see how it applies to your specific situation?";
     }
     
-    // ROI and pricing questions
-    if (message.includes('cost') || message.includes('price') || message.includes('roi') || message.includes('investment')) {
-      return "💰 Great question! Our clients typically see ROI within 18 months, with many achieving 60% efficiency improvements. We offer performance-based pricing options and guarantee measurable results. Investment varies based on scope, but most projects range from €50K-€500K depending on complexity. We provide detailed ROI calculations during our strategy call. Would you like me to connect you with our team for a personalized cost analysis?";
+    // Cost and pricing questions
+    if (message.includes('cost') || message.includes('price') || message.includes('investment') || message.includes('40-60%') || message.includes('savings')) {
+      return "💰 Our cost advantage is significant! We deliver AI solutions at 40-60% less cost than big companies while maintaining enterprise-grade quality. Here's why:\n\n🤖 **AI-Assisted Development**: Smart automation reduces development time\n🎯 **Focused Expertise**: Specialized team, no corporate overhead\n⚡ **Efficient Process**: The EA Method eliminates waste\n🔄 **Reusable Components**: Smart architecture reduces future costs\n\nTypical projects range €50K-€500K depending on scope, with ROI typically achieved within 18 months. Most clients see 60% efficiency improvements. Would you like a personalized cost analysis for your specific needs?";
     }
     
     // Booking and contact
     if (message.includes('book') || message.includes('call') || message.includes('meeting') || message.includes('demo')) {
-      return "📅 I'd love to connect you with our team! You can book a personalized AI strategy call where Ali H., our founder, will personally walk you through solutions tailored to your business. The call includes a live demonstration and ROI analysis. You can use the 'Book Your AI Strategy Call' button on this page, or I can guide you through our booking process right here. What works better for you?";
+      return "📅 I'd love to connect you with our team! You can book a personalized AI strategy call where Ali H., our founder, will personally walk you through solutions tailored to your business. The call includes:\n\n✅ Live demonstration of relevant solutions\n✅ Custom ROI analysis for your business\n✅ Detailed implementation roadmap\n✅ Q&A with our lead AI architect\n\nYou can use the 'Book Your AI Strategy Call' button on this page, or I can guide you through our booking process right here. What works better for you?";
     }
     
     // Company information
     if (message.includes('about') || message.includes('company') || message.includes('team') || message.includes('experience')) {
-      return "🚀 EA Solutions is led by world-class AI engineers and strategists with 15+ years average experience. We've completed 50+ successful implementations across 10+ industries. Our team includes PhD-level researchers, former Big Tech engineers, and industry domain experts. We're based in Wiesbaden, Germany, but serve clients globally. We've won multiple awards including the AI Innovation Award 2024. What specific aspect of our expertise interests you most?";
+      return "🚀 EA Solutions is led by world-class AI engineers and strategists with 15+ years average experience. We've completed 6+ successful implementations including major projects like Hotel am Kochbrunnen's complete AI transformation and Klavierschule Glenn Miller's intelligent platform.\n\n👥 **Our Team**: PhD-level researchers, former Big Tech engineers, industry domain experts\n🏆 **Track Record**: 98% client satisfaction, 95% project success rate\n🌍 **Global Reach**: Based in Wiesbaden, Germany, serving clients worldwide\n🥇 **Recognition**: AI Innovation Award 2024 winner\n\nWhat specific aspect of our expertise interests you most?";
     }
     
     // Technical questions
     if (message.includes('technical') || message.includes('integration') || message.includes('security') || message.includes('data')) {
-      return "🔧 Technically, we're cutting-edge! We work with the latest AI models (GPT-4, Claude, custom LLMs), ensure enterprise-grade security with end-to-end encryption, and integrate seamlessly with existing systems. We support cloud and on-premise deployments, maintain GDPR/HIPAA compliance, and provide 24/7 monitoring. Our solutions are built for scalability and future-proofing. What specific technical requirements do you have?";
+      return "🔧 Technically, we're cutting-edge! Our Hotel am Kochbrunnen project showcases our capabilities:\n\n🤖 **AI Models**: Latest GPT-4, Claude, custom LLMs, context-aware RAG systems\n🔒 **Security**: Zero-trust networks, GDPR-proof data lakes, automatic PII masking\n☁️ **Infrastructure**: Containerized microservices, 99.9% uptime guarantee\n🔗 **Integration**: Seamless with existing systems (PMS, OTA, payment gateways)\n📊 **Monitoring**: Real-time analytics, continuous vulnerability scanning\n🌍 **Compliance**: DSGVO, HIPAA, industry-specific regulations\n\nWe support cloud and on-premise deployments with 24/7 monitoring. What specific technical requirements do you have?";
     }
     
     // Comparison questions
     if (message.includes('different') || message.includes('better') || message.includes('competition') || message.includes('compare')) {
-      return "⭐ What sets us apart: 1) Radically Bespoke - Every solution is custom-built, not generic software. 2) Elite Expertise - World-class team with deep industry knowledge. 3) Tangible ROI - Guaranteed results within 18 months. 4) Continuous Evolution - Your AI grows with your business. Unlike generic platforms or traditional consulting, we deliver fully customized, performance-guaranteed solutions. Want to see a detailed comparison?";
+      return "⭐ What sets us apart - proven by projects like Hotel am Kochbrunnen:\n\n🎯 **Radically Bespoke**: Every solution custom-built (8 integrated pillars for hotels vs generic software)\n👥 **Elite Expertise**: World-class team delivering 99.9% uptime and 40hrs/month savings\n💰 **Tangible Results**: Guaranteed ROI within 18 months, 40-60% cost savings vs big companies\n🔄 **Continuous Evolution**: Your AI grows with your business (ongoing optimization)\n🏆 **Proven Success**: 98% client satisfaction, real transformations not just implementations\n\nUnlike generic platforms or traditional consulting, we deliver fully customized, performance-guaranteed solutions. Want to see a detailed comparison?";
     }
     
     // General AI questions
     if (message.includes('ai') || message.includes('artificial intelligence') || message.includes('machine learning')) {
-      return "🧠 AI is transforming every industry! We specialize in practical AI applications that deliver immediate business value: automation of repetitive tasks, intelligent decision-making systems, predictive analytics, and personalized customer experiences. Our approach focuses on augmenting human capabilities, not replacing them. We ensure ethical AI implementation with full transparency. What specific AI applications interest you for your business?";
+      return "🧠 AI is transforming every industry! We specialize in practical AI applications that deliver immediate business value:\n\n🤖 **Automation**: Eliminate repetitive tasks (like Hotel am Kochbrunnen's 40hrs/month admin savings)\n🧠 **Intelligence**: Smart decision-making systems and predictive analytics\n👥 **Personalization**: Tailored customer experiences and recommendations\n⚡ **Efficiency**: Optimize operations (25% energy savings, 99.9% uptime)\n\nOur approach focuses on augmenting human capabilities, not replacing them. We ensure ethical AI implementation with full transparency. What specific AI applications interest you for your business?";
     }
     
     // Default intelligent response
-    return "🤔 That's an interesting question! I'm designed to help you understand how EA Solutions can transform your business with AI. I can provide detailed information about our industry-specific solutions, the EA Method, ROI expectations, technical capabilities, and help you book a strategy call. Could you tell me more about your specific business or what aspect of AI transformation interests you most? I'm here to provide intelligent, personalized guidance!";
+    return "🤔 That's an interesting question! I'm designed to help you understand how EA Solutions can transform your business with AI. I can provide detailed information about:\n\n🏨 **Success Stories**: Hotel am Kochbrunnen's complete transformation, Klavierschule Glenn Miller's intelligent platform\n🎯 **The EA Method**: Our proven 4-stage methodology\n💰 **Cost Advantages**: 40-60% savings vs big companies\n🔧 **Technical Capabilities**: Enterprise-grade AI solutions\n📅 **Strategy Calls**: Connect with our expert team\n\nCould you tell me more about your specific business or what aspect of AI transformation interests you most? I'm here to provide intelligent, personalized guidance!";
   };
 
   const handleSend = async () => {
