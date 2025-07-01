@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './components/ThemeProvider';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
@@ -15,23 +16,25 @@ import Contact from './pages/Contact';
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/solutions" element={<Solutions />} />
-          <Route path="/solutions/gastronomy-hospitality" element={<GastronomyHospitality />} />
-          <Route path="/solutions/industrial-manufacturing" element={<IndustrialManufacturing />} />
-          <Route path="/solutions/finance-security" element={<FinanceSecurity />} />
-          <Route path="/solutions/smart-living" element={<SmartLiving />} />
-          <Route path="/solutions/healthcare" element={<Healthcare />} />
-          <Route path="/solutions/retail" element={<Retail />} />
-          <Route path="/ea-method" element={<EAMethod />} />
-          <Route path="/why-ea" element={<WhyEA />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/solutions/gastronomy-hospitality" element={<GastronomyHospitality />} />
+            <Route path="/solutions/industrial-manufacturing" element={<IndustrialManufacturing />} />
+            <Route path="/solutions/finance-security" element={<FinanceSecurity />} />
+            <Route path="/solutions/smart-living" element={<SmartLiving />} />
+            <Route path="/solutions/healthcare" element={<Healthcare />} />
+            <Route path="/solutions/retail" element={<Retail />} />
+            <Route path="/ea-method" element={<EAMethod />} />
+            <Route path="/why-ea" element={<WhyEA />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 }
 
