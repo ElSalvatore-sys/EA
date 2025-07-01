@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Utensils, 
@@ -13,113 +13,131 @@ import {
   Zap,
   Target,
   Building2,
-  Sparkles
+  Sparkles,
+  Globe,
+  Code,
+  Palette
 } from 'lucide-react';
 
 const Home: React.FC = () => {
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+
   const industries = [
     {
       id: 'gastronomy',
       title: 'Gastronomy & Hospitality',
       icon: Utensils,
       link: '/solutions/gastronomy-hospitality',
-      description: 'Intelligent reservation systems, automated guest services',
-      gradient: 'from-orange-400 via-red-400 to-pink-400',
-      shadowColor: 'shadow-orange-500/25'
+      description: 'Intelligent systems for seamless guest experiences',
+      available: true
     },
     {
       id: 'industrial',
       title: 'Industrial & Manufacturing',
       icon: Factory,
       link: '/solutions/industrial-manufacturing',
-      description: 'Predictive maintenance, quality control automation',
-      gradient: 'from-gray-400 via-slate-500 to-zinc-600',
-      shadowColor: 'shadow-gray-500/25'
+      description: 'Smart automation for operational excellence',
+      available: true
     },
     {
       id: 'finance',
       title: 'Finance & Security',
       icon: Shield,
       link: '/solutions/finance-security',
-      description: 'Fraud detection, risk assessment, compliance automation',
-      gradient: 'from-emerald-400 via-teal-500 to-cyan-600',
-      shadowColor: 'shadow-emerald-500/25'
+      description: 'Advanced protection and compliance systems',
+      available: false,
+      status: 'Under Research'
     },
     {
       id: 'smart-living',
       title: 'Smart Living & Personal AI',
       icon: HomeIcon,
       link: '/solutions/smart-living',
-      description: 'Intelligent home automation, personal assistant systems',
-      gradient: 'from-blue-400 via-indigo-500 to-purple-600',
-      shadowColor: 'shadow-blue-500/25'
+      description: 'Intelligent environments that adapt to you',
+      available: true
     },
     {
       id: 'healthcare',
-      title: 'Healthcare & Life Sciences',
+      title: 'Healthcare',
       icon: Heart,
       link: '/solutions/healthcare',
-      description: 'Diagnostic assistance, patient management systems',
-      gradient: 'from-pink-400 via-rose-500 to-red-500',
-      shadowColor: 'shadow-pink-500/25'
+      description: 'Precision care through intelligent systems',
+      available: true
     },
     {
       id: 'retail',
       title: 'Retail & E-commerce',
       icon: ShoppingCart,
       link: '/solutions/retail',
-      description: 'Personalized recommendations, inventory optimization',
-      gradient: 'from-purple-400 via-violet-500 to-indigo-600',
-      shadowColor: 'shadow-purple-500/25'
+      description: 'Personalized experiences that drive growth',
+      available: false,
+      status: 'Under Research'
     }
   ];
 
   const clientLogos = [
     { name: 'Hotel am Kochbrunnen', industry: 'Hospitality', metric: '40% efficiency boost' },
     { name: 'Falchi Dental', industry: 'Healthcare', metric: '60% faster diagnostics' },
-    { name: 'Aramco', industry: 'Energy', metric: 'Global AI integration' },
-    { name: 'TechCorp Industries', industry: 'Manufacturing', metric: '70% downtime reduction' },
-    { name: 'SecureBank', industry: 'Finance', metric: '99.7% fraud detection' }
+    { name: 'Klavierschule Glenn Miller', industry: 'Education', metric: 'AI-powered booking system' }
   ];
 
   const partners = [
-    'Google Cloud Partner',
-    'Microsoft Azure',
-    'Amazon Web Services',
-    'OpenAI',
-    'Anthropic (Claude)'
+    { name: 'Google Cloud', logo: '🌐' },
+    { name: 'Microsoft Azure', logo: '☁️' },
+    { name: 'OpenAI', logo: '🤖' },
+    { name: 'Anthropic', logo: '🧠' },
+    { name: 'AWS', logo: '⚡' }
   ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const stepIndex = parseInt(entry.target.getAttribute('data-step') || '0');
+            setVisibleSteps(prev => [...new Set([...prev, stepIndex])]);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    stepsRef.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
       <section className="pt-16 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 dark:from-gray-950 dark:via-blue-950 dark:to-gray-900 text-white relative overflow-hidden">
-        {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full opacity-10 animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full opacity-5 animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full opacity-5 animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full opacity-3 animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-light mb-8 leading-tight tracking-tight">
               Your Business Has a Body.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 font-medium">
                 We Build Its Mind.
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-300 dark:text-gray-400 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl mb-12 text-gray-300 dark:text-gray-400 max-w-4xl mx-auto font-light leading-relaxed">
               We architect bespoke AI infrastructures that eradicate repetitive work, 
-              amplify human potential, and unlock unprecedented levels of efficiency for your enterprise.
+              amplify human potential, and unlock unprecedented efficiency.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-blue-500 hover:to-blue-400 dark:hover:from-blue-400 dark:hover:to-blue-300 transition-all duration-300 transform hover:scale-105 shadow-xl">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button className="bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
                 Book Your AI Strategy Call
               </button>
               <Link 
                 to="/solutions" 
-                className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 dark:hover:text-gray-800 transition-all duration-300"
+                className="border border-white/30 text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300"
               >
                 Explore Solutions
               </Link>
@@ -129,200 +147,302 @@ const Home: React.FC = () => {
       </section>
 
       {/* Enhanced Client Showcase */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden transition-colors duration-300">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 25px 25px, rgba(59, 130, 246, 0.3) 2px, transparent 0)`,
-            backgroundSize: '50px 50px'
-          }}></div>
-        </div>
-        
+      <section className="py-32 bg-gray-50 dark:bg-gray-800 relative overflow-hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              <Sparkles className="h-4 w-4" />
-              <span>Powering Innovation Across Industries</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
               Transforming Businesses Worldwide
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-light">
               From local innovators to global enterprises, we empower organizations to integrate intelligence at their core.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {clientLogos.map((client, index) => (
               <div 
                 key={index} 
-                className="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700"
+                className="group bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
                     <Building2 className="h-6 w-6 text-white" />
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">
+                  <div className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
                     {client.industry}
                   </div>
                 </div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <h3 className="font-medium text-gray-900 dark:text-white mb-3 text-lg">
                   {client.name}
                 </h3>
-                <div className="text-sm text-green-600 dark:text-green-400 font-semibold bg-green-50 dark:bg-green-900/30 px-3 py-1 rounded-full inline-block">
+                <div className="text-sm text-green-600 dark:text-green-400 font-medium">
                   {client.metric}
                 </div>
               </div>
             ))}
           </div>
           
-          {/* Animated metrics bar */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-              <div className="group">
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">50+</div>
-                <div className="text-gray-600 dark:text-gray-400">Projects Delivered</div>
+          {/* Metrics */}
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-12 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-12 text-center">
+              <div>
+                <div className="text-4xl font-light text-blue-600 dark:text-blue-400 mb-2">6+</div>
+                <div className="text-gray-600 dark:text-gray-400 font-light">Projects Delivered</div>
               </div>
-              <div className="group">
-                <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">98%</div>
-                <div className="text-gray-600 dark:text-gray-400">Client Satisfaction</div>
+              <div>
+                <div className="text-4xl font-light text-purple-600 dark:text-purple-400 mb-2">98%</div>
+                <div className="text-gray-600 dark:text-gray-400 font-light">Client Satisfaction</div>
               </div>
-              <div className="group">
-                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">60%</div>
-                <div className="text-gray-600 dark:text-gray-400">Avg. Efficiency Gain</div>
-              </div>
-              <div className="group">
-                <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">18mo</div>
-                <div className="text-gray-600 dark:text-gray-400">Avg. ROI Timeline</div>
+              <div className="col-span-2 md:col-span-1">
+                <div className="text-4xl font-light text-green-600 dark:text-green-400 mb-2">40-60%</div>
+                <div className="text-gray-600 dark:text-gray-400 font-light">Cost Reduction vs Big Companies</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Industry Solutions Section */}
-      <section className="py-20 bg-white dark:bg-gray-900 relative overflow-hidden transition-colors duration-300">
-        {/* 3D Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl animate-float"></div>
-          <div className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-full blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-300 px-6 py-3 rounded-full text-sm font-semibold mb-6">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              <span>Intelligence, Engineered for Your Sector</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Sector-Specific AI Solutions
+      {/* AI-Powered Websites & Apps Section */}
+      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              AI-Powered Websites & Apps
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
-              Generic AI is a dead end. True transformation requires solutions engineered 
-              for the specific DNA of your industry. Discover how we elevate your operations.
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              We build intelligent websites and applications with 40-60% cost savings compared to big companies, 
+              without compromising on quality or innovation.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="lg:col-span-2">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-12 h-full">
+                <div className="flex items-center space-x-4 mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                    <Globe className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-medium text-gray-900 dark:text-white">Klavierschule Glenn Miller</h3>
+                    <p className="text-gray-600 dark:text-gray-400">AI-Integrated Piano School Platform</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 mb-8 text-lg font-light leading-relaxed">
+                  Complete website with AI-powered booking system, intelligent schedule creator, and automated 
+                  student management. Features smart lesson planning and personalized learning paths.
+                </p>
+                <a 
+                  href="https://klavierschule-glennmiller.de" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                >
+                  Visit Website
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </div>
+            </div>
+            
+            <div className="space-y-8">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6">
+                  <Code className="h-6 w-6 text-white" />
+                </div>
+                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">Smart Development</h4>
+                <p className="text-gray-600 dark:text-gray-400 font-light">
+                  AI-assisted development process that reduces costs while maintaining enterprise-grade quality.
+                </p>
+              </div>
+              
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6">
+                  <Palette className="h-6 w-6 text-white" />
+                </div>
+                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">Intelligent Design</h4>
+                <p className="text-gray-600 dark:text-gray-400 font-light">
+                  AI-powered design systems that create beautiful, user-centric interfaces automatically.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Minimalistic Industry Solutions */}
+      <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              Sector-Specific Solutions
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              Intelligent systems engineered for your industry's unique requirements.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industries.map((industry, index) => {
               const IconComponent = industry.icon;
+              const isAvailable = industry.available;
+              
               return (
-                <Link
+                <div
                   key={industry.id}
-                  to={industry.link}
-                  className="group relative bg-white dark:bg-gray-800 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 overflow-hidden"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className={`group relative bg-white dark:bg-gray-900 rounded-3xl p-8 transition-all duration-500 border border-gray-100 dark:border-gray-700 ${
+                    isAvailable 
+                      ? 'hover:shadow-xl hover:-translate-y-2 cursor-pointer' 
+                      : 'opacity-60 cursor-not-allowed'
+                  }`}
                 >
-                  {/* 3D Background Gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${industry.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                  {!isAvailable && (
+                    <div className="absolute top-4 right-4 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 px-3 py-1 rounded-full text-xs font-medium">
+                      {industry.status}
+                    </div>
+                  )}
                   
-                  {/* Floating particles effect */}
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-500"></div>
-                    <div className="absolute bottom-6 left-6 w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-500" style={{ animationDelay: '0.5s' }}></div>
+                  <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                    <IconComponent className="h-8 w-8 text-gray-600 dark:text-gray-400" />
                   </div>
 
-                  <div className="relative z-10">
-                    {/* 3D Icon Container */}
-                    <div className={`relative w-20 h-20 mb-6 mx-auto group-hover:scale-110 transition-transform duration-500`}>
-                      <div className={`absolute inset-0 bg-gradient-to-br ${industry.gradient} rounded-2xl ${industry.shadowColor} shadow-lg group-hover:shadow-xl transition-shadow duration-500`}></div>
-                      <div className="absolute inset-0 bg-white/20 rounded-2xl backdrop-blur-sm"></div>
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <IconComponent className="h-10 w-10 text-white drop-shadow-lg" />
-                      </div>
-                      {/* 3D depth effect */}
-                      <div className={`absolute -bottom-1 -right-1 w-full h-full bg-gradient-to-br ${industry.gradient} rounded-2xl opacity-30 -z-10`}></div>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500 text-center">
-                      {industry.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-6 text-center leading-relaxed">
-                      {industry.description}
-                    </p>
-                    <div className="flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 font-semibold transition-colors duration-500">
-                      <span className="mr-2">Explore Solutions</span>
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-500" />
-                    </div>
-                  </div>
-
-                  {/* Hover glow effect */}
-                  <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${industry.shadowColor} shadow-2xl -z-10`}></div>
-                </Link>
+                  <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-4">
+                    {industry.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 font-light leading-relaxed mb-6">
+                    {industry.description}
+                  </p>
+                  
+                  {isAvailable ? (
+                    <Link
+                      to={industry.link}
+                      className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                    >
+                      Explore
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                  ) : (
+                    <span className="text-gray-400 dark:text-gray-500 font-medium">
+                      Coming Soon
+                    </span>
+                  )}
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* The EA Method Preview */}
-      <section className="py-20 bg-gradient-to-r from-blue-900 to-blue-800 dark:from-blue-950 dark:to-blue-900 text-white transition-colors duration-300">
+      {/* Dynamic EA Method Process */}
+      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Comprehensive Support for Every Stage</h2>
-            <p className="text-xl text-blue-100 dark:text-blue-200 max-w-3xl mx-auto">
-              Our proven methodology ensures your AI transformation is seamless, 
-              strategic, and sustainable.
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              The EA Method
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              Our proven methodology ensures seamless AI transformation.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                number: '01',
-                title: 'Deep Dive & Discovery',
-                description: 'We embed with your team to map every process, identify bottlenecks, and understand your ultimate goals.'
-              },
-              {
-                number: '02',
-                title: 'Architectural Design',
-                description: 'We design a bespoke AI blueprint for your business, selecting the optimal blend of technologies.'
-              },
-              {
-                number: '03',
-                title: 'Seamless Implementation',
-                description: 'Our elite engineers build and deploy your AI infrastructure with military precision.'
-              },
-              {
-                number: '04',
-                title: 'Evolution & Enhancement',
-                description: 'Your AI mind is a living entity. We provide continuous optimization and enhancement.'
-              }
-            ].map((stage, index) => (
-              <div key={index} className="text-center">
-                <div className="text-6xl font-bold text-blue-400 dark:text-blue-300 mb-4">{stage.number}</div>
-                <h3 className="text-xl font-bold mb-3">{stage.title}</h3>
-                <p className="text-blue-100 dark:text-blue-200">{stage.description}</p>
-              </div>
-            ))}
+          <div className="relative">
+            {/* Connection Lines */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-200 via-purple-200 to-blue-200 dark:from-blue-800 dark:via-purple-800 dark:to-blue-800 transform -translate-x-1/2 hidden lg:block"></div>
+            
+            <div className="space-y-32">
+              {[
+                {
+                  number: '01',
+                  title: 'Deep Dive & Discovery',
+                  description: 'We embed with your team to map every process and identify transformation opportunities.',
+                  duration: '2-4 weeks'
+                },
+                {
+                  number: '02',
+                  title: 'Architectural Design',
+                  description: 'Custom AI blueprint creation with optimal technology selection for your specific needs.',
+                  duration: '3-5 weeks'
+                },
+                {
+                  number: '03',
+                  title: 'Seamless Implementation',
+                  description: 'Precise deployment with minimal disruption and comprehensive team training.',
+                  duration: '6-12 weeks'
+                },
+                {
+                  number: '04',
+                  title: 'Evolution & Enhancement',
+                  description: 'Continuous optimization and enhancement as your AI systems grow with your business.',
+                  duration: 'Ongoing'
+                }
+              ].map((stage, index) => (
+                <div
+                  key={index}
+                  ref={(el) => (stepsRef.current[index] = el)}
+                  data-step={index}
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center transition-all duration-1000 ${
+                    visibleSteps.includes(index) 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-8'
+                  } ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}
+                >
+                  <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                    <div className="relative">
+                      {/* Step Circle */}
+                      <div className={`absolute -left-6 top-8 w-12 h-12 rounded-full flex items-center justify-center text-white font-medium text-lg transition-all duration-1000 hidden lg:flex ${
+                        visibleSteps.includes(index)
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 scale-100'
+                          : 'bg-gray-300 dark:bg-gray-700 scale-75'
+                      }`}>
+                        {stage.number}
+                      </div>
+                      
+                      <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 lg:ml-6">
+                        <div className="flex items-center justify-between mb-6 lg:hidden">
+                          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-medium text-lg">
+                            {stage.number}
+                          </div>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full">
+                            {stage.duration}
+                          </span>
+                        </div>
+                        
+                        <div className="hidden lg:flex justify-between items-center mb-6">
+                          <h3 className="text-2xl font-medium text-gray-900 dark:text-white">
+                            {stage.title}
+                          </h3>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full">
+                            {stage.duration}
+                          </span>
+                        </div>
+                        
+                        <h3 className="text-2xl font-medium text-gray-900 dark:text-white mb-4 lg:hidden">
+                          {stage.title}
+                        </h3>
+                        
+                        <p className="text-gray-600 dark:text-gray-400 font-light text-lg leading-relaxed">
+                          {stage.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                    <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-3xl flex items-center justify-center">
+                      <div className="text-6xl opacity-20">
+                        {stage.number}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-20">
             <Link
               to="/ea-method"
-              className="inline-flex items-center bg-white text-blue-900 dark:text-blue-800 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 dark:hover:bg-gray-100 transition-colors duration-300"
+              className="inline-flex items-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-4 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-300"
             >
-              Learn About Our Process
+              Learn More About Our Process
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
@@ -330,38 +450,40 @@ const Home: React.FC = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+      <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">The EA Solutions Advantage</h2>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              The EA Solutions Advantage
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
                 icon: Target,
                 title: 'Radically Bespoke',
-                description: 'We don\'t sell software. We build solutions. Every line of code, every algorithm, and every integration is custom-architected for you.'
+                description: 'Every solution is custom-architected for your specific needs and industry requirements.'
               },
               {
                 icon: Users,
                 title: 'Elite Expertise',
-                description: 'Our team consists of world-class AI engineers and strategists who live at the bleeding edge of technology.'
+                description: 'World-class AI engineers and strategists with deep industry knowledge and proven results.'
               },
               {
                 icon: Zap,
-                title: 'Tangible ROI',
-                description: 'Our goal is your bottom line. We deliver measurable improvements in efficiency, cost reduction, and revenue generation.'
+                title: 'Measurable Impact',
+                description: 'Guaranteed improvements in efficiency, cost reduction, and operational excellence.'
               }
             ].map((advantage, index) => {
               const IconComponent = advantage.icon;
               return (
-                <div key={index} className="text-center bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg transition-colors duration-300">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
-                    <IconComponent className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                <div key={index} className="text-center bg-white dark:bg-gray-900 p-12 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700">
+                  <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                    <IconComponent className="h-8 w-8 text-gray-600 dark:text-gray-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{advantage.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{advantage.description}</p>
+                  <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-4">{advantage.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 font-light leading-relaxed">{advantage.description}</p>
                 </div>
               );
             })}
@@ -369,16 +491,20 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
+      {/* Enhanced Partners Section */}
+      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Powered by World-Leading Technology</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              Powered by Leading Technology
+            </h2>
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             {partners.map((partner, index) => (
-              <div key={index} className="bg-gray-50 dark:bg-gray-800 px-6 py-3 rounded-lg transition-colors duration-300">
-                <span className="text-lg font-semibold text-gray-700 dark:text-gray-300">{partner}</span>
+              <div key={index} className="group bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 text-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300">
+                <div className="text-4xl mb-4">{partner.logo}</div>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{partner.name}</span>
               </div>
             ))}
           </div>
@@ -386,27 +512,17 @@ const Home: React.FC = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-r from-gray-900 to-blue-900 dark:from-gray-950 dark:to-blue-950 text-white transition-colors duration-300">
+      <section className="py-32 bg-gray-900 dark:bg-gray-950 text-white transition-colors duration-300">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
-          <p className="text-xl text-gray-300 dark:text-gray-400 mb-8">
+          <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-tight">Ready to Transform Your Business?</h2>
+          <p className="text-xl text-gray-300 dark:text-gray-400 mb-12 font-light">
             Schedule a personalized consultation and discover how AI can revolutionize your operations.
           </p>
-          <button className="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-blue-500 hover:to-blue-400 dark:hover:from-blue-400 dark:hover:to-blue-300 transition-all duration-300 transform hover:scale-105 shadow-xl">
+          <button className="bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
             Book Your AI Strategy Call Now
           </button>
         </div>
       </section>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };
