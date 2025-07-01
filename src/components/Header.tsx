@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, Menu, X, ChevronDown } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import LanguageSelector from './LanguageSelector';
 
 interface HeaderProps {
   onBookingClick: () => void;
@@ -46,18 +47,18 @@ const Header: React.FC<HeaderProps> = ({ onBookingClick }) => {
                   <Link to="/solutions/industrial-manufacturing" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-900 dark:hover:text-blue-400">
                     Industrial & Manufacturing
                   </Link>
-                  <Link to="/solutions/finance-security" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-900 dark:hover:text-blue-400">
-                    Finance & Security
-                  </Link>
+                  <div className="px-4 py-2 text-gray-400 dark:text-gray-500 text-sm">
+                    Finance & Security (Under Research)
+                  </div>
                   <Link to="/solutions/smart-living" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-900 dark:hover:text-blue-400">
                     Smart Living & Personal AI
                   </Link>
                   <Link to="/solutions/healthcare" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-900 dark:hover:text-blue-400">
-                    Healthcare & Life Sciences
+                    Healthcare
                   </Link>
-                  <Link to="/solutions/retail" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-900 dark:hover:text-blue-400">
-                    Retail & E-commerce
-                  </Link>
+                  <div className="px-4 py-2 text-gray-400 dark:text-gray-500 text-sm">
+                    Retail & E-commerce (Under Research)
+                  </div>
                 </div>
               )}
             </div>
@@ -73,8 +74,9 @@ const Header: React.FC<HeaderProps> = ({ onBookingClick }) => {
             </Link>
           </div>
 
-          {/* Theme Toggle and CTA Button */}
+          {/* Controls */}
           <div className="flex items-center space-x-4">
+            <LanguageSelector />
             <ThemeToggle />
             <button
               onClick={onBookingClick}
