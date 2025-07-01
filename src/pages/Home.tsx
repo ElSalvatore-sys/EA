@@ -1,12 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Utensils, 
-  Factory, 
-  Shield, 
-  Home as HomeIcon, 
-  Heart, 
-  ShoppingCart,
   ArrowRight,
   CheckCircle,
   Users,
@@ -23,8 +17,22 @@ import {
   Lock,
   TrendingUp,
   BarChart3,
-  Smartphone
+  Smartphone,
+  ExternalLink
 } from 'lucide-react';
+import {
+  HospitalityIcon,
+  ManufacturingIcon,
+  FinanceIcon,
+  SmartHomeIcon,
+  HealthcareIcon,
+  RetailIcon,
+  KlavierschuleLogo,
+  AIBrainIcon,
+  SecurityShieldIcon,
+  AutomationIcon,
+  Enhanced3DIcon
+} from '../components/Icons';
 
 const Home: React.FC = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
@@ -34,7 +42,7 @@ const Home: React.FC = () => {
     {
       id: 'gastronomy',
       title: 'Gastronomy & Hospitality',
-      icon: Utensils,
+      IconComponent: HospitalityIcon,
       link: '/solutions/gastronomy-hospitality',
       description: 'Intelligent systems for seamless guest experiences',
       available: true
@@ -42,7 +50,7 @@ const Home: React.FC = () => {
     {
       id: 'industrial',
       title: 'Industrial & Manufacturing',
-      icon: Factory,
+      IconComponent: ManufacturingIcon,
       link: '/solutions/industrial-manufacturing',
       description: 'Smart automation for operational excellence',
       available: true
@@ -50,7 +58,7 @@ const Home: React.FC = () => {
     {
       id: 'finance',
       title: 'Finance & Security',
-      icon: Shield,
+      IconComponent: FinanceIcon,
       link: '/solutions/finance-security',
       description: 'Advanced protection and compliance systems',
       available: false,
@@ -59,7 +67,7 @@ const Home: React.FC = () => {
     {
       id: 'smart-living',
       title: 'Smart Living & Personal AI',
-      icon: HomeIcon,
+      IconComponent: SmartHomeIcon,
       link: '/solutions/smart-living',
       description: 'Intelligent environments that adapt to you',
       available: true
@@ -67,7 +75,7 @@ const Home: React.FC = () => {
     {
       id: 'healthcare',
       title: 'Healthcare',
-      icon: Heart,
+      IconComponent: HealthcareIcon,
       link: '/solutions/healthcare',
       description: 'Precision care through intelligent systems',
       available: true
@@ -75,7 +83,7 @@ const Home: React.FC = () => {
     {
       id: 'retail',
       title: 'Retail & E-commerce',
-      icon: ShoppingCart,
+      IconComponent: RetailIcon,
       link: '/solutions/retail',
       description: 'Personalized experiences that drive growth',
       available: false,
@@ -88,28 +96,32 @@ const Home: React.FC = () => {
       name: 'Hotel am Kochbrunnen', 
       industry: 'Hospitality', 
       metric: 'Full AI transformation',
-      description: 'Complete hospitality AI ecosystem with 8 integrated pillars'
+      description: 'Complete hospitality AI ecosystem with 8 integrated pillars',
+      IconComponent: HospitalityIcon
     },
     { 
       name: 'Falchi Dental', 
       industry: 'Healthcare', 
       metric: '60% faster diagnostics',
-      description: 'AI-powered diagnostic support and patient management'
+      description: 'AI-powered diagnostic support and patient management',
+      IconComponent: HealthcareIcon
     },
     { 
       name: 'Klavierschule Glenn Miller', 
       industry: 'Education', 
       metric: 'AI booking & scheduling',
-      description: 'Intelligent booking system with automated schedule optimization'
+      description: 'Intelligent booking system with automated schedule optimization',
+      IconComponent: KlavierschuleLogo,
+      website: 'https://klavierschule-glennmiller.de'
     }
   ];
 
   const partners = [
-    { name: 'Google Cloud', logo: '🌐' },
-    { name: 'Microsoft Azure', logo: '☁️' },
-    { name: 'OpenAI', logo: '🤖' },
-    { name: 'Anthropic', logo: '🧠' },
-    { name: 'AWS', logo: '⚡' }
+    { name: 'Google Cloud', icon: '🌐', gradient: 'from-blue-500 to-green-500' },
+    { name: 'Microsoft Azure', icon: '☁️', gradient: 'from-blue-600 to-cyan-500' },
+    { name: 'OpenAI', icon: '🤖', gradient: 'from-green-500 to-teal-500' },
+    { name: 'Anthropic', icon: '🧠', gradient: 'from-purple-500 to-pink-500' },
+    { name: 'AWS', icon: '⚡', gradient: 'from-orange-500 to-yellow-500' }
   ];
 
   useEffect(() => {
@@ -181,30 +193,44 @@ const Home: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {clientLogos.map((client, index) => (
-              <div 
-                key={index} 
-                className="group bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700"
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
-                    <Building2 className="h-6 w-6 text-white" />
+            {clientLogos.map((client, index) => {
+              const IconComponent = client.IconComponent;
+              return (
+                <div 
+                  key={index} 
+                  className="group bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <IconComponent size="md" />
+                    <div className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
+                      {client.industry}
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
-                    {client.industry}
+                  <h3 className="font-medium text-gray-900 dark:text-white mb-2 text-lg">
+                    {client.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    {client.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm text-green-600 dark:text-green-400 font-medium">
+                      {client.metric}
+                    </div>
+                    {client.website && (
+                      <a 
+                        href={client.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-sm font-medium"
+                      >
+                        Visit Website
+                        <ExternalLink className="ml-1 h-3 w-3" />
+                      </a>
+                    )}
                   </div>
                 </div>
-                <h3 className="font-medium text-gray-900 dark:text-white mb-2 text-lg">
-                  {client.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                  {client.description}
-                </p>
-                <div className="text-sm text-green-600 dark:text-green-400 font-medium">
-                  {client.metric}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           
           {/* Metrics */}
@@ -254,7 +280,11 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: Key,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-blue-500 to-cyan-500" shadowColor="shadow-blue-500/25" size="md">
+                    <Key className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Friction-Free Guest Journey',
                 features: [
                   'Keyless check-in/out via QR & NFC',
@@ -265,7 +295,11 @@ const Home: React.FC = () => {
                 impact: 'Cuts queue times, boosts satisfaction, captures upsell moments'
               },
               {
-                icon: BarChart3,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-green-500 to-emerald-500" shadowColor="shadow-green-500/25" size="md">
+                    <BarChart3 className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Fully-Automated Back Office',
                 features: [
                   'e-Invoice generator & Steuererklärung',
@@ -276,7 +310,11 @@ const Home: React.FC = () => {
                 impact: 'Saves ~40 hrs/month admin, eliminates tax errors'
               },
               {
-                icon: Thermometer,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-orange-500 to-red-500" shadowColor="shadow-orange-500/25" size="md">
+                    <Thermometer className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Smart Room & Building Control',
                 features: [
                   'IoT occupancy-based HVAC',
@@ -287,7 +325,11 @@ const Home: React.FC = () => {
                 impact: 'Cuts energy cost by 25%, supports ESG goals'
               },
               {
-                icon: Lock,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-purple-500 to-pink-500" shadowColor="shadow-purple-500/25" size="md">
+                    <Lock className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Security & Compliance',
                 features: [
                   'Zero-trust network segmentation',
@@ -298,7 +340,11 @@ const Home: React.FC = () => {
                 impact: 'Protects guest data, lowers insurance premiums'
               },
               {
-                icon: TrendingUp,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-indigo-500 to-blue-500" shadowColor="shadow-indigo-500/25" size="md">
+                    <TrendingUp className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Revenue-Driving AI Services',
                 features: [
                   'Context-aware RAG system',
@@ -309,7 +355,11 @@ const Home: React.FC = () => {
                 impact: 'Converts inquiries to bookings, increases revenue'
               },
               {
-                icon: Smartphone,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-teal-500 to-cyan-500" shadowColor="shadow-teal-500/25" size="md">
+                    <Smartphone className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Seamless Booking & CRM',
                 features: [
                   'Mobile-first website (99 Lighthouse)',
@@ -320,7 +370,11 @@ const Home: React.FC = () => {
                 impact: 'Lifts direct-booking share, drives repeat stays'
               },
               {
-                icon: Users,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-amber-500 to-orange-500" shadowColor="shadow-amber-500/25" size="md">
+                    <Users className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Staff Orchestration',
                 features: [
                   'AI-driven housekeeping routes',
@@ -331,7 +385,11 @@ const Home: React.FC = () => {
                 impact: 'Cuts room-turn times, prevents outages'
               },
               {
-                icon: Zap,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-violet-500 to-purple-500" shadowColor="shadow-violet-500/25" size="md">
+                    <Zap className="h-6 w-6" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Scalable Architecture',
                 features: [
                   'Containerised micro-services',
@@ -342,11 +400,11 @@ const Home: React.FC = () => {
                 impact: 'Guarantees 99.9% uptime, DSGVO-compliant'
               }
             ].map((pillar, index) => {
-              const IconComponent = pillar.icon;
+              const IconComponent = pillar.IconComponent;
               return (
                 <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                    <IconComponent className="h-6 w-6 text-white" />
+                  <div className="mb-6">
+                    <IconComponent />
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">{pillar.title}</h3>
                   <ul className="space-y-2 mb-4">
@@ -412,9 +470,7 @@ const Home: React.FC = () => {
             <div className="lg:col-span-2">
               <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-12 h-full">
                 <div className="flex items-center space-x-4 mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
-                    <Globe className="h-8 w-8 text-white" />
-                  </div>
+                  <KlavierschuleLogo size="lg" />
                   <div>
                     <h3 className="text-2xl font-medium text-gray-900 dark:text-white">Klavierschule Glenn Miller</h3>
                     <p className="text-gray-600 dark:text-gray-400">AI-Integrated Piano School Platform</p>
@@ -438,20 +494,20 @@ const Home: React.FC = () => {
             
             <div className="space-y-8">
               <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-100 dark:border-gray-700">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6">
-                  <Code className="h-6 w-6 text-white" />
-                </div>
-                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">Smart Development</h4>
+                <Enhanced3DIcon gradient="from-green-500 to-teal-600" shadowColor="shadow-green-500/25" size="md">
+                  <Code className="h-6 w-6" />
+                </Enhanced3DIcon>
+                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4 mt-6">Smart Development</h4>
                 <p className="text-gray-600 dark:text-gray-400 font-light">
                   AI-assisted development process that reduces costs while maintaining enterprise-grade quality.
                 </p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-100 dark:border-gray-700">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6">
-                  <Palette className="h-6 w-6 text-white" />
-                </div>
-                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">Intelligent Design</h4>
+                <Enhanced3DIcon gradient="from-orange-500 to-red-600" shadowColor="shadow-orange-500/25" size="md">
+                  <Palette className="h-6 w-6" />
+                </Enhanced3DIcon>
+                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4 mt-6">Intelligent Design</h4>
                 <p className="text-gray-600 dark:text-gray-400 font-light">
                   AI-powered design systems that create beautiful, user-centric interfaces automatically.
                 </p>
@@ -475,7 +531,7 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industries.map((industry, index) => {
-              const IconComponent = industry.icon;
+              const IconComponent = industry.IconComponent;
               const isAvailable = industry.available;
               
               return (
@@ -493,8 +549,8 @@ const Home: React.FC = () => {
                     </div>
                   )}
                   
-                  <div className="w-16 h-16 bg-white dark:bg-gray-700 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 shadow-sm">
-                    <IconComponent className="h-8 w-8 text-gray-600 dark:text-gray-400" />
+                  <div className="mb-8 group-hover:scale-110 transition-transform duration-500">
+                    <IconComponent size="lg" />
                   </div>
 
                   <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-4">
@@ -546,25 +602,29 @@ const Home: React.FC = () => {
                   number: '01',
                   title: 'Deep Dive & Discovery',
                   description: 'We embed with your team to map every process and identify transformation opportunities.',
-                  duration: '2-4 weeks'
+                  duration: '2-4 weeks',
+                  gradient: 'from-blue-500 to-cyan-500'
                 },
                 {
                   number: '02',
                   title: 'Architectural Design',
                   description: 'Custom AI blueprint creation with optimal technology selection for your specific needs.',
-                  duration: '3-5 weeks'
+                  duration: '3-5 weeks',
+                  gradient: 'from-green-500 to-emerald-500'
                 },
                 {
                   number: '03',
                   title: 'Seamless Implementation',
                   description: 'Precise deployment with minimal disruption and comprehensive team training.',
-                  duration: '6-12 weeks'
+                  duration: '6-12 weeks',
+                  gradient: 'from-orange-500 to-red-500'
                 },
                 {
                   number: '04',
                   title: 'Evolution & Enhancement',
                   description: 'Continuous optimization and enhancement as your AI systems grow with your business.',
-                  duration: 'Ongoing'
+                  duration: 'Ongoing',
+                  gradient: 'from-purple-500 to-pink-500'
                 }
               ].map((stage, index) => (
                 <div
@@ -580,19 +640,21 @@ const Home: React.FC = () => {
                   <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                     <div className="relative">
                       {/* Step Circle */}
-                      <div className={`absolute -left-6 top-8 w-12 h-12 rounded-full flex items-center justify-center text-white font-medium text-lg transition-all duration-1000 hidden lg:flex ${
+                      <div className={`absolute -left-6 top-8 transition-all duration-1000 hidden lg:flex ${
                         visibleSteps.includes(index)
-                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 scale-100'
-                          : 'bg-gray-300 dark:bg-gray-700 scale-75'
+                          ? 'scale-100'
+                          : 'scale-75'
                       }`}>
-                        {stage.number}
+                        <Enhanced3DIcon gradient={stage.gradient} shadowColor="shadow-blue-500/25" size="md">
+                          <span className="text-white font-medium text-lg">{stage.number}</span>
+                        </Enhanced3DIcon>
                       </div>
                       
                       <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 lg:ml-6 border border-gray-100 dark:border-gray-700">
                         <div className="flex items-center justify-between mb-6 lg:hidden">
-                          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-medium text-lg">
-                            {stage.number}
-                          </div>
+                          <Enhanced3DIcon gradient={stage.gradient} shadowColor="shadow-blue-500/25" size="md">
+                            <span className="text-white font-medium text-lg">{stage.number}</span>
+                          </Enhanced3DIcon>
                           <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full">
                             {stage.duration}
                           </span>
@@ -654,26 +716,38 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                icon: Target,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-blue-500 to-purple-600" shadowColor="shadow-blue-500/25" size="lg">
+                    <Target className="h-8 w-8" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Radically Bespoke',
                 description: 'Every solution is custom-architected for your specific needs and industry requirements.'
               },
               {
-                icon: Users,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-green-500 to-teal-600" shadowColor="shadow-green-500/25" size="lg">
+                    <Users className="h-8 w-8" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Elite Expertise',
                 description: 'World-class AI engineers and strategists with deep industry knowledge and proven results.'
               },
               {
-                icon: Zap,
+                IconComponent: () => (
+                  <Enhanced3DIcon gradient="from-orange-500 to-red-600" shadowColor="shadow-orange-500/25" size="lg">
+                    <Zap className="h-8 w-8" />
+                  </Enhanced3DIcon>
+                ),
                 title: 'Measurable Impact',
                 description: 'Guaranteed improvements in efficiency, cost reduction, and operational excellence.'
               }
             ].map((advantage, index) => {
-              const IconComponent = advantage.icon;
+              const IconComponent = advantage.IconComponent;
               return (
                 <div key={index} className="text-center bg-gray-50 dark:bg-gray-800 p-12 rounded-3xl border border-gray-100 dark:border-gray-700">
-                  <div className="w-16 h-16 bg-white dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-sm">
-                    <IconComponent className="h-8 w-8 text-gray-600 dark:text-gray-400" />
+                  <div className="flex justify-center mb-8">
+                    <IconComponent />
                   </div>
                   <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-4">{advantage.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 font-light leading-relaxed">{advantage.description}</p>
@@ -696,8 +770,10 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             {partners.map((partner, index) => (
               <div key={index} className="group bg-white dark:bg-gray-900 rounded-2xl p-8 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{partner.logo}</div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{partner.name}</span>
+                <Enhanced3DIcon gradient={partner.gradient} shadowColor="shadow-blue-500/25" size="md">
+                  <span className="text-2xl">{partner.icon}</span>
+                </Enhanced3DIcon>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 mt-4 block">{partner.name}</span>
               </div>
             ))}
           </div>
