@@ -40,50 +40,50 @@ const Home: React.FC = () => {
   const industries = [
     {
       id: 'gastronomy',
-      title: 'Gastronomy & Hospitality',
-      description: 'Intelligent systems for seamless guest experiences',
+      title: translate('industry.gastronomy'),
+      description: translate('industry.gastronomy.desc'),
       available: true,
       link: '/solutions/gastronomy-hospitality',
       icon: '🏨'
     },
     {
       id: 'industrial',
-      title: 'Industrial & Manufacturing',
-      description: 'Smart automation for operational excellence',
+      title: translate('industry.industrial'),
+      description: translate('industry.industrial.desc'),
       available: true,
       link: '/solutions/industrial-manufacturing',
       icon: '🏭'
     },
     {
       id: 'finance',
-      title: 'Finance & Security',
-      description: 'Advanced protection and compliance systems',
+      title: translate('industry.finance'),
+      description: translate('industry.finance.desc'),
       available: false,
-      status: 'Under Research',
+      status: translate('industry.finance.status'),
       icon: '🏦'
     },
     {
       id: 'smart-living',
-      title: 'Smart Living & Personal AI',
-      description: 'Intelligent environments that adapt to you',
+      title: translate('industry.smart'),
+      description: translate('industry.smart.desc'),
       available: true,
       link: '/solutions/smart-living',
       icon: '🏠'
     },
     {
       id: 'healthcare',
-      title: 'Healthcare',
-      description: 'Precision care through intelligent systems',
+      title: translate('industry.healthcare'),
+      description: translate('industry.healthcare.desc'),
       available: true,
       link: '/solutions/healthcare',
       icon: '🏥'
     },
     {
       id: 'retail',
-      title: 'Retail & E-commerce',
-      description: 'Personalized experiences that drive growth',
+      title: translate('industry.retail'),
+      description: translate('industry.retail.desc'),
       available: false,
-      status: 'Under Research',
+      status: translate('industry.retail.status'),
       icon: '🛍️'
     }
   ];
@@ -249,7 +249,7 @@ const Home: React.FC = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-sm font-medium"
                   >
-                    Visit Website
+                    {translate('common.visitWebsite')}
                     <ExternalLink className="ml-1 h-3 w-3" />
                   </a>
                 </div>
@@ -262,15 +262,15 @@ const Home: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-12 text-center">
               <div>
                 <div className="text-4xl font-light text-blue-600 dark:text-blue-400 mb-2">6+</div>
-                <div className="text-gray-600 dark:text-gray-400 font-light">Projects Delivered</div>
+                <div className="text-gray-600 dark:text-gray-400 font-light">{translate('metrics.projects')}</div>
               </div>
               <div>
                 <div className="text-4xl font-light text-purple-600 dark:text-purple-400 mb-2">98%</div>
-                <div className="text-gray-600 dark:text-gray-400 font-light">Client Satisfaction</div>
+                <div className="text-gray-600 dark:text-gray-400 font-light">{translate('metrics.satisfaction')}</div>
               </div>
               <div className="col-span-2 md:col-span-1">
                 <div className="text-4xl font-light text-green-600 dark:text-green-400 mb-2">40-60%</div>
-                <div className="text-gray-600 dark:text-gray-400 font-light">Cost Reduction vs Big Companies</div>
+                <div className="text-gray-600 dark:text-gray-400 font-light">{translate('metrics.cost')}</div>
               </div>
             </div>
           </div>
@@ -282,62 +282,62 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Hotel am Kochbrunnen: Complete AI Transformation
+              {translate('hotel.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              Our flagship hospitality project showcasing 8 integrated AI pillars that transformed traditional operations into an intelligent ecosystem.
+              {translate('hotel.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {[
               {
-                title: 'Friction-Free Guest Journey',
-                description: 'Keyless check-in/out via QR & NFC, AI-concierge available everywhere',
+                title: translate('pillar.journey.title'),
+                description: translate('pillar.journey.desc'),
                 icon: Key,
-                metric: '99.9% uptime'
+                metric: translate('pillar.journey.metric')
               },
               {
-                title: 'Automated Back Office',
-                description: 'e-Invoice generator, real-time PMS & OTA sync, dynamic pricing',
+                title: translate('pillar.backoffice.title'),
+                description: translate('pillar.backoffice.desc'),
                 icon: BarChart3,
-                metric: '40hrs/month saved'
+                metric: translate('pillar.backoffice.metric')
               },
               {
-                title: 'Smart Building Control',
-                description: 'IoT occupancy-based HVAC, voice + mobile app control',
+                title: translate('pillar.building.title'),
+                description: translate('pillar.building.desc'),
                 icon: Thermometer,
-                metric: '25% energy savings'
+                metric: translate('pillar.building.metric')
               },
               {
-                title: 'Security & Compliance',
-                description: 'Zero-trust network, GDPR-proof data lake with PII masking',
+                title: translate('pillar.security.title'),
+                description: translate('pillar.security.desc'),
                 icon: Lock,
-                metric: '99 Lighthouse score'
+                metric: translate('pillar.security.metric')
               },
               {
-                title: 'Revenue-Driving AI',
-                description: 'Context-aware RAG system, upsell engine, sentiment analysis',
+                title: translate('pillar.revenue.title'),
+                description: translate('pillar.revenue.desc'),
                 icon: TrendingUp,
-                metric: 'Increased revenue'
+                metric: translate('pillar.revenue.metric')
               },
               {
-                title: 'Seamless Booking',
-                description: 'Mobile-first website, one-tap booking with Apple/Google Pay',
+                title: translate('pillar.booking.title'),
+                description: translate('pillar.booking.desc'),
                 icon: Smartphone,
-                metric: 'Direct bookings up'
+                metric: translate('pillar.booking.metric')
               },
               {
-                title: 'Staff Orchestration',
-                description: 'AI-driven housekeeping routes, automated maintenance tickets',
+                title: translate('pillar.staff.title'),
+                description: translate('pillar.staff.desc'),
                 icon: Users,
-                metric: 'Optimized workflows'
+                metric: translate('pillar.staff.metric')
               },
               {
-                title: 'Scalable Architecture',
-                description: 'Containerized microservices, GitOps CI/CD, disaster recovery',
+                title: translate('pillar.architecture.title'),
+                description: translate('pillar.architecture.desc'),
                 icon: Globe,
-                metric: 'Future-proof'
+                metric: translate('pillar.architecture.metric')
               }
             ].map((pillar, index) => {
               const IconComponent = pillar.icon;
@@ -361,7 +361,7 @@ const Home: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-lg"
             >
-              Visit Hotel am Kochbrunnen
+              {translate('hotel.visit')}
               <ExternalLink className="ml-2 h-5 w-5" />
             </a>
           </div>
@@ -373,11 +373,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              AI-Powered Websites & Apps
+              {translate('websites.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              We build intelligent websites and applications with 40-60% cost savings compared to big companies, 
-              without compromising on quality or innovation.
+              {translate('websites.subtitle')}
             </p>
           </div>
 
@@ -398,13 +397,12 @@ const Home: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-medium text-gray-900 dark:text-white">Klavierschule Glenn Miller</h3>
-                    <p className="text-gray-600 dark:text-gray-400">AI-Integrated Piano School Platform</p>
+                    <h3 className="text-2xl font-medium text-gray-900 dark:text-white">{translate('websites.piano.title')}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{translate('websites.piano.subtitle')}</p>
                   </div>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 mb-8 text-lg font-light leading-relaxed">
-                  Complete website with AI-powered booking system, intelligent schedule creator, and automated 
-                  student management. Features smart lesson planning and personalized learning paths.
+                  {translate('websites.piano.desc')}
                 </p>
                 <a 
                   href="https://klavierschule-glennmiller.de" 
@@ -412,7 +410,7 @@ const Home: React.FC = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                 >
-                  Visit Website
+                  {translate('websites.piano.visit')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </div>
@@ -423,9 +421,9 @@ const Home: React.FC = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
                   <Code className="h-6 w-6 text-white" />
                 </div>
-                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">Smart Development</h4>
+                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">{translate('websites.development.title')}</h4>
                 <p className="text-gray-600 dark:text-gray-400 font-light">
-                  AI-assisted development process that reduces costs while maintaining enterprise-grade quality.
+                  {translate('websites.development.desc')}
                 </p>
               </div>
               
@@ -433,9 +431,9 @@ const Home: React.FC = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
                   <Palette className="h-6 w-6 text-white" />
                 </div>
-                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">Intelligent Design</h4>
+                <h4 className="text-xl font-medium text-gray-900 dark:text-white mb-4">{translate('websites.design.title')}</h4>
                 <p className="text-gray-600 dark:text-gray-400 font-light">
-                  AI-powered design systems that create beautiful, user-centric interfaces automatically.
+                  {translate('websites.design.desc')}
                 </p>
               </div>
             </div>
@@ -448,10 +446,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Sector-Specific Solutions
+              {translate('industry.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              Intelligent systems engineered for your industry's unique requirements.
+              {translate('industry.subtitle')}
             </p>
           </div>
 
@@ -494,12 +492,12 @@ const Home: React.FC = () => {
                       to={industry.link!}
                       className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                     >
-                      Explore
+                      {translate('industry.explore')}
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                   ) : (
                     <span className="text-gray-400 dark:text-gray-500 font-medium">
-                      Coming Soon
+                      {translate('industry.coming')}
                     </span>
                   )}
                 </div>
@@ -517,7 +515,7 @@ const Home: React.FC = () => {
               {translate('section.method')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              Our proven methodology ensures seamless AI transformation.
+              {translate('method.subtitle')}
             </p>
           </div>
 
@@ -564,36 +562,36 @@ const Home: React.FC = () => {
               {[
                 {
                   number: '01',
-                  title: 'Deep Dive & Discovery',
-                  description: 'We embed with your team to map every process and identify transformation opportunities.',
-                  duration: '2-4 weeks',
+                  title: translate('method.step1.title'),
+                  description: translate('method.step1.desc'),
+                  duration: translate('method.step1.duration'),
                   icon: Search,
                   gradient: 'from-blue-500 to-cyan-500',
                   image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
                 },
                 {
                   number: '02',
-                  title: 'Architectural Design',
-                  description: 'Custom AI blueprint creation with optimal technology selection for your specific needs.',
-                  duration: '3-5 weeks',
+                  title: translate('method.step2.title'),
+                  description: translate('method.step2.desc'),
+                  duration: translate('method.step2.duration'),
                   icon: Lightbulb,
                   gradient: 'from-green-500 to-emerald-500',
                   image: 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
                 },
                 {
                   number: '03',
-                  title: 'Seamless Implementation',
-                  description: 'Precise deployment with minimal disruption and comprehensive team training.',
-                  duration: '6-12 weeks',
+                  title: translate('method.step3.title'),
+                  description: translate('method.step3.desc'),
+                  duration: translate('method.step3.duration'),
                   icon: Cog,
                   gradient: 'from-orange-500 to-red-500',
                   image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
                 },
                 {
                   number: '04',
-                  title: 'Evolution & Enhancement',
-                  description: 'Continuous optimization and enhancement as your AI systems grow with your business.',
-                  duration: 'Ongoing',
+                  title: translate('method.step4.title'),
+                  description: translate('method.step4.desc'),
+                  duration: translate('method.step4.duration'),
                   icon: TrendingUp,
                   gradient: 'from-purple-500 to-pink-500',
                   image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
@@ -657,7 +655,7 @@ const Home: React.FC = () => {
               to="/ea-method"
               className="inline-flex items-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-4 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-300"
             >
-              {translate('common.learnMore')} About Our Process
+              {translate('method.learn')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
@@ -678,19 +676,19 @@ const Home: React.FC = () => {
               {
                 icon: Rocket,
                 title: translate('feature.bespoke'),
-                description: 'Every solution is custom-architected for your specific needs and industry requirements.',
+                description: translate('feature.bespoke.desc'),
                 gradient: 'from-blue-500 to-purple-600'
               },
               {
                 icon: Brain,
                 title: translate('feature.expertise'),
-                description: 'World-class AI engineers and strategists with deep industry knowledge and proven results.',
+                description: translate('feature.expertise.desc'),
                 gradient: 'from-green-500 to-teal-600'
               },
               {
                 icon: Shield,
                 title: translate('feature.impact'),
-                description: 'Guaranteed improvements in efficiency, cost reduction, and operational excellence.',
+                description: translate('feature.impact.desc'),
                 gradient: 'from-orange-500 to-red-600'
               }
             ].map((advantage, index) => {
@@ -745,12 +743,12 @@ const Home: React.FC = () => {
       {/* Final CTA */}
       <section className="py-32 bg-gray-900 dark:bg-gray-950 text-white transition-colors duration-300">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-tight">{translate('section.ready')}</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-tight">{translate('final.title')}</h2>
           <p className="text-xl text-gray-300 dark:text-gray-400 mb-12 font-light">
-            Schedule a personalized consultation and discover how AI can revolutionize your operations.
+            {translate('final.subtitle')}
           </p>
           <button className="bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-            {translate('cta.book')} Now
+            {translate('final.cta')}
           </button>
         </div>
       </section>
