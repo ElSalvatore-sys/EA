@@ -21,12 +21,19 @@ import {
   ExternalLink,
   Search,
   Lightbulb,
-  Cog
+  Cog,
+  Rocket,
+  Brain,
+  Shield
 } from 'lucide-react';
 
 const Home: React.FC = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const industries = [
     {
@@ -101,11 +108,31 @@ const Home: React.FC = () => {
   ];
 
   const partners = [
-    { name: 'Google Cloud', icon: '🌐', gradient: 'from-blue-500 to-green-500' },
-    { name: 'Microsoft Azure', icon: '☁️', gradient: 'from-blue-600 to-cyan-500' },
-    { name: 'OpenAI', icon: '🤖', gradient: 'from-green-500 to-teal-500' },
-    { name: 'Anthropic', icon: '🧠', gradient: 'from-purple-500 to-pink-500' },
-    { name: 'AWS', icon: '⚡', gradient: 'from-orange-500 to-yellow-500' }
+    { 
+      name: 'Google Cloud', 
+      logo: 'https://www.google.com/favicon.ico',
+      gradient: 'from-blue-500 to-green-500' 
+    },
+    { 
+      name: 'Microsoft Azure', 
+      logo: 'https://www.microsoft.com/favicon.ico',
+      gradient: 'from-blue-600 to-cyan-500' 
+    },
+    { 
+      name: 'OpenAI', 
+      logo: 'https://openai.com/favicon.ico',
+      gradient: 'from-green-500 to-teal-500' 
+    },
+    { 
+      name: 'Anthropic', 
+      logo: 'https://www.anthropic.com/favicon.ico',
+      gradient: 'from-purple-500 to-pink-500' 
+    },
+    { 
+      name: 'AWS', 
+      logo: 'https://aws.amazon.com/favicon.ico',
+      gradient: 'from-orange-500 to-yellow-500' 
+    }
   ];
 
   useEffect(() => {
@@ -189,7 +216,6 @@ const Home: React.FC = () => {
                       alt={`${client.name} logo`}
                       className="w-8 h-8 object-contain"
                       onError={(e) => {
-                        // Fallback to a generic building icon if logo fails to load
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         target.parentElement!.innerHTML = '<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg></div>';
@@ -244,8 +270,99 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* AI-Powered Websites & Apps Section */}
+      {/* Hotel am Kochbrunnen Showcase */}
       <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              Hotel am Kochbrunnen: Complete AI Transformation
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              Our flagship hospitality project showcasing 8 integrated AI pillars that transformed traditional operations into an intelligent ecosystem.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {[
+              {
+                title: 'Friction-Free Guest Journey',
+                description: 'Keyless check-in/out via QR & NFC, AI-concierge available everywhere',
+                icon: Key,
+                metric: '99.9% uptime'
+              },
+              {
+                title: 'Automated Back Office',
+                description: 'e-Invoice generator, real-time PMS & OTA sync, dynamic pricing',
+                icon: BarChart3,
+                metric: '40hrs/month saved'
+              },
+              {
+                title: 'Smart Building Control',
+                description: 'IoT occupancy-based HVAC, voice + mobile app control',
+                icon: Thermometer,
+                metric: '25% energy savings'
+              },
+              {
+                title: 'Security & Compliance',
+                description: 'Zero-trust network, GDPR-proof data lake with PII masking',
+                icon: Lock,
+                metric: '99 Lighthouse score'
+              },
+              {
+                title: 'Revenue-Driving AI',
+                description: 'Context-aware RAG system, upsell engine, sentiment analysis',
+                icon: TrendingUp,
+                metric: 'Increased revenue'
+              },
+              {
+                title: 'Seamless Booking',
+                description: 'Mobile-first website, one-tap booking with Apple/Google Pay',
+                icon: Smartphone,
+                metric: 'Direct bookings up'
+              },
+              {
+                title: 'Staff Orchestration',
+                description: 'AI-driven housekeeping routes, automated maintenance tickets',
+                icon: Users,
+                metric: 'Optimized workflows'
+              },
+              {
+                title: 'Scalable Architecture',
+                description: 'Containerized microservices, GitOps CI/CD, disaster recovery',
+                icon: Globe,
+                metric: 'Future-proof'
+              }
+            ].map((pillar, index) => {
+              const IconComponent = pillar.icon;
+              return (
+                <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <IconComponent className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{pillar.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 leading-relaxed">{pillar.description}</p>
+                  <div className="text-sm text-blue-600 dark:text-blue-400 font-medium">{pillar.metric}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <a 
+              href="https://hotelamkochbrunnen.de" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-lg"
+            >
+              Visit Hotel am Kochbrunnen
+              <ExternalLink className="ml-2 h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* AI-Powered Websites & Apps Section */}
+      <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
@@ -295,7 +412,7 @@ const Home: React.FC = () => {
             </div>
             
             <div className="space-y-8">
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-100 dark:border-gray-700">
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
                   <Code className="h-6 w-6 text-white" />
                 </div>
@@ -305,7 +422,7 @@ const Home: React.FC = () => {
                 </p>
               </div>
               
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-100 dark:border-gray-700">
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
                   <Palette className="h-6 w-6 text-white" />
                 </div>
@@ -320,7 +437,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Minimalistic Industry Solutions */}
-      <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
@@ -391,7 +508,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Enhanced EA Method Process */}
-      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
+      <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
@@ -493,7 +610,7 @@ const Home: React.FC = () => {
                     } ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}
                   >
                     <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                      <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-lg">
+                      <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-lg">
                         <div className="flex items-center justify-between mb-6">
                           <div className="flex items-center space-x-4">
                             <div className={`w-12 h-12 bg-gradient-to-br ${stage.gradient} rounded-2xl flex items-center justify-center shadow-lg`}>
@@ -546,7 +663,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
@@ -557,19 +674,19 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                icon: Target,
+                icon: Rocket,
                 title: 'Radically Bespoke',
                 description: 'Every solution is custom-architected for your specific needs and industry requirements.',
                 gradient: 'from-blue-500 to-purple-600'
               },
               {
-                icon: Users,
+                icon: Brain,
                 title: 'Elite Expertise',
                 description: 'World-class AI engineers and strategists with deep industry knowledge and proven results.',
                 gradient: 'from-green-500 to-teal-600'
               },
               {
-                icon: Zap,
+                icon: Shield,
                 title: 'Measurable Impact',
                 description: 'Guaranteed improvements in efficiency, cost reduction, and operational excellence.',
                 gradient: 'from-orange-500 to-red-600'
@@ -577,7 +694,7 @@ const Home: React.FC = () => {
             ].map((advantage, index) => {
               const IconComponent = advantage.icon;
               return (
-                <div key={index} className="text-center bg-white dark:bg-gray-900 p-12 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg">
+                <div key={index} className="text-center bg-gray-50 dark:bg-gray-800 p-12 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg">
                   <div className="flex justify-center mb-8">
                     <div className={`w-16 h-16 bg-gradient-to-br ${advantage.gradient} rounded-3xl flex items-center justify-center shadow-lg`}>
                       <IconComponent className="h-8 w-8 text-white" />
@@ -593,7 +710,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Enhanced Partners Section */}
-      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
+      <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
@@ -603,9 +720,18 @@ const Home: React.FC = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             {partners.map((partner, index) => (
-              <div key={index} className="group bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700">
-                <div className={`w-12 h-12 bg-gradient-to-br ${partner.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <span className="text-2xl">{partner.icon}</span>
+              <div key={index} className="group bg-white dark:bg-gray-900 rounded-3xl p-8 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                  <img 
+                    src={partner.logo} 
+                    alt={`${partner.name} logo`}
+                    className="w-8 h-8 object-contain"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      target.parentElement!.innerHTML = `<div class="w-8 h-8 bg-gradient-to-br ${partner.gradient} rounded-lg flex items-center justify-center"><div class="w-4 h-4 bg-white rounded"></div></div>`;
+                    }}
+                  />
                 </div>
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{partner.name}</span>
               </div>

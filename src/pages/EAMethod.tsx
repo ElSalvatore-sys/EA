@@ -1,7 +1,34 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Search, Lightbulb, Cog, TrendingUp, CheckCircle, Users, Target, Zap } from 'lucide-react';
 
 const EAMethod: React.FC = () => {
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const stepIndex = parseInt(entry.target.getAttribute('data-step') || '0');
+            setVisibleSteps(prev => [...new Set([...prev, stepIndex])]);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    stepsRef.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen pt-16 bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
@@ -20,99 +47,209 @@ const EAMethod: React.FC = () => {
         </div>
       </section>
 
-      {/* Process Overview */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      {/* Enhanced Process with Connecting Lines */}
+      <section className="py-32 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Four Stages to AI Excellence</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              Four Stages to AI Excellence
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
               Our comprehensive approach ensures every aspect of your AI implementation is carefully planned, 
               expertly executed, and continuously optimized for maximum impact.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {[
-              {
-                stage: '01',
-                title: 'Deep Dive & Discovery',
-                icon: Search,
-                description: 'We embed with your team to map every process, identify bottlenecks, and understand your ultimate goals. We don\'t just listen; we analyze.',
-                duration: '2-4 weeks',
-                deliverables: ['Process mapping', 'Bottleneck analysis', 'Goal alignment', 'Technical assessment'],
-                image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
-              },
-              {
-                stage: '02',
-                title: 'Architectural Design',
-                icon: Lightbulb,
-                description: 'We design a bespoke AI blueprint for your business, selecting the optimal blend of local and external LLMs and integrating with your existing tech stack.',
-                duration: '3-5 weeks',
-                deliverables: ['AI architecture blueprint', 'Technology selection', 'Integration plan', 'Security framework'],
-                image: 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
-              },
-              {
-                stage: '03',
-                title: 'Seamless Implementation',
-                icon: Cog,
-                description: 'Our elite engineers build and deploy your AI infrastructure with military precision, ensuring minimal disruption and maximum adoption.',
-                duration: '6-12 weeks',
-                deliverables: ['System development', 'Integration testing', 'Staff training', 'Go-live support'],
-                image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
-              },
-              {
-                stage: '04',
-                title: 'Evolution & Enhancement',
-                icon: TrendingUp,
-                description: 'Your AI mind is a living entity. We provide continuous optimization, performance monitoring, and enhancement to ensure it grows with your business.',
-                duration: 'Ongoing',
-                deliverables: ['Performance monitoring', 'Continuous optimization', 'Feature updates', 'Strategic guidance'],
-                image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
-              }
-            ].map((stage, index) => {
-              const IconComponent = stage.icon;
-              return (
-                <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2">
-                  <div className="text-center mb-6">
-                    <div className="bg-blue-900 dark:bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                      {stage.stage}
+          <div className="relative">
+            {/* Animated Connection Lines */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block" style={{ zIndex: 1 }}>
+              <defs>
+                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.6" />
+                  <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.6" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge> 
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              
+              {/* Step 1 to Step 2 */}
+              {visibleSteps.includes(0) && visibleSteps.includes(1) && (
+                <path
+                  d="M 20% 20% Q 50% 10% 80% 30%"
+                  stroke="url(#connectionGradient)"
+                  strokeWidth="3"
+                  fill="none"
+                  filter="url(#glow)"
+                  className="animate-pulse"
+                  strokeDasharray="10,5"
+                  style={{
+                    animation: 'drawLine 2s ease-in-out forwards, pulse 3s ease-in-out infinite'
+                  }}
+                />
+              )}
+              
+              {/* Step 2 to Step 3 */}
+              {visibleSteps.includes(1) && visibleSteps.includes(2) && (
+                <path
+                  d="M 80% 30% Q 50% 40% 20% 60%"
+                  stroke="url(#connectionGradient)"
+                  strokeWidth="3"
+                  fill="none"
+                  filter="url(#glow)"
+                  className="animate-pulse"
+                  strokeDasharray="10,5"
+                  style={{
+                    animation: 'drawLine 2s ease-in-out forwards, pulse 3s ease-in-out infinite',
+                    animationDelay: '0.5s'
+                  }}
+                />
+              )}
+              
+              {/* Step 3 to Step 4 */}
+              {visibleSteps.includes(2) && visibleSteps.includes(3) && (
+                <path
+                  d="M 20% 60% Q 50% 70% 80% 90%"
+                  stroke="url(#connectionGradient)"
+                  strokeWidth="3"
+                  fill="none"
+                  filter="url(#glow)"
+                  className="animate-pulse"
+                  strokeDasharray="10,5"
+                  style={{
+                    animation: 'drawLine 2s ease-in-out forwards, pulse 3s ease-in-out infinite',
+                    animationDelay: '1s'
+                  }}
+                />
+              )}
+            </svg>
+            
+            <div className="space-y-32 relative" style={{ zIndex: 2 }}>
+              {[
+                {
+                  number: '01',
+                  title: 'Deep Dive & Discovery',
+                  description: 'We embed with your team to map every process, identify bottlenecks, and understand your ultimate goals. We don\'t just listen; we analyze.',
+                  duration: '2-4 weeks',
+                  icon: Search,
+                  gradient: 'from-blue-500 to-cyan-500',
+                  image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+                  deliverables: ['Process mapping', 'Bottleneck analysis', 'Goal alignment', 'Technical assessment']
+                },
+                {
+                  number: '02',
+                  title: 'Architectural Design',
+                  description: 'We design a bespoke AI blueprint for your business, selecting the optimal blend of local and external LLMs and integrating with your existing tech stack.',
+                  duration: '3-5 weeks',
+                  icon: Lightbulb,
+                  gradient: 'from-green-500 to-emerald-500',
+                  image: 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+                  deliverables: ['AI architecture blueprint', 'Technology selection', 'Integration plan', 'Security framework']
+                },
+                {
+                  number: '03',
+                  title: 'Seamless Implementation',
+                  description: 'Our elite engineers build and deploy your AI infrastructure with military precision, ensuring minimal disruption and maximum adoption.',
+                  duration: '6-12 weeks',
+                  icon: Cog,
+                  gradient: 'from-orange-500 to-red-500',
+                  image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+                  deliverables: ['System development', 'Integration testing', 'Staff training', 'Go-live support']
+                },
+                {
+                  number: '04',
+                  title: 'Evolution & Enhancement',
+                  description: 'Your AI mind is a living entity. We provide continuous optimization, performance monitoring, and enhancement to ensure it grows with your business.',
+                  duration: 'Ongoing',
+                  icon: TrendingUp,
+                  gradient: 'from-purple-500 to-pink-500',
+                  image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+                  deliverables: ['Performance monitoring', 'Continuous optimization', 'Feature updates', 'Strategic guidance']
+                }
+              ].map((stage, index) => {
+                const IconComponent = stage.icon;
+                return (
+                  <div
+                    key={index}
+                    ref={(el) => (stepsRef.current[index] = el)}
+                    data-step={index}
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center transition-all duration-1000 ${
+                      visibleSteps.includes(index) 
+                        ? 'opacity-100 translate-y-0' 
+                        : 'opacity-0 translate-y-12'
+                    } ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}
+                  >
+                    <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                      <div className="bg-white dark:bg-gray-800 rounded-3xl p-10 border border-gray-100 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-500">
+                        <div className="flex items-center justify-between mb-8">
+                          <div className="flex items-center space-x-6">
+                            <div className={`w-16 h-16 bg-gradient-to-br ${stage.gradient} rounded-3xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300`}>
+                              <IconComponent className="h-8 w-8 text-white" />
+                            </div>
+                            <div className="text-6xl font-light text-gray-200 dark:text-gray-700">
+                              {stage.number}
+                            </div>
+                          </div>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full font-medium">
+                            {stage.duration}
+                          </span>
+                        </div>
+                        
+                        <h3 className="text-3xl font-medium text-gray-900 dark:text-white mb-6">
+                          {stage.title}
+                        </h3>
+                        
+                        <p className="text-gray-600 dark:text-gray-400 font-light text-lg leading-relaxed mb-8">
+                          {stage.description}
+                        </p>
+
+                        <div>
+                          <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-4">
+                            Key Deliverables
+                          </h4>
+                          <ul className="space-y-3">
+                            {stage.deliverables.map((deliverable, deliverableIndex) => (
+                              <li key={deliverableIndex} className="flex items-center space-x-3">
+                                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                                <span className="text-gray-700 dark:text-gray-300 font-light">{deliverable}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
                     </div>
-                    <div className="bg-blue-100 dark:bg-blue-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <IconComponent className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                    
+                    <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                      <div className="relative group">
+                        <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
+                          <img 
+                            src={stage.image}
+                            alt={`${stage.title} process visualization`}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+                        {/* Floating elements for visual enhancement */}
+                        <div className={`absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br ${stage.gradient} rounded-full opacity-60 animate-pulse`}></div>
+                        <div className={`absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-br ${stage.gradient} rounded-full opacity-40 animate-pulse`} style={{ animationDelay: '1s' }}></div>
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* Stage Image */}
-                  <div className="mb-6">
-                    <img 
-                      src={stage.image}
-                      alt={`${stage.title} process`}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">{stage.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">{stage.description}</p>
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">DURATION</span>
-                      <span className="text-sm font-bold text-blue-600 dark:text-blue-400">{stage.duration}</span>
-                    </div>
-                    <div>
-                      <span className="text-sm font-semibold text-gray-500 dark:text-gray-400 block mb-2">KEY DELIVERABLES</span>
-                      <ul className="space-y-1">
-                        {stage.deliverables.map((deliverable, deliverableIndex) => (
-                          <li key={deliverableIndex} className="flex items-center space-x-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
-                            <span className="text-sm text-gray-700 dark:text-gray-300">{deliverable}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="text-center mt-20">
+            <button className="inline-flex items-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-10 py-4 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-300 shadow-xl">
+              Learn More About Our Process
+              <TrendingUp className="ml-3 h-5 w-5" />
+            </button>
           </div>
         </div>
       </section>
@@ -182,6 +319,17 @@ const EAMethod: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <style jsx>{`
+        @keyframes drawLine {
+          from {
+            stroke-dashoffset: 100;
+          }
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 };

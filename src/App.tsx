@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './components/ThemeProvider';
+import { LanguageProvider } from './components/LanguageSelector';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
@@ -14,26 +15,40 @@ import EAMethod from './pages/EAMethod';
 import WhyEA from './pages/WhyEA';
 import Contact from './pages/Contact';
 
+// Component to handle scroll to top on route change
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/solutions/gastronomy-hospitality" element={<GastronomyHospitality />} />
-            <Route path="/solutions/industrial-manufacturing" element={<IndustrialManufacturing />} />
-            <Route path="/solutions/finance-security" element={<FinanceSecurity />} />
-            <Route path="/solutions/smart-living" element={<SmartLiving />} />
-            <Route path="/solutions/healthcare" element={<Healthcare />} />
-            <Route path="/solutions/retail" element={<Retail />} />
-            <Route path="/ea-method" element={<EAMethod />} />
-            <Route path="/why-ea" element={<WhyEA />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <LanguageProvider>
+        <Router>
+          <ScrollToTop />
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/solutions" element={<Solutions />} />
+              <Route path="/solutions/gastronomy-hospitality" element={<GastronomyHospitality />} />
+              <Route path="/solutions/industrial-manufacturing" element={<IndustrialManufacturing />} />
+              <Route path="/solutions/finance-security" element={<FinanceSecurity />} />
+              <Route path="/solutions/smart-living" element={<SmartLiving />} />
+              <Route path="/solutions/healthcare" element={<Healthcare />} />
+              <Route path="/solutions/retail" element={<Retail />} />
+              <Route path="/ea-method" element={<EAMethod />} />
+              <Route path="/why-ea" element={<WhyEA />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }
