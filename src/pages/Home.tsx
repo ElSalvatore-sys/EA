@@ -26,10 +26,12 @@ import {
   Brain,
   Shield
 } from 'lucide-react';
+import { useLanguage } from '../components/LanguageSelector';
 
 const Home: React.FC = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const { translate } = useLanguage();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,42 +43,48 @@ const Home: React.FC = () => {
       title: 'Gastronomy & Hospitality',
       description: 'Intelligent systems for seamless guest experiences',
       available: true,
-      link: '/solutions/gastronomy-hospitality'
+      link: '/solutions/gastronomy-hospitality',
+      icon: '🏨'
     },
     {
       id: 'industrial',
       title: 'Industrial & Manufacturing',
       description: 'Smart automation for operational excellence',
       available: true,
-      link: '/solutions/industrial-manufacturing'
+      link: '/solutions/industrial-manufacturing',
+      icon: '🏭'
     },
     {
       id: 'finance',
       title: 'Finance & Security',
       description: 'Advanced protection and compliance systems',
       available: false,
-      status: 'Under Research'
+      status: 'Under Research',
+      icon: '🏦'
     },
     {
       id: 'smart-living',
       title: 'Smart Living & Personal AI',
       description: 'Intelligent environments that adapt to you',
       available: true,
-      link: '/solutions/smart-living'
+      link: '/solutions/smart-living',
+      icon: '🏠'
     },
     {
       id: 'healthcare',
       title: 'Healthcare',
       description: 'Precision care through intelligent systems',
       available: true,
-      link: '/solutions/healthcare'
+      link: '/solutions/healthcare',
+      icon: '🏥'
     },
     {
       id: 'retail',
       title: 'Retail & E-commerce',
       description: 'Personalized experiences that drive growth',
       available: false,
-      status: 'Under Research'
+      status: 'Under Research',
+      icon: '🛍️'
     }
   ];
 
@@ -103,7 +111,7 @@ const Home: React.FC = () => {
       metric: 'AI booking & scheduling',
       description: 'Intelligent booking system with automated schedule optimization',
       website: 'https://klavierschule-glennmiller.de',
-      logo: 'https://klavierschule-glennmiller.de/favicon.ico'
+      logo: 'https://www.google.com/s2/favicons?domain=klavierschule-glennmiller.de&sz=64'
     }
   ];
 
@@ -167,24 +175,23 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
           <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-light mb-8 leading-tight tracking-tight">
-              Your Business Has a Body.<br />
+              {translate('hero.title').split('.')[0]}.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 font-medium">
-                We Build Its Mind.
+                {translate('hero.title').split('.')[1]}.
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-12 text-gray-300 dark:text-gray-400 max-w-4xl mx-auto font-light leading-relaxed">
-              We architect bespoke AI infrastructures that eradicate repetitive work, 
-              amplify human potential, and unlock unprecedented efficiency.
+              {translate('hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button className="bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                Book Your AI Strategy Call
+                {translate('cta.book')}
               </button>
               <Link 
                 to="/solutions" 
                 className="border border-white/30 text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300"
               >
-                Explore Solutions
+                {translate('cta.explore')}
               </Link>
             </div>
           </div>
@@ -196,7 +203,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Transforming Businesses Worldwide
+              {translate('section.transforming')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-light">
               From local innovators to global enterprises, we empower organizations to integrate intelligence at their core.
@@ -380,7 +387,7 @@ const Home: React.FC = () => {
                 <div className="flex items-center space-x-4 mb-8">
                   <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center overflow-hidden shadow-lg">
                     <img 
-                      src="https://klavierschule-glennmiller.de/favicon.ico" 
+                      src="https://www.google.com/s2/favicons?domain=klavierschule-glennmiller.de&sz=64" 
                       alt="Klavierschule Glenn Miller logo"
                       className="w-8 h-8 object-contain"
                       onError={(e) => {
@@ -470,12 +477,7 @@ const Home: React.FC = () => {
                   <div className="mb-8">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
                       <div className="text-2xl">
-                        {industry.id === 'gastronomy' && '🏨'}
-                        {industry.id === 'industrial' && '🏭'}
-                        {industry.id === 'finance' && '🏦'}
-                        {industry.id === 'smart-living' && '🏠'}
-                        {industry.id === 'healthcare' && '🏥'}
-                        {industry.id === 'retail' && '🛍️'}
+                        {industry.icon}
                       </div>
                     </div>
                   </div>
@@ -512,7 +514,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              The EA Method
+              {translate('section.method')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
               Our proven methodology ensures seamless AI transformation.
@@ -655,7 +657,7 @@ const Home: React.FC = () => {
               to="/ea-method"
               className="inline-flex items-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-4 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-300"
             >
-              Learn More About Our Process
+              {translate('common.learnMore')} About Our Process
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
@@ -667,7 +669,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              The EA Solutions Advantage
+              {translate('section.advantage')}
             </h2>
           </div>
 
@@ -675,19 +677,19 @@ const Home: React.FC = () => {
             {[
               {
                 icon: Rocket,
-                title: 'Radically Bespoke',
+                title: translate('feature.bespoke'),
                 description: 'Every solution is custom-architected for your specific needs and industry requirements.',
                 gradient: 'from-blue-500 to-purple-600'
               },
               {
                 icon: Brain,
-                title: 'Elite Expertise',
+                title: translate('feature.expertise'),
                 description: 'World-class AI engineers and strategists with deep industry knowledge and proven results.',
                 gradient: 'from-green-500 to-teal-600'
               },
               {
                 icon: Shield,
-                title: 'Measurable Impact',
+                title: translate('feature.impact'),
                 description: 'Guaranteed improvements in efficiency, cost reduction, and operational excellence.',
                 gradient: 'from-orange-500 to-red-600'
               }
@@ -714,7 +716,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Powered by Leading Technology
+              {translate('section.powered')}
             </h2>
           </div>
           
@@ -743,12 +745,12 @@ const Home: React.FC = () => {
       {/* Final CTA */}
       <section className="py-32 bg-gray-900 dark:bg-gray-950 text-white transition-colors duration-300">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-tight">Ready to Transform Your Business?</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-tight">{translate('section.ready')}</h2>
           <p className="text-xl text-gray-300 dark:text-gray-400 mb-12 font-light">
             Schedule a personalized consultation and discover how AI can revolutionize your operations.
           </p>
           <button className="bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-            Book Your AI Strategy Call Now
+            {translate('cta.book')} Now
           </button>
         </div>
       </section>
