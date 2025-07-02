@@ -163,11 +163,13 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Advanced AI Brain & Hand Animation Component
-  const AdvancedAIBrainHand = () => {
+  // Ultra-Detailed AI Brain & Hand Animation Component
+  const UltraDetailedAIBrain = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const animationRef = useRef<number>();
     const particlesRef = useRef<any[]>([]);
+    const neuronsRef = useRef<any[]>([]);
+    const synapsesRef = useRef<any[]>([]);
     const timeRef = useRef(0);
 
     useEffect(() => {
@@ -185,293 +187,688 @@ const Home: React.FC = () => {
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
 
-      // Initialize particles
-      const initParticles = () => {
+      // Initialize ultra-detailed brain structure
+      const initBrainStructure = () => {
+        neuronsRef.current = [];
+        synapsesRef.current = [];
+        
+        const centerX = canvas.width * 0.25;
+        const centerY = canvas.height * 0.4;
+        
+        // Create detailed brain regions
+        const regions = [
+          // Frontal Cortex
+          { name: 'frontal', x: centerX - 60, y: centerY - 80, neurons: 25, color: '#3B82F6' },
+          // Parietal Cortex
+          { name: 'parietal', x: centerX - 20, y: centerY - 100, neurons: 20, color: '#8B5CF6' },
+          // Temporal Cortex
+          { name: 'temporal', x: centerX - 80, y: centerY - 20, neurons: 18, color: '#06B6D4' },
+          // Occipital Cortex
+          { name: 'occipital', x: centerX + 40, y: centerY - 60, neurons: 15, color: '#10B981' },
+          // Cerebellum
+          { name: 'cerebellum', x: centerX + 60, y: centerY + 40, neurons: 30, color: '#F59E0B' },
+          // Brain Stem
+          { name: 'brainstem', x: centerX, y: centerY + 80, neurons: 12, color: '#EF4444' },
+          // Hippocampus
+          { name: 'hippocampus', x: centerX - 40, y: centerY + 20, neurons: 16, color: '#EC4899' },
+          // Thalamus
+          { name: 'thalamus', x: centerX, y: centerY - 20, neurons: 14, color: '#84CC16' }
+        ];
+
+        // Create neurons for each brain region
+        regions.forEach((region, regionIndex) => {
+          for (let i = 0; i < region.neurons; i++) {
+            const angle = (i / region.neurons) * Math.PI * 2;
+            const radius = 30 + Math.random() * 50;
+            const neuron = {
+              id: `${region.name}_${i}`,
+              x: region.x + Math.cos(angle) * radius + (Math.random() - 0.5) * 20,
+              y: region.y + Math.sin(angle) * radius + (Math.random() - 0.5) * 20,
+              size: 3 + Math.random() * 4,
+              color: region.color,
+              region: region.name,
+              activity: Math.random(),
+              connections: [],
+              dendrites: [],
+              axon: null,
+              pulse: Math.random() * Math.PI * 2,
+              lastFired: 0,
+              threshold: 0.7 + Math.random() * 0.3,
+              charge: Math.random() * 0.5
+            };
+
+            // Create dendrites (input branches)
+            const numDendrites = 3 + Math.floor(Math.random() * 5);
+            for (let d = 0; d < numDendrites; d++) {
+              const dendriteAngle = (d / numDendrites) * Math.PI * 2;
+              const dendriteLength = 15 + Math.random() * 25;
+              neuron.dendrites.push({
+                angle: dendriteAngle,
+                length: dendriteLength,
+                branches: Math.floor(Math.random() * 3) + 1,
+                activity: 0
+              });
+            }
+
+            // Create axon (output branch)
+            neuron.axon = {
+              angle: Math.random() * Math.PI * 2,
+              length: 40 + Math.random() * 60,
+              terminals: Math.floor(Math.random() * 4) + 2,
+              activity: 0
+            };
+
+            neuronsRef.current.push(neuron);
+          }
+        });
+
+        // Create synaptic connections between neurons
+        neuronsRef.current.forEach((neuron, i) => {
+          const numConnections = 3 + Math.floor(Math.random() * 6);
+          for (let c = 0; c < numConnections; c++) {
+            const targetIndex = Math.floor(Math.random() * neuronsRef.current.length);
+            if (targetIndex !== i) {
+              const target = neuronsRef.current[targetIndex];
+              const distance = Math.sqrt((target.x - neuron.x) ** 2 + (target.y - neuron.y) ** 2);
+              
+              if (distance < 120) {
+                const synapse = {
+                  from: i,
+                  to: targetIndex,
+                  strength: 0.3 + Math.random() * 0.7,
+                  activity: 0,
+                  neurotransmitters: [],
+                  delay: Math.random() * 0.1,
+                  plasticity: Math.random() * 0.2
+                };
+                
+                neuron.connections.push(synapse);
+                synapsesRef.current.push(synapse);
+              }
+            }
+          }
+        });
+
+        // Initialize particles for neural activity
         particlesRef.current = [];
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 300; i++) {
           particlesRef.current.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 2,
-            vy: (Math.random() - 0.5) * 2,
-            size: Math.random() * 3 + 1,
+            vx: (Math.random() - 0.5) * 3,
+            vy: (Math.random() - 0.5) * 3,
+            size: Math.random() * 2 + 0.5,
             opacity: Math.random() * 0.8 + 0.2,
-            color: `hsl(${200 + Math.random() * 60}, 70%, 60%)`,
+            color: `hsl(${200 + Math.random() * 80}, 70%, 60%)`,
             life: Math.random() * 100,
-            maxLife: 100 + Math.random() * 100
+            maxLife: 100 + Math.random() * 200,
+            type: Math.random() > 0.7 ? 'neurotransmitter' : 'signal'
           });
         }
       };
-      initParticles();
 
-      // Neural network nodes for brain
-      const brainNodes = [];
-      const centerX = canvas.width * 0.3;
-      const centerY = canvas.height * 0.3;
-      
-      for (let i = 0; i < 25; i++) {
-        const angle = (i / 25) * Math.PI * 2;
-        const radius = 80 + Math.random() * 40;
-        brainNodes.push({
-          x: centerX + Math.cos(angle) * radius,
-          y: centerY + Math.sin(angle) * radius,
-          size: 4 + Math.random() * 6,
-          pulse: Math.random() * Math.PI * 2,
-          connections: []
-        });
-      }
+      initBrainStructure();
 
-      // Create connections between brain nodes
-      brainNodes.forEach((node, i) => {
-        const numConnections = 2 + Math.floor(Math.random() * 3);
-        for (let j = 0; j < numConnections; j++) {
-          const targetIndex = Math.floor(Math.random() * brainNodes.length);
-          if (targetIndex !== i) {
-            node.connections.push(targetIndex);
-          }
-        }
-      });
-
-      // Hand position
-      const handX = canvas.width * 0.7;
-      const handY = canvas.height * 0.7;
+      // Hand structure
+      const handX = canvas.width * 0.75;
+      const handY = canvas.height * 0.6;
 
       const animate = () => {
         timeRef.current += 0.02;
         
-        // Clear canvas with fade effect
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+        // Clear canvas with sophisticated fade
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, 'rgba(15, 23, 42, 0.15)');
+        gradient.addColorStop(0.5, 'rgba(30, 41, 59, 0.1)');
+        gradient.addColorStop(1, 'rgba(51, 65, 85, 0.05)');
+        ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Draw background neural network
-        ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)';
-        ctx.lineWidth = 1;
-        for (let i = 0; i < 50; i++) {
-          const x1 = Math.random() * canvas.width;
-          const y1 = Math.random() * canvas.height;
-          const x2 = x1 + (Math.random() - 0.5) * 200;
-          const y2 = y1 + (Math.random() - 0.5) * 200;
-          
-          ctx.beginPath();
-          ctx.moveTo(x1, y1);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
-        }
-
-        // Draw AI Brain
+        // Draw background neural field
         ctx.save();
-        
-        // Brain outline with glow
-        const brainGlow = 20 + Math.sin(timeRef.current * 2) * 10;
-        ctx.shadowColor = '#3B82F6';
-        ctx.shadowBlur = brainGlow;
-        
-        // Brain shape
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.3)';
-        ctx.ellipse(centerX, centerY, 120, 100, 0, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Brain hemispheres
-        ctx.beginPath();
-        ctx.strokeStyle = '#60A5FA';
-        ctx.lineWidth = 3;
-        ctx.ellipse(centerX - 30, centerY, 60, 80, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        
-        ctx.beginPath();
-        ctx.ellipse(centerX + 30, centerY, 60, 80, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        
-        // Neural connections in brain
-        brainNodes.forEach((node, i) => {
-          node.connections.forEach(targetIndex => {
-            const target = brainNodes[targetIndex];
-            const distance = Math.sqrt((target.x - node.x) ** 2 + (target.y - node.y) ** 2);
-            
-            if (distance < 150) {
-              const pulse = Math.sin(timeRef.current * 3 + i * 0.5) * 0.5 + 0.5;
-              ctx.strokeStyle = `rgba(139, 92, 246, ${pulse * 0.8})`;
-              ctx.lineWidth = 2;
-              
-              ctx.beginPath();
-              ctx.moveTo(node.x, node.y);
-              ctx.lineTo(target.x, target.y);
-              ctx.stroke();
-              
-              // Data flow particles
-              const progress = (timeRef.current * 2 + i) % 1;
-              const flowX = node.x + (target.x - node.x) * progress;
-              const flowY = node.y + (target.y - node.y) * progress;
-              
-              ctx.beginPath();
-              ctx.fillStyle = '#8B5CF6';
-              ctx.arc(flowX, flowY, 3, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          });
-        });
-
-        // Brain nodes
-        brainNodes.forEach((node, i) => {
-          node.pulse += 0.1;
-          const pulseSize = node.size + Math.sin(node.pulse) * 2;
+        ctx.globalAlpha = 0.1;
+        for (let i = 0; i < 100; i++) {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          const size = Math.random() * 3;
           
           ctx.beginPath();
-          ctx.fillStyle = '#60A5FA';
-          ctx.arc(node.x, node.y, pulseSize, 0, Math.PI * 2);
+          ctx.fillStyle = `hsl(${220 + Math.random() * 40}, 60%, 50%)`;
+          ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
-          
-          // Node glow
-          ctx.beginPath();
-          ctx.fillStyle = 'rgba(96, 165, 250, 0.3)';
-          ctx.arc(node.x, node.y, pulseSize * 2, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
+        }
         ctx.restore();
 
-        // Draw Human Hand
+        // Update and draw neural network
+        neuronsRef.current.forEach((neuron, index) => {
+          // Update neuron activity
+          neuron.pulse += 0.1 + neuron.activity * 0.05;
+          neuron.charge += (Math.random() - 0.5) * 0.02;
+          neuron.charge = Math.max(0, Math.min(1, neuron.charge));
+
+          // Neural firing logic
+          if (neuron.charge > neuron.threshold && timeRef.current - neuron.lastFired > 0.5) {
+            neuron.lastFired = timeRef.current;
+            neuron.activity = 1;
+            
+            // Propagate signal to connected neurons
+            neuron.connections.forEach(connection => {
+              const target = neuronsRef.current[connection.to];
+              if (target) {
+                target.charge += connection.strength * 0.3;
+                connection.activity = 1;
+                
+                // Create neurotransmitter particles
+                for (let i = 0; i < 3; i++) {
+                  particlesRef.current.push({
+                    x: neuron.x,
+                    y: neuron.y,
+                    vx: (target.x - neuron.x) * 0.02 + (Math.random() - 0.5) * 2,
+                    vy: (target.y - neuron.y) * 0.02 + (Math.random() - 0.5) * 2,
+                    size: 1 + Math.random() * 2,
+                    opacity: 1,
+                    color: neuron.color,
+                    life: 0,
+                    maxLife: 60,
+                    type: 'neurotransmitter'
+                  });
+                }
+              }
+            });
+          }
+
+          // Decay activity
+          neuron.activity *= 0.95;
+          neuron.charge *= 0.98;
+
+          // Draw neuron cell body
+          const pulseSize = neuron.size + Math.sin(neuron.pulse) * 2 + neuron.activity * 3;
+          
+          // Cell membrane
+          ctx.save();
+          ctx.shadowColor = neuron.color;
+          ctx.shadowBlur = 10 + neuron.activity * 20;
+          
+          ctx.beginPath();
+          ctx.fillStyle = neuron.color;
+          ctx.globalAlpha = 0.8 + neuron.activity * 0.2;
+          ctx.arc(neuron.x, neuron.y, pulseSize, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Nucleus
+          ctx.beginPath();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.globalAlpha = 0.6;
+          ctx.arc(neuron.x, neuron.y, pulseSize * 0.4, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Nucleolus
+          ctx.beginPath();
+          ctx.fillStyle = neuron.color;
+          ctx.globalAlpha = 0.8;
+          ctx.arc(neuron.x + 1, neuron.y - 1, pulseSize * 0.15, 0, Math.PI * 2);
+          ctx.fill();
+          
+          ctx.restore();
+
+          // Draw dendrites (input branches)
+          neuron.dendrites.forEach((dendrite, dIndex) => {
+            const dendriteActivity = neuron.activity * (0.5 + Math.sin(timeRef.current * 3 + dIndex) * 0.5);
+            
+            ctx.save();
+            ctx.strokeStyle = neuron.color;
+            ctx.lineWidth = 1 + dendriteActivity * 2;
+            ctx.globalAlpha = 0.6 + dendriteActivity * 0.4;
+            
+            for (let branch = 0; branch < dendrite.branches; branch++) {
+              const branchAngle = dendrite.angle + (branch - dendrite.branches/2) * 0.3;
+              const branchLength = dendrite.length * (0.7 + branch * 0.15);
+              
+              ctx.beginPath();
+              ctx.moveTo(neuron.x, neuron.y);
+              
+              // Create curved dendrite
+              const controlX = neuron.x + Math.cos(branchAngle) * branchLength * 0.5;
+              const controlY = neuron.y + Math.sin(branchAngle) * branchLength * 0.5;
+              const endX = neuron.x + Math.cos(branchAngle) * branchLength;
+              const endY = neuron.y + Math.sin(branchAngle) * branchLength;
+              
+              ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+              ctx.stroke();
+              
+              // Dendritic spines
+              for (let spine = 1; spine < 4; spine++) {
+                const spineProgress = spine / 4;
+                const spineX = neuron.x + Math.cos(branchAngle) * branchLength * spineProgress;
+                const spineY = neuron.y + Math.sin(branchAngle) * branchLength * spineProgress;
+                
+                ctx.beginPath();
+                ctx.arc(spineX, spineY, 0.5 + dendriteActivity, 0, Math.PI * 2);
+                ctx.fill();
+              }
+            }
+            ctx.restore();
+          });
+
+          // Draw axon (output branch)
+          if (neuron.axon) {
+            const axonActivity = neuron.activity;
+            
+            ctx.save();
+            ctx.strokeStyle = neuron.color;
+            ctx.lineWidth = 2 + axonActivity * 3;
+            ctx.globalAlpha = 0.7 + axonActivity * 0.3;
+            
+            // Main axon shaft
+            const axonEndX = neuron.x + Math.cos(neuron.axon.angle) * neuron.axon.length;
+            const axonEndY = neuron.y + Math.sin(neuron.axon.angle) * neuron.axon.length;
+            
+            ctx.beginPath();
+            ctx.moveTo(neuron.x, neuron.y);
+            ctx.lineTo(axonEndX, axonEndY);
+            ctx.stroke();
+            
+            // Axon terminals
+            for (let terminal = 0; terminal < neuron.axon.terminals; terminal++) {
+              const terminalAngle = neuron.axon.angle + (terminal - neuron.axon.terminals/2) * 0.4;
+              const terminalLength = 15 + Math.random() * 10;
+              
+              const terminalX = axonEndX + Math.cos(terminalAngle) * terminalLength;
+              const terminalY = axonEndY + Math.sin(terminalAngle) * terminalLength;
+              
+              ctx.beginPath();
+              ctx.moveTo(axonEndX, axonEndY);
+              ctx.lineTo(terminalX, terminalY);
+              ctx.stroke();
+              
+              // Synaptic bouton
+              ctx.beginPath();
+              ctx.fillStyle = neuron.color;
+              ctx.arc(terminalX, terminalY, 2 + axonActivity * 2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+            
+            ctx.restore();
+          }
+        });
+
+        // Draw synaptic connections with neurotransmitter flow
+        synapsesRef.current.forEach(synapse => {
+          const fromNeuron = neuronsRef.current[synapse.from];
+          const toNeuron = neuronsRef.current[synapse.to];
+          
+          if (fromNeuron && toNeuron) {
+            synapse.activity *= 0.9;
+            
+            const distance = Math.sqrt((toNeuron.x - fromNeuron.x) ** 2 + (toNeuron.y - fromNeuron.y) ** 2);
+            const alpha = synapse.strength * (0.3 + synapse.activity * 0.7);
+            
+            ctx.save();
+            ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+            ctx.lineWidth = 1 + synapse.activity * 2;
+            
+            // Draw synaptic connection
+            ctx.beginPath();
+            ctx.moveTo(fromNeuron.x, fromNeuron.y);
+            
+            // Create curved connection
+            const midX = (fromNeuron.x + toNeuron.x) / 2 + Math.sin(timeRef.current + synapse.from) * 10;
+            const midY = (fromNeuron.y + toNeuron.y) / 2 + Math.cos(timeRef.current + synapse.to) * 10;
+            
+            ctx.quadraticCurveTo(midX, midY, toNeuron.x, toNeuron.y);
+            ctx.stroke();
+            
+            // Synaptic gap visualization
+            if (synapse.activity > 0.5) {
+              const gapX = fromNeuron.x + (toNeuron.x - fromNeuron.x) * 0.8;
+              const gapY = fromNeuron.y + (toNeuron.y - fromNeuron.y) * 0.8;
+              
+              ctx.beginPath();
+              ctx.fillStyle = `rgba(255, 255, 255, ${synapse.activity})`;
+              ctx.arc(gapX, gapY, 2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+            
+            ctx.restore();
+          }
+        });
+
+        // Draw ultra-detailed human hand
         ctx.save();
         
-        const handPulse = Math.sin(timeRef.current * 1.5) * 10;
+        const handPulse = Math.sin(timeRef.current * 1.5) * 15;
         ctx.shadowColor = '#F59E0B';
-        ctx.shadowBlur = 15 + handPulse;
+        ctx.shadowBlur = 20 + handPulse;
         
-        // Hand palm
+        // Hand palm with detailed anatomy
+        const palmGradient = ctx.createRadialGradient(handX, handY, 0, handX, handY, 60);
+        palmGradient.addColorStop(0, 'rgba(245, 158, 11, 0.9)');
+        palmGradient.addColorStop(0.7, 'rgba(217, 119, 6, 0.8)');
+        palmGradient.addColorStop(1, 'rgba(180, 83, 9, 0.7)');
+        
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(245, 158, 11, 0.8)';
-        ctx.ellipse(handX, handY, 40, 60, 0, 0, Math.PI * 2);
+        ctx.fillStyle = palmGradient;
+        ctx.ellipse(handX, handY, 45, 65, 0, 0, Math.PI * 2);
         ctx.fill();
         
-        // Fingers
+        // Palm lines (life line, heart line, head line)
+        ctx.strokeStyle = 'rgba(180, 83, 9, 0.6)';
+        ctx.lineWidth = 2;
+        
+        // Life line
+        ctx.beginPath();
+        ctx.arc(handX - 20, handY - 10, 30, 0.5, 2.5);
+        ctx.stroke();
+        
+        // Heart line
+        ctx.beginPath();
+        ctx.moveTo(handX - 35, handY - 25);
+        ctx.quadraticCurveTo(handX, handY - 35, handX + 35, handY - 20);
+        ctx.stroke();
+        
+        // Head line
+        ctx.beginPath();
+        ctx.moveTo(handX - 30, handY - 5);
+        ctx.quadraticCurveTo(handX + 10, handY + 5, handX + 40, handY + 10);
+        ctx.stroke();
+
+        // Detailed fingers with joints and fingerprints
         const fingers = [
-          { x: handX - 30, y: handY - 40, w: 12, h: 35 },
-          { x: handX - 10, y: handY - 50, w: 12, h: 40 },
-          { x: handX + 10, y: handY - 45, w: 12, h: 38 },
-          { x: handX + 30, y: handY - 35, w: 12, h: 30 }
+          { x: handX - 35, y: handY - 45, w: 14, h: 40, name: 'pinky' },
+          { x: handX - 12, y: handY - 55, w: 16, h: 45, name: 'ring' },
+          { x: handX + 12, y: handY - 50, w: 16, h: 42, name: 'middle' },
+          { x: handX + 35, y: handY - 40, w: 15, h: 35, name: 'index' }
         ];
         
         fingers.forEach((finger, i) => {
-          const fingerPulse = Math.sin(timeRef.current * 2 + i * 0.5) * 2;
-          ctx.beginPath();
-          ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
-          ctx.roundRect(finger.x - finger.w/2, finger.y - finger.h + fingerPulse, finger.w, finger.h, 6);
-          ctx.fill();
+          const fingerPulse = Math.sin(timeRef.current * 2 + i * 0.5) * 3;
           
-          // Fingertip sensors
+          // Finger segments (3 phalanges)
+          for (let segment = 0; segment < 3; segment++) {
+            const segmentY = finger.y - finger.h + (segment * finger.h / 3) + fingerPulse;
+            const segmentHeight = finger.h / 3;
+            
+            const segmentGradient = ctx.createLinearGradient(
+              finger.x - finger.w/2, segmentY,
+              finger.x + finger.w/2, segmentY + segmentHeight
+            );
+            segmentGradient.addColorStop(0, 'rgba(245, 158, 11, 0.95)');
+            segmentGradient.addColorStop(0.5, 'rgba(217, 119, 6, 0.9)');
+            segmentGradient.addColorStop(1, 'rgba(180, 83, 9, 0.85)');
+            
+            ctx.beginPath();
+            ctx.fillStyle = segmentGradient;
+            ctx.roundRect(finger.x - finger.w/2, segmentY, finger.w, segmentHeight, 8);
+            ctx.fill();
+            
+            // Joint lines
+            if (segment < 2) {
+              ctx.strokeStyle = 'rgba(180, 83, 9, 0.7)';
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(finger.x - finger.w/2 + 2, segmentY + segmentHeight);
+              ctx.lineTo(finger.x + finger.w/2 - 2, segmentY + segmentHeight);
+              ctx.stroke();
+            }
+          }
+          
+          // Fingertip with neural sensors
+          const tipY = finger.y - finger.h + fingerPulse;
+          
+          // Fingerprint pattern
+          ctx.strokeStyle = 'rgba(180, 83, 9, 0.4)';
+          ctx.lineWidth = 0.5;
+          for (let ring = 1; ring <= 4; ring++) {
+            ctx.beginPath();
+            ctx.ellipse(finger.x, tipY + 5, ring * 2, ring * 1.5, 0, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          
+          // Neural sensor
           ctx.beginPath();
           ctx.fillStyle = '#3B82F6';
-          ctx.arc(finger.x, finger.y - finger.h + fingerPulse, 4, 0, Math.PI * 2);
+          ctx.shadowColor = '#3B82F6';
+          ctx.shadowBlur = 10;
+          ctx.arc(finger.x, tipY + 5, 4, 0, Math.PI * 2);
           ctx.fill();
+          
+          // Sensor activity rings
+          const sensorActivity = Math.sin(timeRef.current * 4 + i) * 0.5 + 0.5;
+          for (let ring = 1; ring <= 3; ring++) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(59, 130, 246, ${sensorActivity * (1 - ring * 0.3)})`;
+            ctx.lineWidth = 2;
+            ctx.arc(finger.x, tipY + 5, 6 + ring * 4, 0, Math.PI * 2);
+            ctx.stroke();
+          }
         });
 
-        // Thumb
+        // Thumb with detailed anatomy
+        const thumbX = handX - 55;
+        const thumbY = handY + 15;
+        const thumbPulse = Math.sin(timeRef.current * 1.8) * 2;
+        
+        // Thumb segments
+        for (let segment = 0; segment < 2; segment++) {
+          const segmentAngle = -0.5 + segment * 0.3;
+          const segmentLength = 25 - segment * 5;
+          
+          ctx.save();
+          ctx.translate(thumbX, thumbY);
+          ctx.rotate(segmentAngle);
+          
+          const thumbGradient = ctx.createLinearGradient(-8, 0, 8, segmentLength);
+          thumbGradient.addColorStop(0, 'rgba(245, 158, 11, 0.95)');
+          thumbGradient.addColorStop(1, 'rgba(180, 83, 9, 0.85)');
+          
+          ctx.beginPath();
+          ctx.fillStyle = thumbGradient;
+          ctx.roundRect(-8, 0, 16, segmentLength, 8);
+          ctx.fill();
+          
+          ctx.restore();
+        }
+        
+        // Thumb neural sensor
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
-        ctx.ellipse(handX - 50, handY + 10, 15, 25, -0.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#3B82F6';
+        ctx.arc(thumbX - 8, thumbY - 20, 4, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.restore();
 
-        // Energy Connection between Brain and Hand
-        const connectionPoints = 8;
+        // Advanced neural-hand connection system
+        const connectionPoints = 12;
+        const brainCenterX = canvas.width * 0.25;
+        const brainCenterY = canvas.height * 0.4;
+        
         for (let i = 0; i < connectionPoints; i++) {
           const progress = i / (connectionPoints - 1);
-          const x = centerX + (handX - centerX) * progress;
-          const y = centerY + (handY - centerY) * progress;
           
-          // Add curve to the connection
-          const curve = Math.sin(progress * Math.PI) * 50;
-          const curvedY = y + curve;
+          // Create sophisticated curved path
+          const controlPoint1X = brainCenterX + (handX - brainCenterX) * 0.3;
+          const controlPoint1Y = brainCenterY - 100 + Math.sin(progress * Math.PI) * 80;
+          const controlPoint2X = brainCenterX + (handX - brainCenterX) * 0.7;
+          const controlPoint2Y = handY - 50 + Math.cos(progress * Math.PI) * 60;
           
-          // Energy pulse
-          const pulsePhase = (timeRef.current * 3 + i * 0.3) % (Math.PI * 2);
+          const t = progress;
+          const x = Math.pow(1-t, 3) * brainCenterX + 
+                   3 * Math.pow(1-t, 2) * t * controlPoint1X + 
+                   3 * (1-t) * Math.pow(t, 2) * controlPoint2X + 
+                   Math.pow(t, 3) * handX;
+          const y = Math.pow(1-t, 3) * brainCenterY + 
+                   3 * Math.pow(1-t, 2) * t * controlPoint1Y + 
+                   3 * (1-t) * Math.pow(t, 2) * controlPoint2Y + 
+                   Math.pow(t, 3) * handY;
+          
+          // Multi-layered energy pulses
+          const pulsePhase = (timeRef.current * 4 + i * 0.2) % (Math.PI * 2);
           const pulseIntensity = Math.sin(pulsePhase) * 0.5 + 0.5;
           
+          // Primary energy node
+          ctx.save();
+          ctx.shadowColor = '#8B5CF6';
+          ctx.shadowBlur = 15 + pulseIntensity * 10;
           ctx.beginPath();
-          ctx.fillStyle = `rgba(139, 92, 246, ${pulseIntensity})`;
-          ctx.arc(x, curvedY, 4 + pulseIntensity * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(139, 92, 246, ${pulseIntensity * 0.9})`;
+          ctx.arc(x, y, 5 + pulseIntensity * 4, 0, Math.PI * 2);
           ctx.fill();
+          ctx.restore();
           
-          // Energy trail
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(139, 92, 246, ${pulseIntensity * 0.5})`;
-          ctx.lineWidth = 3;
-          if (i > 0) {
-            const prevX = centerX + (handX - centerX) * ((i-1) / (connectionPoints - 1));
-            const prevY = centerY + (handY - centerY) * ((i-1) / (connectionPoints - 1));
-            const prevCurvedY = prevY + Math.sin(((i-1) / (connectionPoints - 1)) * Math.PI) * 50;
-            
-            ctx.moveTo(prevX, prevCurvedY);
-            ctx.lineTo(x, curvedY);
+          // Secondary energy rings
+          for (let ring = 1; ring <= 3; ring++) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(139, 92, 246, ${pulseIntensity * (0.6 - ring * 0.15)})`;
+            ctx.lineWidth = 3 - ring * 0.5;
+            ctx.arc(x, y, 8 + ring * 6 + pulseIntensity * 3, 0, Math.PI * 2);
             ctx.stroke();
+          }
+          
+          // Data stream particles
+          if (i > 0) {
+            const prevProgress = (i - 1) / (connectionPoints - 1);
+            const prevT = prevProgress;
+            const prevX = Math.pow(1-prevT, 3) * brainCenterX + 
+                         3 * Math.pow(1-prevT, 2) * prevT * controlPoint1X + 
+                         3 * (1-prevT) * Math.pow(prevT, 2) * controlPoint2X + 
+                         Math.pow(prevT, 3) * handX;
+            const prevY = Math.pow(1-prevT, 3) * brainCenterY + 
+                         3 * Math.pow(1-prevT, 2) * prevT * controlPoint1Y + 
+                         3 * (1-prevT) * Math.pow(prevT, 2) * controlPoint2Y + 
+                         Math.pow(prevT, 3) * handY;
+            
+            ctx.save();
+            ctx.strokeStyle = `rgba(6, 182, 212, ${pulseIntensity * 0.8})`;
+            ctx.lineWidth = 2 + pulseIntensity * 2;
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.restore();
           }
         }
 
-        // Floating particles
-        particlesRef.current.forEach((particle, i) => {
+        // Advanced data streams with quantum effects
+        for (let stream = 0; stream < 8; stream++) {
+          const streamProgress = (timeRef.current * 2 + stream * 0.3) % 1;
+          const t = streamProgress;
+          
+          const controlPoint1X = brainCenterX + (handX - brainCenterX) * 0.3;
+          const controlPoint1Y = brainCenterY - 100 + Math.sin(streamProgress * Math.PI) * 80;
+          const controlPoint2X = brainCenterX + (handX - brainCenterX) * 0.7;
+          const controlPoint2Y = handY - 50 + Math.cos(streamProgress * Math.PI) * 60;
+          
+          const streamX = Math.pow(1-t, 3) * brainCenterX + 
+                         3 * Math.pow(1-t, 2) * t * controlPoint1X + 
+                         3 * (1-t) * Math.pow(t, 2) * controlPoint2X + 
+                         Math.pow(t, 3) * handX;
+          const streamY = Math.pow(1-t, 3) * brainCenterY + 
+                         3 * Math.pow(1-t, 2) * t * controlPoint1Y + 
+                         3 * (1-t) * Math.pow(t, 2) * controlPoint2Y + 
+                         Math.pow(t, 3) * handY;
+          
+          // Main data packet
+          ctx.save();
+          ctx.shadowColor = '#06B6D4';
+          ctx.shadowBlur = 20;
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(6, 182, 212, ${1 - streamProgress})`;
+          ctx.arc(streamX, streamY, 8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+          
+          // Quantum trail effect
+          for (let trail = 1; trail <= 6; trail++) {
+            const trailProgress = streamProgress - trail * 0.03;
+            if (trailProgress > 0) {
+              const trailT = trailProgress;
+              const trailX = Math.pow(1-trailT, 3) * brainCenterX + 
+                           3 * Math.pow(1-trailT, 2) * trailT * controlPoint1X + 
+                           3 * (1-trailT) * Math.pow(trailT, 2) * controlPoint2X + 
+                           Math.pow(trailT, 3) * handX;
+              const trailY = Math.pow(1-trailT, 3) * brainCenterY + 
+                           3 * Math.pow(1-trailT, 2) * trailT * controlPoint1Y + 
+                           3 * (1-trailT) * Math.pow(trailT, 2) * controlPoint2Y + 
+                           Math.pow(trailT, 3) * handY;
+              
+              ctx.beginPath();
+              ctx.fillStyle = `rgba(6, 182, 212, ${(1 - trailProgress) * 0.4})`;
+              ctx.arc(trailX, trailY, 6 - trail * 0.8, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+
+        // Update and render particles
+        particlesRef.current.forEach((particle, index) => {
           particle.x += particle.vx;
           particle.y += particle.vy;
           particle.life++;
           
-          // Particle attraction to brain-hand connection
-          const connectionCenterX = (centerX + handX) / 2;
-          const connectionCenterY = (centerY + handY) / 2;
-          const distToConnection = Math.sqrt((particle.x - connectionCenterX) ** 2 + (particle.y - connectionCenterY) ** 2);
-          
-          if (distToConnection < 200) {
-            const attractionForce = 0.02;
-            particle.vx += (connectionCenterX - particle.x) * attractionForce / distToConnection;
-            particle.vy += (connectionCenterY - particle.y) * attractionForce / distToConnection;
+          // Particle physics and interactions
+          if (particle.type === 'neurotransmitter') {
+            // Attraction to nearby neurons
+            let closestNeuron = null;
+            let closestDistance = Infinity;
+            
+            neuronsRef.current.forEach(neuron => {
+              const distance = Math.sqrt((particle.x - neuron.x) ** 2 + (particle.y - neuron.y) ** 2);
+              if (distance < closestDistance && distance < 50) {
+                closestDistance = distance;
+                closestNeuron = neuron;
+              }
+            });
+            
+            if (closestNeuron) {
+              const attractionForce = 0.05;
+              particle.vx += (closestNeuron.x - particle.x) * attractionForce / closestDistance;
+              particle.vy += (closestNeuron.y - particle.y) * attractionForce / closestDistance;
+            }
           }
           
-          // Boundary check
-          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+          // Boundary interactions
+          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -0.8;
+          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -0.8;
           
-          // Reset particle if it's too old
+          // Particle aging and regeneration
           if (particle.life > particle.maxLife) {
             particle.x = Math.random() * canvas.width;
             particle.y = Math.random() * canvas.height;
             particle.life = 0;
-            particle.vx = (Math.random() - 0.5) * 2;
-            particle.vy = (Math.random() - 0.5) * 2;
+            particle.vx = (Math.random() - 0.5) * 3;
+            particle.vy = (Math.random() - 0.5) * 3;
+            particle.opacity = Math.random() * 0.8 + 0.2;
           }
           
-          // Draw particle
-          const alpha = 1 - (particle.life / particle.maxLife);
-          ctx.beginPath();
-          ctx.fillStyle = particle.color.replace('60%)', `60%, ${alpha})`);
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fill();
+          // Render particle with advanced effects
+          const alpha = particle.opacity * (1 - particle.life / particle.maxLife);
+          
+          ctx.save();
+          ctx.globalAlpha = alpha;
+          
+          if (particle.type === 'neurotransmitter') {
+            ctx.shadowColor = particle.color;
+            ctx.shadowBlur = 8;
+            
+            ctx.beginPath();
+            ctx.fillStyle = particle.color;
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Neurotransmitter glow
+            ctx.beginPath();
+            ctx.fillStyle = particle.color.replace('60%)', '60%, 0.3)');
+            ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.beginPath();
+            ctx.fillStyle = particle.color.replace('60%)', `60%, ${alpha})`);
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          
+          ctx.restore();
         });
-
-        // Data streams
-        for (let i = 0; i < 5; i++) {
-          const streamProgress = (timeRef.current + i * 0.4) % 1;
-          const streamX = centerX + (handX - centerX) * streamProgress;
-          const streamY = centerY + (handY - centerY) * streamProgress;
-          
-          ctx.beginPath();
-          ctx.fillStyle = `rgba(6, 182, 212, ${1 - streamProgress})`;
-          ctx.arc(streamX, streamY, 6, 0, Math.PI * 2);
-          ctx.fill();
-          
-          // Stream trail
-          for (let j = 1; j <= 5; j++) {
-            const trailProgress = streamProgress - j * 0.05;
-            if (trailProgress > 0) {
-              const trailX = centerX + (handX - centerX) * trailProgress;
-              const trailY = centerY + (handY - centerY) * trailProgress;
-              
-              ctx.beginPath();
-              ctx.fillStyle = `rgba(6, 182, 212, ${(1 - trailProgress) * 0.3})`;
-              ctx.arc(trailX, trailY, 4 - j * 0.5, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-        }
 
         animationRef.current = requestAnimationFrame(animate);
       };
@@ -490,33 +887,43 @@ const Home: React.FC = () => {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}
+        style={{ 
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #334155 70%, #475569 100%)'
+        }}
       />
     );
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Advanced AI Brain & Hand Hero Section */}
+      {/* Ultra-Detailed AI Brain & Hand Hero Section */}
       <section className="pt-16 relative overflow-hidden min-h-screen flex items-center">
-        {/* Advanced AI Brain & Hand Animation */}
-        <AdvancedAIBrainHand />
+        {/* Ultra-Detailed AI Brain & Hand Animation */}
+        <UltraDetailedAIBrain />
         
-        {/* Overlay gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-transparent z-10" />
+        {/* Enhanced overlay gradient for perfect text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-gray-900/40 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-gray-900/30 z-10" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-20">
-          <div className="max-w-4xl">
-            {/* Enhanced Typography with Staggered Animation */}
-            <div className="mb-8">
-              <h1 className="text-6xl md:text-8xl font-light leading-tight tracking-tight text-white">
-                <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="max-w-5xl">
+            {/* Ultra-Enhanced Typography with Advanced Staggered Animation */}
+            <div className="mb-12">
+              <h1 className="text-7xl md:text-9xl font-light leading-tight tracking-tight text-white">
+                <span 
+                  className="inline-block animate-fade-in-up" 
+                  style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+                >
                   {translate('hero.title').split('.')[0]}.
                 </span>
                 <br />
                 <span 
                   className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 font-medium inline-block animate-fade-in-up"
-                  style={{ animationDelay: '0.4s' }}
+                  style={{ 
+                    animationDelay: '0.6s', 
+                    animationFillMode: 'both',
+                    filter: 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.5))'
+                  }}
                 >
                   {translate('hero.title').split('.')[1]}.
                 </span>
@@ -524,43 +931,51 @@ const Home: React.FC = () => {
             </div>
             
             <p 
-              className="text-2xl md:text-3xl mb-12 text-gray-200 max-w-3xl font-light leading-relaxed animate-fade-in-up"
-              style={{ animationDelay: '0.6s' }}
+              className="text-3xl md:text-4xl mb-16 text-gray-100 max-w-4xl font-light leading-relaxed animate-fade-in-up"
+              style={{ 
+                animationDelay: '0.9s', 
+                animationFillMode: 'both',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
+              }}
             >
               {translate('hero.subtitle')}
             </p>
             
             <div 
-              className="flex flex-col sm:flex-row gap-6 animate-fade-in-up"
-              style={{ animationDelay: '0.8s' }}
+              className="flex flex-col sm:flex-row gap-8 animate-fade-in-up"
+              style={{ animationDelay: '1.2s', animationFillMode: 'both' }}
             >
-              <button className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-5 rounded-full text-xl font-medium hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 shadow-2xl relative overflow-hidden">
+              <button className="group bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 text-white px-16 py-6 rounded-full text-2xl font-medium hover:from-blue-500 hover:via-purple-500 hover:to-cyan-500 transition-all duration-500 transform hover:scale-110 shadow-2xl relative overflow-hidden">
                 <span className="relative z-10">{translate('cta.book')}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               </button>
               <Link 
                 to="/solutions" 
-                className="group border-2 border-white/50 text-white px-12 py-5 rounded-full text-xl font-medium hover:bg-white/10 transition-all duration-300 relative overflow-hidden backdrop-blur-sm"
+                className="group border-3 border-white/60 text-white px-16 py-6 rounded-full text-2xl font-medium hover:bg-white/20 transition-all duration-500 relative overflow-hidden backdrop-blur-md"
               >
                 <span className="relative z-10 flex items-center">
                   {translate('cta.explore')}
-                  <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
+                  <ArrowRight className="ml-4 h-7 w-7 group-hover:translate-x-3 transition-transform duration-500" />
                 </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Floating scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-          <div className="w-8 h-12 border-2 border-white/50 rounded-full flex justify-center backdrop-blur-sm">
-            <div className="w-2 h-4 bg-white/70 rounded-full mt-2 animate-pulse" />
+        {/* Enhanced floating scroll indicator with neural pulse */}
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+          <div className="w-10 h-16 border-3 border-white/60 rounded-full flex justify-center backdrop-blur-md relative">
+            <div className="w-3 h-6 bg-gradient-to-b from-white/80 to-transparent rounded-full mt-3 animate-pulse" />
+            <div className="absolute inset-0 rounded-full bg-gradient-to-b from-blue-400/20 to-purple-400/20 animate-pulse" />
           </div>
         </div>
 
-        {/* Ambient light effects */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse z-5" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse z-5" style={{ animationDelay: '1s' }} />
+        {/* Enhanced ambient light effects with neural patterns */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-500/15 rounded-full blur-3xl animate-pulse z-5" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500/15 rounded-full blur-3xl animate-pulse z-5" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl animate-pulse z-5" style={{ animationDelay: '2s' }} />
       </section>
 
       {/* Enhanced Client Showcase */}
@@ -1122,7 +1537,7 @@ const Home: React.FC = () => {
         @keyframes fade-in-up {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px);
           }
           to {
             opacity: 1;
@@ -1131,7 +1546,7 @@ const Home: React.FC = () => {
         }
         
         .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
+          animation: fade-in-up 1.2s ease-out forwards;
           opacity: 0;
         }
       `}</style>
