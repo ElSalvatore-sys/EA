@@ -173,55 +173,34 @@ const Home: React.FC = () => {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
       <section className="pt-16 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 dark:from-gray-950 dark:via-blue-950 dark:to-gray-900 text-white relative overflow-hidden">
-        {/* AI Brain Background Image */}
+        {/* Simple Animated Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-blue-900/40 to-black/60"></div>
-          <img 
-            src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080" 
-            alt="AI Neural Network Background"
-            className="w-full h-full object-cover opacity-20"
-          />
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full opacity-10 animate-pulse"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full opacity-5 animate-pulse" style={{ animationDelay: '1s' }}></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-cyan-400 rounded-full opacity-8 animate-bounce" style={{ animationDelay: '2s' }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl md:text-7xl font-light mb-8 leading-tight tracking-tight">
-                {translate('hero.title').split('.')[0]}.<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 font-medium">
-                  {translate('hero.title').split('.')[1]}.
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl mb-12 text-gray-300 dark:text-gray-400 max-w-4xl mx-auto font-light leading-relaxed">
-                {translate('hero.subtitle')}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                <button className="bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                  {translate('cta.book')}
-                </button>
-                <Link 
-                  to="/solutions" 
-                  className="border border-white/30 text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300 text-center"
-                >
-                  {translate('cta.explore')}
-                </Link>
-              </div>
-            </div>
-            
-            {/* AI Visualization */}
-            <div className="relative">
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
-                <img 
-                  src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=800&h=600" 
-                  alt="AI Brain Visualization"
-                  className="w-full h-80 object-cover rounded-2xl shadow-2xl"
-                />
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full opacity-80 animate-pulse"></div>
-                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full opacity-60 animate-pulse" style={{ animationDelay: '1s' }}></div>
-              </div>
+          <div className="text-center">
+            <h1 className="text-5xl md:text-7xl font-light mb-8 leading-tight tracking-tight">
+              {translate('hero.title').split('.')[0]}.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 font-medium">
+                {translate('hero.title').split('.')[1]}.
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl mb-12 text-gray-300 dark:text-gray-400 max-w-4xl mx-auto font-light leading-relaxed">
+              {translate('hero.subtitle')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button className="bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                {translate('cta.book')}
+              </button>
+              <Link 
+                to="/solutions" 
+                className="border border-white/30 text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300"
+              >
+                {translate('cta.explore')}
+              </Link>
             </div>
           </div>
         </div>
@@ -309,23 +288,13 @@ const Home: React.FC = () => {
       {/* Hotel am Kochbrunnen Showcase */}
       <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-                {translate('hotel.title')}
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed">
-                {translate('hotel.subtitle')}
-              </p>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.pexels.com/photos/8386422/pexels-photo-8386422.jpeg?auto=compress&cs=tinysrgb&w=800&h=600" 
-                alt="AI-powered hotel management system"
-                className="w-full h-80 object-cover rounded-3xl shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-3xl"></div>
-            </div>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              {translate('hotel.title')}
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              {translate('hotel.subtitle')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
@@ -410,23 +379,13 @@ const Home: React.FC = () => {
       {/* AI-Powered Websites & Apps Section */}
       <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-                {translate('websites.title')}
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed">
-                {translate('websites.subtitle')}
-              </p>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.pexels.com/photos/8386427/pexels-photo-8386427.jpeg?auto=compress&cs=tinysrgb&w=800&h=600" 
-                alt="AI-powered web development"
-                className="w-full h-80 object-cover rounded-3xl shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent rounded-3xl"></div>
-            </div>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              {translate('websites.title')}
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              {translate('websites.subtitle')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -493,23 +452,13 @@ const Home: React.FC = () => {
       {/* Minimalistic Industry Solutions */}
       <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-                {translate('industry.title')}
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed">
-                {translate('industry.subtitle')}
-              </p>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.pexels.com/photos/8386421/pexels-photo-8386421.jpeg?auto=compress&cs=tinysrgb&w=800&h=600" 
-                alt="AI solutions across industries"
-                className="w-full h-80 object-cover rounded-3xl shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-green-900/20 to-transparent rounded-3xl"></div>
-            </div>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              {translate('industry.title')}
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              {translate('industry.subtitle')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -569,23 +518,13 @@ const Home: React.FC = () => {
       {/* Enhanced EA Method Process */}
       <section className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-                {translate('section.method')}
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed">
-                {translate('method.subtitle')}
-              </p>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.pexels.com/photos/8386425/pexels-photo-8386425.jpeg?auto=compress&cs=tinysrgb&w=800&h=600" 
-                alt="AI methodology and process"
-                className="w-full h-80 object-cover rounded-3xl shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-orange-900/20 to-transparent rounded-3xl"></div>
-            </div>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              {translate('section.method')}
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              {translate('method.subtitle')}
+            </p>
           </div>
 
           <div className="relative">
@@ -636,7 +575,7 @@ const Home: React.FC = () => {
                   duration: translate('method.step1.duration'),
                   icon: Search,
                   gradient: 'from-blue-500 to-cyan-500',
-                  image: 'https://images.pexels.com/photos/8386436/pexels-photo-8386436.jpeg?auto=compress&cs=tinysrgb&w=800&h=600'
+                  image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
                 },
                 {
                   number: '02',
@@ -645,7 +584,7 @@ const Home: React.FC = () => {
                   duration: translate('method.step2.duration'),
                   icon: Lightbulb,
                   gradient: 'from-green-500 to-emerald-500',
-                  image: 'https://images.pexels.com/photos/8386439/pexels-photo-8386439.jpeg?auto=compress&cs=tinysrgb&w=800&h=600'
+                  image: 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
                 },
                 {
                   number: '03',
@@ -654,7 +593,7 @@ const Home: React.FC = () => {
                   duration: translate('method.step3.duration'),
                   icon: Cog,
                   gradient: 'from-orange-500 to-red-500',
-                  image: 'https://images.pexels.com/photos/8386431/pexels-photo-8386431.jpeg?auto=compress&cs=tinysrgb&w=800&h=600'
+                  image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
                 },
                 {
                   number: '04',
@@ -663,7 +602,7 @@ const Home: React.FC = () => {
                   duration: translate('method.step4.duration'),
                   icon: TrendingUp,
                   gradient: 'from-purple-500 to-pink-500',
-                  image: 'https://images.pexels.com/photos/8386433/pexels-photo-8386433.jpeg?auto=compress&cs=tinysrgb&w=800&h=600'
+                  image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'
                 }
               ].map((stage, index) => {
                 const IconComponent = stage.icon;
@@ -734,23 +673,10 @@ const Home: React.FC = () => {
       {/* Why Choose Us */}
       <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-                {translate('section.advantage')}
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed">
-                We don't just implement AI – we architect intelligent ecosystems that evolve with your business.
-              </p>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.pexels.com/photos/8386435/pexels-photo-8386435.jpeg?auto=compress&cs=tinysrgb&w=800&h=600" 
-                alt="AI advantage and expertise"
-                className="w-full h-80 object-cover rounded-3xl shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-3xl"></div>
-            </div>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              {translate('section.advantage')}
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -823,18 +749,8 @@ const Home: React.FC = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-32 bg-gray-900 dark:bg-gray-950 text-white transition-colors duration-300 relative overflow-hidden">
-        {/* AI Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img 
-            src="https://images.pexels.com/photos/8386437/pexels-photo-8386437.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080" 
-            alt="AI Future Background"
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-blue-900/60 to-gray-900/80"></div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <section className="py-32 bg-gray-900 dark:bg-gray-950 text-white transition-colors duration-300">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-tight">{translate('final.title')}</h2>
           <p className="text-xl text-gray-300 dark:text-gray-400 mb-12 font-light">
             {translate('final.subtitle')}
