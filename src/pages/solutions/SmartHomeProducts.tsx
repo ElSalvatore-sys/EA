@@ -1,29 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowLeft,
-  ShoppingCart,
-  Star,
-  Zap,
-  Shield,
-  Wifi,
-  Smartphone,
-  Home,
-  Lightbulb,
-  Thermometer,
-  Lock,
-  Camera,
-  Speaker,
-  Tv,
-  Filter,
-  Search,
-  Heart,
-  Compare,
-  CheckCircle,
-  TrendingUp,
-  Award,
-  Users
-} from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Star, Zap, Shield, Wifi, Smartphone, Home, Lightbulb, Thermometer, Lock, Camera, Speaker, Tv, Filter, Search, Heart, GitCompare as Compare, CheckCircle, TrendingUp, Award, Users } from 'lucide-react';
 
 const SmartHomeProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
