@@ -24,7 +24,7 @@ const SmartHomeProducts: React.FC = () => {
   ];
 
   const products = [
-    // Philips Hue Lighting
+    // SMART LIGHTING - Philips Hue
     {
       id: 'philips-hue-starter',
       name: 'Philips Hue White and Color Ambiance Starter Kit',
@@ -55,8 +55,53 @@ const SmartHomeProducts: React.FC = () => {
       inStock: true,
       bestseller: false
     },
+    {
+      id: 'philips-hue-go',
+      name: 'Philips Hue Go Portable Smart Light',
+      brand: 'Philips',
+      category: 'lighting',
+      price: 69.99,
+      originalPrice: 79.99,
+      rating: 4.6,
+      reviews: 892,
+      image: 'https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Portable', 'Battery powered', 'Wireless', 'Color changing'],
+      description: 'Portable smart light that goes anywhere in your home.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'lifx-color-bulb',
+      name: 'LIFX Color A19 Smart LED Bulb',
+      brand: 'LIFX',
+      category: 'lighting',
+      price: 49.99,
+      originalPrice: 59.99,
+      rating: 4.5,
+      reviews: 1234,
+      image: 'https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['WiFi enabled', '16 million colors', 'No hub required', 'Energy efficient'],
+      description: 'Bright, colorful smart bulb that connects directly to WiFi.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'nanoleaf-panels',
+      name: 'Nanoleaf Shapes Hexagons Starter Kit',
+      brand: 'Nanoleaf',
+      category: 'lighting',
+      price: 199.99,
+      originalPrice: 229.99,
+      rating: 4.4,
+      reviews: 567,
+      image: 'https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Modular design', 'Touch reactive', 'Music sync', 'App control'],
+      description: 'Modular smart lighting panels for creative wall displays.',
+      inStock: true,
+      bestseller: false
+    },
 
-    // Nest Climate Control
+    // CLIMATE CONTROL
     {
       id: 'nest-thermostat',
       name: 'Google Nest Learning Thermostat',
@@ -87,8 +132,38 @@ const SmartHomeProducts: React.FC = () => {
       inStock: true,
       bestseller: false
     },
+    {
+      id: 'honeywell-t9',
+      name: 'Honeywell Home T9 Smart Thermostat',
+      brand: 'Honeywell',
+      category: 'climate',
+      price: 199.99,
+      originalPrice: 219.99,
+      rating: 4.3,
+      reviews: 1245,
+      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Smart room sensors', 'Geofencing', 'Voice control', 'Energy savings'],
+      description: 'Smart thermostat with room sensors for precise temperature control.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'dyson-pure-cool',
+      name: 'Dyson Pure Cool TP07 Air Purifier',
+      brand: 'Dyson',
+      category: 'climate',
+      price: 549.99,
+      originalPrice: 599.99,
+      rating: 4.7,
+      reviews: 892,
+      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['HEPA filtration', 'Air quality monitoring', 'App control', 'Oscillation'],
+      description: 'Smart air purifier and fan with real-time air quality monitoring.',
+      inStock: true,
+      bestseller: false
+    },
 
-    // Security Systems
+    // SECURITY SYSTEMS
     {
       id: 'ring-doorbell',
       name: 'Ring Video Doorbell Pro 2',
@@ -98,12 +173,59 @@ const SmartHomeProducts: React.FC = () => {
       originalPrice: 229.99,
       rating: 4.4,
       reviews: 5632,
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
       features: ['1080p HD video', 'Motion detection', 'Two-way talk', 'Night vision'],
       description: 'Advanced video doorbell with crystal clear video and smart alerts.',
       inStock: true,
       bestseller: true
     },
+    {
+      id: 'august-smart-lock',
+      name: 'August Wi-Fi Smart Lock',
+      brand: 'August',
+      category: 'security',
+      price: 279.99,
+      originalPrice: 299.99,
+      rating: 4.2,
+      reviews: 2134,
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Keyless entry', 'Remote access', 'Auto-lock', 'Guest access'],
+      description: 'Smart lock that works with your existing deadbolt.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'yale-assure-lock',
+      name: 'Yale Assure Lock SL Connected',
+      brand: 'Yale',
+      category: 'security',
+      price: 249.99,
+      originalPrice: 279.99,
+      rating: 4.3,
+      reviews: 1567,
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Touchscreen keypad', 'Z-Wave Plus', 'Tamper alarm', 'Auto-relock'],
+      description: 'Sleek touchscreen smart lock with advanced security features.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'simplisafe-system',
+      name: 'SimpliSafe 8-Piece Wireless Home Security System',
+      brand: 'SimpliSafe',
+      category: 'security',
+      price: 199.99,
+      originalPrice: 244.99,
+      rating: 4.6,
+      reviews: 3421,
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Wireless setup', '24/7 monitoring', 'Mobile alerts', 'No contracts'],
+      description: 'Complete wireless security system with professional monitoring.',
+      inStock: true,
+      bestseller: true
+    },
+
+    // CAMERAS
     {
       id: 'arlo-camera',
       name: 'Arlo Pro 4 Wireless Security Camera',
@@ -113,14 +235,59 @@ const SmartHomeProducts: React.FC = () => {
       originalPrice: 199.99,
       rating: 4.3,
       reviews: 2156,
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
       features: ['Wire-free', '2K video', 'Color night vision', 'Weather resistant'],
       description: 'Completely wireless security camera with exceptional video quality.',
       inStock: true,
       bestseller: false
     },
+    {
+      id: 'nest-cam-outdoor',
+      name: 'Google Nest Cam (Battery)',
+      brand: 'Google',
+      category: 'cameras',
+      price: 179.99,
+      originalPrice: 199.99,
+      rating: 4.5,
+      reviews: 1834,
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Battery powered', '1080p HDR', 'Night vision', 'Person alerts'],
+      description: 'Wireless security camera with intelligent alerts and long battery life.',
+      inStock: true,
+      bestseller: true
+    },
+    {
+      id: 'wyze-cam-v3',
+      name: 'Wyze Cam v3 1080p HD Indoor/Outdoor Camera',
+      brand: 'Wyze',
+      category: 'cameras',
+      price: 35.99,
+      originalPrice: 39.99,
+      rating: 4.4,
+      reviews: 8765,
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Color night vision', 'Weather resistant', 'Motion detection', 'Cloud storage'],
+      description: 'Affordable smart camera with premium features.',
+      inStock: true,
+      bestseller: true
+    },
+    {
+      id: 'eufy-indoor-cam',
+      name: 'eufy Security Indoor Cam 2K',
+      brand: 'eufy',
+      category: 'cameras',
+      price: 49.99,
+      originalPrice: 59.99,
+      rating: 4.6,
+      reviews: 2341,
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['2K resolution', 'Pan & tilt', 'AI detection', 'Local storage'],
+      description: 'High-resolution indoor camera with AI-powered detection.',
+      inStock: true,
+      bestseller: false
+    },
 
-    // Smart Speakers
+    // SMART SPEAKERS
     {
       id: 'amazon-echo',
       name: 'Amazon Echo (4th Gen)',
@@ -130,7 +297,7 @@ const SmartHomeProducts: React.FC = () => {
       originalPrice: 119.99,
       rating: 4.7,
       reviews: 8934,
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/4790267/pexels-photo-4790267.jpeg?auto=compress&cs=tinysrgb&w=400',
       features: ['Premium sound', 'Built-in hub', 'Voice control', 'Music streaming'],
       description: 'Smart speaker with premium sound and built-in smart home hub.',
       inStock: true,
@@ -145,14 +312,59 @@ const SmartHomeProducts: React.FC = () => {
       originalPrice: 99.99,
       rating: 4.6,
       reviews: 4567,
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/4790267/pexels-photo-4790267.jpeg?auto=compress&cs=tinysrgb&w=400',
       features: ['Rich sound', 'Google Assistant', 'Multi-room audio', 'Touch controls'],
       description: 'Smart speaker with rich sound and Google Assistant built-in.',
       inStock: true,
       bestseller: false
     },
+    {
+      id: 'amazon-echo-dot',
+      name: 'Amazon Echo Dot (5th Gen)',
+      brand: 'Amazon',
+      category: 'speakers',
+      price: 49.99,
+      originalPrice: 59.99,
+      rating: 4.5,
+      reviews: 12456,
+      image: 'https://images.pexels.com/photos/4790267/pexels-photo-4790267.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Compact design', 'Alexa built-in', 'Smart home control', 'Music streaming'],
+      description: 'Compact smart speaker with Alexa for any room.',
+      inStock: true,
+      bestseller: true
+    },
+    {
+      id: 'apple-homepod-mini',
+      name: 'Apple HomePod mini',
+      brand: 'Apple',
+      category: 'speakers',
+      price: 99.99,
+      originalPrice: 99.99,
+      rating: 4.4,
+      reviews: 3245,
+      image: 'https://images.pexels.com/photos/4790267/pexels-photo-4790267.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['360-degree audio', 'Siri built-in', 'HomeKit hub', 'Intercom'],
+      description: 'Compact smart speaker with amazing sound and Siri.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'sonos-one',
+      name: 'Sonos One (Gen 2)',
+      brand: 'Sonos',
+      category: 'speakers',
+      price: 199.99,
+      originalPrice: 219.99,
+      rating: 4.8,
+      reviews: 2876,
+      image: 'https://images.pexels.com/photos/4790267/pexels-photo-4790267.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['Premium audio', 'Alexa & Google', 'Multi-room', 'Trueplay tuning'],
+      description: 'Premium smart speaker with exceptional sound quality.',
+      inStock: true,
+      bestseller: false
+    },
 
-    // Entertainment
+    // ENTERTAINMENT
     {
       id: 'apple-tv',
       name: 'Apple TV 4K (3rd generation)',
@@ -162,7 +374,7 @@ const SmartHomeProducts: React.FC = () => {
       originalPrice: 199.99,
       rating: 4.8,
       reviews: 3245,
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=400',
       features: ['4K HDR', 'A15 Bionic chip', 'Siri Remote', 'AirPlay'],
       description: 'The ultimate streaming device with 4K HDR and powerful performance.',
       inStock: true,
@@ -177,9 +389,54 @@ const SmartHomeProducts: React.FC = () => {
       originalPrice: 119.99,
       rating: 4.5,
       reviews: 2876,
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=400',
       features: ['4K/HDR/Dolby Vision', 'Voice remote', 'Lost remote finder', 'Ethernet port'],
       description: 'Premium streaming device with advanced features and voice remote.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'nvidia-shield',
+      name: 'NVIDIA Shield TV Pro',
+      brand: 'NVIDIA',
+      category: 'entertainment',
+      price: 199.99,
+      originalPrice: 219.99,
+      rating: 4.6,
+      reviews: 1567,
+      image: 'https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['4K HDR', 'AI upscaling', 'Gaming capable', 'Google Assistant'],
+      description: 'Powerful streaming device with AI upscaling and gaming capabilities.',
+      inStock: true,
+      bestseller: false
+    },
+    {
+      id: 'chromecast-google-tv',
+      name: 'Chromecast with Google TV (4K)',
+      brand: 'Google',
+      category: 'entertainment',
+      price: 49.99,
+      originalPrice: 59.99,
+      rating: 4.4,
+      reviews: 4321,
+      image: 'https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['4K HDR', 'Google TV interface', 'Voice remote', 'Personalized recommendations'],
+      description: 'Affordable 4K streaming device with Google TV interface.',
+      inStock: true,
+      bestseller: true
+    },
+    {
+      id: 'fire-tv-stick-4k',
+      name: 'Amazon Fire TV Stick 4K Max',
+      brand: 'Amazon',
+      category: 'entertainment',
+      price: 54.99,
+      originalPrice: 64.99,
+      rating: 4.3,
+      reviews: 7654,
+      image: 'https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=400',
+      features: ['4K Ultra HD', 'Alexa Voice Remote', 'Wi-Fi 6', 'Dolby Vision'],
+      description: 'Fast 4K streaming stick with Alexa Voice Remote.',
       inStock: true,
       bestseller: false
     }
@@ -190,7 +447,7 @@ const SmartHomeProducts: React.FC = () => {
       id: 'starter-bundle',
       name: 'Smart Home Starter Bundle',
       description: 'Perfect for beginners - essential smart home devices',
-      products: ['Philips Hue Starter Kit', 'Amazon Echo', 'Ring Doorbell'],
+      products: ['Philips Hue Starter Kit', 'Amazon Echo Dot', 'Ring Video Doorbell'],
       originalPrice: 519.97,
       bundlePrice: 449.99,
       savings: 69.98,
@@ -201,21 +458,54 @@ const SmartHomeProducts: React.FC = () => {
       id: 'security-bundle',
       name: 'Complete Security Bundle',
       description: 'Comprehensive home security solution',
-      products: ['Ring Doorbell Pro 2', 'Arlo Pro 4 (2x)', 'Smart Lock'],
-      originalPrice: 659.97,
-      bundlePrice: 579.99,
-      savings: 79.98,
+      products: ['Ring Doorbell Pro 2', 'Arlo Pro 4 (2x)', 'August Smart Lock', 'SimpliSafe System'],
+      originalPrice: 859.96,
+      bundlePrice: 729.99,
+      savings: 129.97,
+      image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=400',
+      popular: false
+    },
+    {
+      id: 'lighting-bundle',
+      name: 'Smart Lighting Bundle',
+      description: 'Complete lighting transformation package',
+      products: ['Philips Hue Starter Kit', 'Hue Lightstrip Plus', 'Hue Go', 'LIFX Color Bulbs (4x)'],
+      originalPrice: 549.95,
+      bundlePrice: 479.99,
+      savings: 69.96,
+      image: 'https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=400',
+      popular: false
+    },
+    {
+      id: 'entertainment-bundle',
+      name: 'Entertainment Hub Bundle',
+      description: 'Ultimate entertainment and audio setup',
+      products: ['Apple TV 4K', 'Sonos One (2x)', 'Amazon Echo', 'Philips Hue Sync'],
+      originalPrice: 679.96,
+      bundlePrice: 599.99,
+      savings: 79.97,
+      image: 'https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=400',
+      popular: false
+    },
+    {
+      id: 'climate-bundle',
+      name: 'Climate Control Bundle',
+      description: 'Smart climate and air quality management',
+      products: ['Nest Learning Thermostat', 'Dyson Pure Cool', 'ecobee Room Sensors (3x)'],
+      originalPrice: 1049.97,
+      bundlePrice: 899.99,
+      savings: 149.98,
       image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
       popular: false
     },
     {
       id: 'premium-bundle',
       name: 'Premium Smart Home Bundle',
-      description: 'Complete smart home transformation',
-      products: ['All lighting', 'Climate control', 'Security system', 'Entertainment'],
-      originalPrice: 1299.97,
-      bundlePrice: 999.99,
-      savings: 299.98,
+      description: 'Complete smart home transformation - everything included',
+      products: ['All lighting systems', 'Complete security', 'Climate control', 'Entertainment hub', 'Smart speakers'],
+      originalPrice: 2299.97,
+      bundlePrice: 1799.99,
+      savings: 499.98,
       image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400',
       popular: true
     }
@@ -270,6 +560,23 @@ const SmartHomeProducts: React.FC = () => {
               Curated collection of the best smart home devices from leading brands. 
               Transform your home with our AI-powered bundles and expert recommendations.
             </p>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto mb-8">
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold">50+</div>
+                  <div className="text-sm text-blue-100">Premium Products</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">30%</div>
+                  <div className="text-sm text-blue-100">Average Savings</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">6</div>
+                  <div className="text-sm text-blue-100">Smart Bundles</div>
+                </div>
+              </div>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
@@ -345,7 +652,7 @@ const SmartHomeProducts: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {bundles.map((bundle) => (
               <div key={bundle.id} className={`relative bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-xl ${
                 bundle.popular ? 'border-blue-500 shadow-lg' : 'border-gray-200 dark:border-gray-700'
