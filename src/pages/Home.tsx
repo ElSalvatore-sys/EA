@@ -30,7 +30,6 @@ import { useLanguage } from '../components/LanguageSelector';
 
 const Home: React.FC = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
-  const [heroDesign, setHeroDesign] = useState(1); // State to switch between designs
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
   const { translate } = useLanguage();
 
@@ -164,328 +163,353 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Neural Network Animation Component
-  const NeuralNetworkAnimation = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Animated Neural Network */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 800">
-        <defs>
-          <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.3" />
-          </radialGradient>
-          <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.6" />
-            <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.6" />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge> 
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
+  // Advanced AI Brain & Hand Animation Component
+  const AdvancedAIBrainHand = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const animationRef = useRef<number>();
+    const particlesRef = useRef<any[]>([]);
+    const timeRef = useRef(0);
+
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Set canvas size
+      const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Initialize particles
+      const initParticles = () => {
+        particlesRef.current = [];
+        for (let i = 0; i < 150; i++) {
+          particlesRef.current.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2,
+            size: Math.random() * 3 + 1,
+            opacity: Math.random() * 0.8 + 0.2,
+            color: `hsl(${200 + Math.random() * 60}, 70%, 60%)`,
+            life: Math.random() * 100,
+            maxLife: 100 + Math.random() * 100
+          });
+        }
+      };
+      initParticles();
+
+      // Neural network nodes for brain
+      const brainNodes = [];
+      const centerX = canvas.width * 0.3;
+      const centerY = canvas.height * 0.3;
+      
+      for (let i = 0; i < 25; i++) {
+        const angle = (i / 25) * Math.PI * 2;
+        const radius = 80 + Math.random() * 40;
+        brainNodes.push({
+          x: centerX + Math.cos(angle) * radius,
+          y: centerY + Math.sin(angle) * radius,
+          size: 4 + Math.random() * 6,
+          pulse: Math.random() * Math.PI * 2,
+          connections: []
+        });
+      }
+
+      // Create connections between brain nodes
+      brainNodes.forEach((node, i) => {
+        const numConnections = 2 + Math.floor(Math.random() * 3);
+        for (let j = 0; j < numConnections; j++) {
+          const targetIndex = Math.floor(Math.random() * brainNodes.length);
+          if (targetIndex !== i) {
+            node.connections.push(targetIndex);
+          }
+        }
+      });
+
+      // Hand position
+      const handX = canvas.width * 0.7;
+      const handY = canvas.height * 0.7;
+
+      const animate = () => {
+        timeRef.current += 0.02;
         
-        {/* Neural Network Connections */}
-        {Array.from({ length: 15 }).map((_, i) => (
-          <line
-            key={`connection-${i}`}
-            x1={Math.random() * 1200}
-            y1={Math.random() * 800}
-            x2={Math.random() * 1200}
-            y2={Math.random() * 800}
-            stroke="url(#connectionGradient)"
-            strokeWidth="2"
-            filter="url(#glow)"
-            className="animate-pulse"
-            style={{
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
-            }}
-          />
-        ))}
+        // Clear canvas with fade effect
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw background neural network
+        ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 50; i++) {
+          const x1 = Math.random() * canvas.width;
+          const y1 = Math.random() * canvas.height;
+          const x2 = x1 + (Math.random() - 0.5) * 200;
+          const y2 = y1 + (Math.random() - 0.5) * 200;
+          
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+        }
+
+        // Draw AI Brain
+        ctx.save();
         
-        {/* Neural Nodes */}
-        {Array.from({ length: 20 }).map((_, i) => (
-          <circle
-            key={`node-${i}`}
-            cx={Math.random() * 1200}
-            cy={Math.random() * 800}
-            r={4 + Math.random() * 8}
-            fill="url(#nodeGradient)"
-            filter="url(#glow)"
-            className="animate-pulse"
-            style={{
-              animationDelay: `${i * 0.2}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}
+        // Brain outline with glow
+        const brainGlow = 20 + Math.sin(timeRef.current * 2) * 10;
+        ctx.shadowColor = '#3B82F6';
+        ctx.shadowBlur = brainGlow;
         
-        {/* Data Flow Particles */}
-        {Array.from({ length: 10 }).map((_, i) => (
-          <circle
-            key={`particle-${i}`}
-            r="3"
-            fill="#60A5FA"
-            filter="url(#glow)"
-            className="animate-ping"
-            style={{
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: '2s'
-            }}
-          >
-            <animateMotion
-              dur={`${5 + Math.random() * 5}s`}
-              repeatCount="indefinite"
-              path={`M${Math.random() * 1200},${Math.random() * 800} Q${Math.random() * 1200},${Math.random() * 800} ${Math.random() * 1200},${Math.random() * 800}`}
-            />
-          </circle>
-        ))}
-      </svg>
-    </div>
-  );
-
-  // 3D Brain-Hand Connection Component
-  const BrainHandConnection = () => (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <div className="relative w-96 h-96">
-        {/* Brain Visualization */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32">
-          <div className="relative w-full h-full">
-            {/* Brain Outline */}
-            <svg viewBox="0 0 100 100" className="w-full h-full">
-              <defs>
-                <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#8B5CF6" />
-                  <stop offset="50%" stopColor="#3B82F6" />
-                  <stop offset="100%" stopColor="#06B6D4" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M20,40 Q30,20 50,25 Q70,20 80,40 Q85,60 75,75 Q50,85 25,75 Q15,60 20,40 Z"
-                fill="url(#brainGradient)"
-                opacity="0.7"
-                className="animate-pulse"
-              />
-              {/* Brain Synapses */}
-              {Array.from({ length: 8 }).map((_, i) => (
-                <circle
-                  key={i}
-                  cx={30 + (i % 4) * 15}
-                  cy={35 + Math.floor(i / 4) * 20}
-                  r="2"
-                  fill="#60A5FA"
-                  className="animate-ping"
-                  style={{ animationDelay: `${i * 0.3}s` }}
-                />
-              ))}
-            </svg>
-          </div>
-        </div>
-
-        {/* Connection Lines */}
-        <svg className="absolute inset-0 w-full h-full">
-          <defs>
-            <linearGradient id="connectionFlow" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.8" />
-            </linearGradient>
-          </defs>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <path
-              key={i}
-              d={`M192,64 Q${150 + i * 20},${100 + i * 30} 192,320`}
-              stroke="url(#connectionFlow)"
-              strokeWidth="3"
-              fill="none"
-              className="animate-pulse"
-              style={{ animationDelay: `${i * 0.4}s` }}
-            />
-          ))}
-        </svg>
-
-        {/* Hand Visualization */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-32">
-          <svg viewBox="0 0 100 130" className="w-full h-full">
-            <defs>
-              <linearGradient id="handGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F59E0B" />
-                <stop offset="50%" stopColor="#EF4444" />
-                <stop offset="100%" stopColor="#EC4899" />
-              </linearGradient>
-            </defs>
-            {/* Hand Shape */}
-            <path
-              d="M30,120 L30,90 Q30,85 35,85 L40,85 Q45,85 45,90 L45,75 Q45,70 50,70 Q55,70 55,75 L55,65 Q55,60 60,60 Q65,60 65,65 L65,75 Q65,70 70,70 Q75,70 75,75 L75,90 Q75,95 70,100 L65,110 Q60,120 50,120 Z"
-              fill="url(#handGradient)"
-              opacity="0.8"
-              className="animate-pulse"
-            />
-            {/* Fingertip Sensors */}
-            {Array.from({ length: 4 }).map((_, i) => (
-              <circle
-                key={i}
-                cx={40 + i * 10}
-                cy={75 - i * 5}
-                r="2"
-                fill="#60A5FA"
-                className="animate-ping"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              />
-            ))}
-          </svg>
-        </div>
-
-        {/* Energy Flow Particles */}
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-blue-400 rounded-full animate-ping"
-            style={{
-              left: `${45 + Math.sin(i) * 20}%`,
-              top: `${30 + i * 15}%`,
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: '2s'
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-
-  // Holographic AI Interface
-  const HolographicInterface = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20">
-        {/* Holographic Grid */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          animation: 'gridMove 20s linear infinite'
-        }} />
+        // Brain shape
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.3)';
+        ctx.ellipse(centerX, centerY, 120, 100, 0, 0, Math.PI * 2);
+        ctx.fill();
         
-        {/* Floating Data Panels */}
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute bg-blue-500/10 backdrop-blur-sm border border-blue-400/30 rounded-lg p-4 animate-float"
-            style={{
-              left: `${20 + i * 20}%`,
-              top: `${30 + (i % 2) * 40}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${4 + i}s`
-            }}
-          >
-            <div className="w-16 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded mb-2 animate-pulse" />
-            <div className="w-12 h-1 bg-blue-300/50 rounded mb-1" />
-            <div className="w-20 h-1 bg-blue-300/30 rounded" />
-          </div>
-        ))}
+        // Brain hemispheres
+        ctx.beginPath();
+        ctx.strokeStyle = '#60A5FA';
+        ctx.lineWidth = 3;
+        ctx.ellipse(centerX - 30, centerY, 60, 80, 0, 0, Math.PI * 2);
+        ctx.stroke();
         
-        {/* AI Processing Indicators */}
-        <div className="absolute top-1/4 right-1/4 w-32 h-32">
-          <div className="relative w-full h-full">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div
-                key={i}
-                className="absolute inset-0 border-2 border-blue-400/30 rounded-full animate-ping"
-                style={{
-                  animationDelay: `${i * 0.7}s`,
-                  animationDuration: '3s'
-                }}
-              />
-            ))}
-            <div className="absolute inset-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center">
-              <Brain className="w-8 h-8 text-blue-400 animate-pulse" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+        ctx.beginPath();
+        ctx.ellipse(centerX + 30, centerY, 60, 80, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        // Neural connections in brain
+        brainNodes.forEach((node, i) => {
+          node.connections.forEach(targetIndex => {
+            const target = brainNodes[targetIndex];
+            const distance = Math.sqrt((target.x - node.x) ** 2 + (target.y - node.y) ** 2);
+            
+            if (distance < 150) {
+              const pulse = Math.sin(timeRef.current * 3 + i * 0.5) * 0.5 + 0.5;
+              ctx.strokeStyle = `rgba(139, 92, 246, ${pulse * 0.8})`;
+              ctx.lineWidth = 2;
+              
+              ctx.beginPath();
+              ctx.moveTo(node.x, node.y);
+              ctx.lineTo(target.x, target.y);
+              ctx.stroke();
+              
+              // Data flow particles
+              const progress = (timeRef.current * 2 + i) % 1;
+              const flowX = node.x + (target.x - node.x) * progress;
+              const flowY = node.y + (target.y - node.y) * progress;
+              
+              ctx.beginPath();
+              ctx.fillStyle = '#8B5CF6';
+              ctx.arc(flowX, flowY, 3, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          });
+        });
 
-  // Matrix-Style Code Rain
-  const MatrixCodeRain = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 20 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute top-0 text-green-400/30 font-mono text-sm animate-pulse"
-          style={{
-            left: `${i * 5}%`,
-            animationDelay: `${i * 0.2}s`,
-            animationDuration: `${3 + Math.random() * 2}s`
-          }}
-        >
-          {Array.from({ length: 10 }).map((_, j) => (
-            <div
-              key={j}
-              className="animate-bounce"
-              style={{
-                animationDelay: `${j * 0.1}s`,
-                opacity: 1 - j * 0.1
-              }}
-            >
-              {Math.random() > 0.5 ? '1' : '0'}
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
+        // Brain nodes
+        brainNodes.forEach((node, i) => {
+          node.pulse += 0.1;
+          const pulseSize = node.size + Math.sin(node.pulse) * 2;
+          
+          ctx.beginPath();
+          ctx.fillStyle = '#60A5FA';
+          ctx.arc(node.x, node.y, pulseSize, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Node glow
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(96, 165, 250, 0.3)';
+          ctx.arc(node.x, node.y, pulseSize * 2, 0, Math.PI * 2);
+          ctx.fill();
+        });
 
-  const renderHeroDesign = () => {
-    switch (heroDesign) {
-      case 1:
-        return <NeuralNetworkAnimation />;
-      case 2:
-        return <BrainHandConnection />;
-      case 3:
-        return <HolographicInterface />;
-      case 4:
-        return <MatrixCodeRain />;
-      default:
-        return <NeuralNetworkAnimation />;
-    }
+        ctx.restore();
+
+        // Draw Human Hand
+        ctx.save();
+        
+        const handPulse = Math.sin(timeRef.current * 1.5) * 10;
+        ctx.shadowColor = '#F59E0B';
+        ctx.shadowBlur = 15 + handPulse;
+        
+        // Hand palm
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(245, 158, 11, 0.8)';
+        ctx.ellipse(handX, handY, 40, 60, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Fingers
+        const fingers = [
+          { x: handX - 30, y: handY - 40, w: 12, h: 35 },
+          { x: handX - 10, y: handY - 50, w: 12, h: 40 },
+          { x: handX + 10, y: handY - 45, w: 12, h: 38 },
+          { x: handX + 30, y: handY - 35, w: 12, h: 30 }
+        ];
+        
+        fingers.forEach((finger, i) => {
+          const fingerPulse = Math.sin(timeRef.current * 2 + i * 0.5) * 2;
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
+          ctx.roundRect(finger.x - finger.w/2, finger.y - finger.h + fingerPulse, finger.w, finger.h, 6);
+          ctx.fill();
+          
+          // Fingertip sensors
+          ctx.beginPath();
+          ctx.fillStyle = '#3B82F6';
+          ctx.arc(finger.x, finger.y - finger.h + fingerPulse, 4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Thumb
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
+        ctx.ellipse(handX - 50, handY + 10, 15, 25, -0.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+
+        // Energy Connection between Brain and Hand
+        const connectionPoints = 8;
+        for (let i = 0; i < connectionPoints; i++) {
+          const progress = i / (connectionPoints - 1);
+          const x = centerX + (handX - centerX) * progress;
+          const y = centerY + (handY - centerY) * progress;
+          
+          // Add curve to the connection
+          const curve = Math.sin(progress * Math.PI) * 50;
+          const curvedY = y + curve;
+          
+          // Energy pulse
+          const pulsePhase = (timeRef.current * 3 + i * 0.3) % (Math.PI * 2);
+          const pulseIntensity = Math.sin(pulsePhase) * 0.5 + 0.5;
+          
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(139, 92, 246, ${pulseIntensity})`;
+          ctx.arc(x, curvedY, 4 + pulseIntensity * 3, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Energy trail
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(139, 92, 246, ${pulseIntensity * 0.5})`;
+          ctx.lineWidth = 3;
+          if (i > 0) {
+            const prevX = centerX + (handX - centerX) * ((i-1) / (connectionPoints - 1));
+            const prevY = centerY + (handY - centerY) * ((i-1) / (connectionPoints - 1));
+            const prevCurvedY = prevY + Math.sin(((i-1) / (connectionPoints - 1)) * Math.PI) * 50;
+            
+            ctx.moveTo(prevX, prevCurvedY);
+            ctx.lineTo(x, curvedY);
+            ctx.stroke();
+          }
+        }
+
+        // Floating particles
+        particlesRef.current.forEach((particle, i) => {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          particle.life++;
+          
+          // Particle attraction to brain-hand connection
+          const connectionCenterX = (centerX + handX) / 2;
+          const connectionCenterY = (centerY + handY) / 2;
+          const distToConnection = Math.sqrt((particle.x - connectionCenterX) ** 2 + (particle.y - connectionCenterY) ** 2);
+          
+          if (distToConnection < 200) {
+            const attractionForce = 0.02;
+            particle.vx += (connectionCenterX - particle.x) * attractionForce / distToConnection;
+            particle.vy += (connectionCenterY - particle.y) * attractionForce / distToConnection;
+          }
+          
+          // Boundary check
+          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+          
+          // Reset particle if it's too old
+          if (particle.life > particle.maxLife) {
+            particle.x = Math.random() * canvas.width;
+            particle.y = Math.random() * canvas.height;
+            particle.life = 0;
+            particle.vx = (Math.random() - 0.5) * 2;
+            particle.vy = (Math.random() - 0.5) * 2;
+          }
+          
+          // Draw particle
+          const alpha = 1 - (particle.life / particle.maxLife);
+          ctx.beginPath();
+          ctx.fillStyle = particle.color.replace('60%)', `60%, ${alpha})`);
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Data streams
+        for (let i = 0; i < 5; i++) {
+          const streamProgress = (timeRef.current + i * 0.4) % 1;
+          const streamX = centerX + (handX - centerX) * streamProgress;
+          const streamY = centerY + (handY - centerY) * streamProgress;
+          
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(6, 182, 212, ${1 - streamProgress})`;
+          ctx.arc(streamX, streamY, 6, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Stream trail
+          for (let j = 1; j <= 5; j++) {
+            const trailProgress = streamProgress - j * 0.05;
+            if (trailProgress > 0) {
+              const trailX = centerX + (handX - centerX) * trailProgress;
+              const trailY = centerY + (handY - centerY) * trailProgress;
+              
+              ctx.beginPath();
+              ctx.fillStyle = `rgba(6, 182, 212, ${(1 - trailProgress) * 0.3})`;
+              ctx.arc(trailX, trailY, 4 - j * 0.5, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+
+        animationRef.current = requestAnimationFrame(animate);
+      };
+
+      animate();
+
+      return () => {
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+        window.removeEventListener('resize', resizeCanvas);
+      };
+    }, []);
+
+    return (
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}
+      />
+    );
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Hero Section with Design Switcher */}
-      <section className="pt-16 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 dark:from-gray-950 dark:via-blue-950 dark:to-gray-900 text-white relative overflow-hidden min-h-screen flex items-center">
-        {/* Design Switcher */}
-        <div className="absolute top-20 right-4 z-20 flex flex-col space-y-2">
-          {[1, 2, 3, 4].map((design) => (
-            <button
-              key={design}
-              onClick={() => setHeroDesign(design)}
-              className={`w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-                heroDesign === design 
-                  ? 'border-blue-400 bg-blue-500/20' 
-                  : 'border-white/30 bg-white/10 hover:border-blue-400/50'
-              }`}
-              title={`Design ${design}`}
-            >
-              <span className="text-xs font-bold">{design}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Dynamic Background Animation */}
-        {renderHeroDesign()}
+      {/* Advanced AI Brain & Hand Hero Section */}
+      <section className="pt-16 relative overflow-hidden min-h-screen flex items-center">
+        {/* Advanced AI Brain & Hand Animation */}
+        <AdvancedAIBrainHand />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
-          <div className="text-center">
-            {/* Enhanced Typography with Animation */}
+        {/* Overlay gradient for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-transparent z-10" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-20">
+          <div className="max-w-4xl">
+            {/* Enhanced Typography with Staggered Animation */}
             <div className="mb-8">
-              <h1 className="text-5xl md:text-7xl font-light leading-tight tracking-tight">
+              <h1 className="text-6xl md:text-8xl font-light leading-tight tracking-tight text-white">
                 <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                   {translate('hero.title').split('.')[0]}.
                 </span>
@@ -500,39 +524,43 @@ const Home: React.FC = () => {
             </div>
             
             <p 
-              className="text-xl md:text-2xl mb-12 text-gray-300 dark:text-gray-400 max-w-4xl mx-auto font-light leading-relaxed animate-fade-in-up"
+              className="text-2xl md:text-3xl mb-12 text-gray-200 max-w-3xl font-light leading-relaxed animate-fade-in-up"
               style={{ animationDelay: '0.6s' }}
             >
               {translate('hero.subtitle')}
             </p>
             
             <div 
-              className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up"
+              className="flex flex-col sm:flex-row gap-6 animate-fade-in-up"
               style={{ animationDelay: '0.8s' }}
             >
-              <button className="group bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl relative overflow-hidden">
+              <button className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-5 rounded-full text-xl font-medium hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 shadow-2xl relative overflow-hidden">
                 <span className="relative z-10">{translate('cta.book')}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
               <Link 
                 to="/solutions" 
-                className="group border border-white/30 text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300 relative overflow-hidden"
+                className="group border-2 border-white/50 text-white px-12 py-5 rounded-full text-xl font-medium hover:bg-white/10 transition-all duration-300 relative overflow-hidden backdrop-blur-sm"
               >
                 <span className="relative z-10 flex items-center">
                   {translate('cta.explore')}
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Floating Elements */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse" />
+        {/* Floating scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+          <div className="w-8 h-12 border-2 border-white/50 rounded-full flex justify-center backdrop-blur-sm">
+            <div className="w-2 h-4 bg-white/70 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
+
+        {/* Ambient light effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse z-5" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse z-5" style={{ animationDelay: '1s' }} />
       </section>
 
       {/* Enhanced Client Showcase */}
@@ -1102,23 +1130,9 @@ const Home: React.FC = () => {
           }
         }
         
-        @keyframes gridMove {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(50px, 50px); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
         .animate-fade-in-up {
           animation: fade-in-up 0.8s ease-out forwards;
           opacity: 0;
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
         }
       `}</style>
     </div>
