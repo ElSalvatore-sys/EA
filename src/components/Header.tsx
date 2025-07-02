@@ -64,6 +64,9 @@ const Header: React.FC<HeaderProps> = ({ onBookingClick }) => {
               )}
             </div>
 
+            <Link to="/mind" className="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-400 transition-colors font-medium">
+              MIND
+            </Link>
             <Link to="/ea-method" className="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-400 transition-colors">
               {translate('nav.method')}
             </Link>
@@ -105,6 +108,9 @@ const Header: React.FC<HeaderProps> = ({ onBookingClick }) => {
               </Link>
               <Link to="/solutions" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800">
                 {translate('nav.solutions')}
+              </Link>
+              <Link to="/mind" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 font-medium">
+                MIND
               </Link>
               <Link to="/ea-method" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800">
                 {translate('nav.method')}

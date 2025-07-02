@@ -11,6 +11,8 @@ import FinanceSecurity from './pages/solutions/FinanceSecurity';
 import SmartLiving from './pages/solutions/SmartLiving';
 import Healthcare from './pages/solutions/Healthcare';
 import Retail from './pages/solutions/Retail';
+import SmartHomeProducts from './pages/solutions/SmartHomeProducts';
+import MindProduct from './pages/MindProduct';
 import EAMethod from './pages/EAMethod';
 import WhyEA from './pages/WhyEA';
 import Contact from './pages/Contact';
@@ -40,8 +42,10 @@ function App() {
               <Route path="/solutions/industrial-manufacturing" element={<IndustrialManufacturing />} />
               <Route path="/solutions/finance-security" element={<FinanceSecurity />} />
               <Route path="/solutions/smart-living" element={<SmartLiving />} />
+              <Route path="/solutions/smart-living/products" element={<SmartHomeProducts />} />
               <Route path="/solutions/healthcare" element={<Healthcare />} />
               <Route path="/solutions/retail" element={<Retail />} />
+              <Route path="/mind" element={<MindProduct />} />
               <Route path="/ea-method" element={<EAMethod />} />
               <Route path="/why-ea" element={<WhyEA />} />
               <Route path="/contact" element={<Contact />} />
