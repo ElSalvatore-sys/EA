@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import { Globe, ChevronDown } from 'lucide-react';
+import { Languages, Check } from 'lucide-react';
 
 interface Language {
   code: string;
@@ -778,32 +778,80 @@ const LanguageSelector: React.FC = () => {
 
   return (
     <div className="relative">
+      {/* Sleek Modern Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+        className="group flex items-center space-x-3 px-4 py-2.5 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 border border-blue-200 dark:border-gray-600 rounded-xl hover:from-blue-100 hover:to-indigo-100 dark:hover:from-gray-700 dark:hover:to-gray-600 transition-all duration-300 shadow-sm hover:shadow-md"
       >
-        <Globe className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-        <span className="text-lg">{currentLanguage.flag}</span>
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:block">
-          {currentLanguage.name}
-        </span>
-        <ChevronDown className={`h-4 w-4 text-gray-600 dark:text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <div className="flex items-center space-x-2">
+          <Languages className="h-4 w-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
+          <span className="text-2xl">{currentLanguage.flag}</span>
+        </div>
+        <div className="hidden sm:block">
+          <div className="text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wide">
+            Language
+          </div>
+          <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+            {currentLanguage.name}
+          </div>
+        </div>
+        <div className="w-5 h-5 bg-blue-100 dark:bg-gray-600 rounded-full flex items-center justify-center">
+          <div className={`w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}></div>
+        </div>
       </button>
 
+      {/* Enhanced Dropdown */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50">
-          {languages.map((language) => (
-            <button
-              key={language.code}
-              onClick={() => handleLanguageChange(language)}
-              className={`w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 ${
-                currentLanguage.code === language.code ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : 'text-gray-700 dark:text-gray-300'
-              }`}
-            >
-              <span className="text-lg">{language.flag}</span>
-              <span className="font-medium">{language.name}</span>
-            </button>
-          ))}
+        <div className="absolute top-full right-0 mt-3 w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 py-3 z-50 backdrop-blur-sm">
+          <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
+            <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+              Select Language
+            </div>
+          </div>
+          
+          <div className="py-2">
+            {languages.map((language) => (
+              <button
+                key={language.code}
+                onClick={() => handleLanguageChange(language)}
+                className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-200 group ${
+                  currentLanguage.code === language.code 
+                    ? 'bg-blue-50 dark:bg-blue-900/20 border-r-2 border-blue-500' 
+                    : ''
+                }`}
+              >
+                <div className="flex items-center space-x-3">
+                  <span className="text-2xl group-hover:scale-110 transition-transform duration-200">
+                    {language.flag}
+                  </span>
+                  <div>
+                    <div className={`font-semibold ${
+                      currentLanguage.code === language.code 
+                        ? 'text-blue-600 dark:text-blue-400' 
+                        : 'text-gray-700 dark:text-gray-300'
+                    }`}>
+                      {language.name}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                      {language.code}
+                    </div>
+                  </div>
+                </div>
+                
+                {currentLanguage.code === language.code && (
+                  <div className="flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full">
+                    <Check className="h-3 w-3 text-white" />
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
+          
+          <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-700">
+            <div className="text-xs text-gray-400 dark:text-gray-500">
+              More languages coming soon
+            </div>
+          </div>
         </div>
       )}
     </div>

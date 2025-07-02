@@ -75,9 +75,11 @@ const Header: React.FC<HeaderProps> = ({ onBookingClick }) => {
             </Link>
           </div>
 
-          {/* Controls */}
+          {/* Controls - Moved Language Selector to prominent position */}
           <div className="flex items-center space-x-4">
-            <LanguageSelector />
+            <div className="hidden lg:block">
+              <LanguageSelector />
+            </div>
             <ThemeToggle />
             <button
               onClick={onBookingClick}
@@ -100,6 +102,11 @@ const Header: React.FC<HeaderProps> = ({ onBookingClick }) => {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
             <div className="px-2 pt-2 pb-3 space-y-1">
+              {/* Mobile Language Selector */}
+              <div className="px-3 py-2">
+                <LanguageSelector />
+              </div>
+              
               <Link to="/" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800">
                 {translate('nav.home')}
               </Link>
