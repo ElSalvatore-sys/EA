@@ -9,13 +9,15 @@ import GastronomyHospitality from './pages/solutions/GastronomyHospitality';
 import IndustrialManufacturing from './pages/solutions/IndustrialManufacturing';
 import FinanceSecurity from './pages/solutions/FinanceSecurity';
 import SmartLiving from './pages/solutions/SmartLiving';
+import SmartHomeProducts from './pages/solutions/SmartHomeProducts';
 import Healthcare from './pages/solutions/Healthcare';
 import Retail from './pages/solutions/Retail';
-import SmartHomeProducts from './pages/solutions/SmartHomeProducts';
 import MindProduct from './pages/MindProduct';
 import EAMethod from './pages/EAMethod';
 import WhyEA from './pages/WhyEA';
 import Contact from './pages/Contact';
+import Datenschutz from './pages/Datenschutz';
+import Impressum from './pages/Impressum';
 
 // Component to handle scroll to top on route change
 const ScrollToTop: React.FC = () => {
@@ -49,6 +51,8 @@ function App() {
               <Route path="/ea-method" element={<EAMethod />} />
               <Route path="/why-ea" element={<WhyEA />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/datenschutz" element={<Datenschutz />} />
+              <Route path="/impressum" element={<Impressum />} />
             </Routes>
           </Layout>
         </Router>

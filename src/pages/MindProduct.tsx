@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { 
   Brain, 
   Zap, 
@@ -100,29 +99,29 @@ const MindProduct: React.FC = () => {
   const features = [
     {
       icon: Brain,
-      title: 'Universal AI Intelligence',
-      description: 'One AI system that adapts to any industry, any workflow, any challenge with unprecedented learning capabilities.',
+      title: translate('mind.features.universal.title'),
+      description: translate('mind.features.universal.desc'),
       gradient: 'from-purple-500 via-pink-500 to-red-500',
       pattern: 'radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%)'
     },
     {
       icon: Zap,
-      title: 'Lightning-Fast Implementation',
-      description: 'Deploy across your entire organization in weeks, not months, with zero disruption to existing workflows.',
+      title: translate('mind.features.fast.title'),
+      description: translate('mind.features.fast.desc'),
       gradient: 'from-yellow-400 via-orange-500 to-red-500',
       pattern: 'radial-gradient(circle at 30% 40%, rgba(251, 191, 36, 0.3) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(249, 115, 22, 0.3) 0%, transparent 50%)'
     },
     {
       icon: Shield,
-      title: 'Enterprise-Grade Security',
-      description: 'Military-level encryption, zero-trust architecture, and compliance with all major international standards.',
+      title: translate('mind.features.security.title'),
+      description: translate('mind.features.security.desc'),
       gradient: 'from-green-400 via-teal-500 to-blue-500',
       pattern: 'radial-gradient(circle at 40% 30%, rgba(34, 197, 94, 0.3) 0%, transparent 50%), radial-gradient(circle at 60% 70%, rgba(20, 184, 166, 0.3) 0%, transparent 50%)'
     },
     {
       icon: Globe,
-      title: 'Seamless Integration',
-      description: 'Connects with 1000+ existing tools and platforms out of the box, with custom API development available.',
+      title: translate('mind.features.integration.title'),
+      description: translate('mind.features.integration.desc'),
       gradient: 'from-blue-400 via-cyan-500 to-teal-500',
       pattern: 'radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 50%)'
     }
@@ -143,7 +142,7 @@ const MindProduct: React.FC = () => {
       name: 'Pilot',
       price: '€499',
       period: '/month',
-      description: 'Perfect for small teams testing AI transformation',
+      description: translate('mind.pricing.pilot'),
       features: [
         '1 local model',
         '1 connector',
@@ -160,7 +159,7 @@ const MindProduct: React.FC = () => {
       name: 'Growth',
       price: '€1,499',
       period: '/month',
-      description: 'Comprehensive AI transformation for growing companies',
+      description: translate('mind.pricing.growth'),
       features: [
         'Up to 50 staff',
         '3 connectors',
@@ -178,7 +177,7 @@ const MindProduct: React.FC = () => {
       name: 'Scale',
       price: '€4,999',
       period: '/month',
-      description: 'Advanced AI capabilities for scaling organizations',
+      description: translate('mind.pricing.scale'),
       features: [
         'Up to 250 staff',
         'Unlimited connectors',
@@ -197,7 +196,7 @@ const MindProduct: React.FC = () => {
       name: 'Sovereign Enterprise',
       price: 'Custom',
       period: 'pricing',
-      description: 'Unlimited AI power with complete sovereignty',
+      description: translate('mind.pricing.enterprise'),
       features: [
         'On-prem cluster',
         '24/7 SLA',
@@ -331,32 +330,31 @@ const MindProduct: React.FC = () => {
             </h1>
             
             <p className="text-3xl md:text-4xl mb-6 text-gray-300 dark:text-gray-400 font-light">
-              The Universal AI Solution
+              {translate('mind.title')}
             </p>
             
             <p className="text-xl md:text-2xl mb-12 text-gray-300 dark:text-gray-400 max-w-5xl mx-auto font-light leading-relaxed">
-              One intelligent system that adapts to every industry, every workflow, every challenge. 
-              MIND is not just AI – it's the evolution of how businesses think, learn, and grow.
+              {translate('mind.description')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
               <button className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-4 rounded-full text-lg font-medium hover:from-purple-500 hover:to-pink-500 transition-all duration-300 transform hover:scale-105 shadow-xl">
                 <div className="flex items-center space-x-2">
                   <Rocket className="h-5 w-5 group-hover:animate-bounce" />
-                  <span>Start Your AI Transformation</span>
+                  <span>{translate('mind.cta.start')}</span>
                 </div>
               </button>
               <button className="group border-2 border-white/30 text-white px-12 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300">
                 <div className="flex items-center space-x-2">
                   <Play className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span>Watch Demo</span>
+                  <span>{translate('mind.cta.demo')}</span>
                 </div>
               </button>
             </div>
             
             {/* Trust Indicators */}
             <div className="text-center">
-              <p className="text-gray-400 dark:text-gray-500 mb-6">Trusted by 4+ companies in Germany and 1 internationally</p>
+              <p className="text-gray-400 dark:text-gray-500 mb-6">{translate('mind.trusted')}</p>
               <div className="flex justify-center items-center space-x-8 opacity-60">
                 <div className="text-sm font-medium">Hotel am Kochbrunnen</div>
                 <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -386,10 +384,10 @@ const MindProduct: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Why MIND Changes Everything
+              {translate('mind.features.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto font-light">
-              Unlike traditional AI solutions that force you to adapt, MIND adapts to you with unprecedented intelligence and flexibility.
+              {translate('mind.features.subtitle')}
             </p>
           </div>
 
@@ -426,10 +424,10 @@ const MindProduct: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Advanced AI Architecture
+              {translate('mind.architecture.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              Built on cutting-edge technology with enterprise-grade reliability and infinite scalability.
+              {translate('mind.architecture.subtitle')}
             </p>
           </div>
 
@@ -455,10 +453,10 @@ const MindProduct: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              One Solution, Every Industry
+              {translate('mind.industries.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              MIND automatically configures itself for your specific industry needs with specialized modules and optimizations.
+              {translate('mind.industries.subtitle')}
             </p>
           </div>
 
@@ -496,10 +494,10 @@ const MindProduct: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Transparent Pricing
+              {translate('mind.pricing.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              Choose the plan that fits your organization's size and ambitions. All plans include 30-day free trial.
+              {translate('mind.pricing.subtitle')}
             </p>
           </div>
 
@@ -516,7 +514,7 @@ const MindProduct: React.FC = () => {
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
-                      Most Popular
+                      {translate('mind.pricing.popular')}
                     </div>
                   </div>
                 )}
@@ -555,7 +553,7 @@ const MindProduct: React.FC = () => {
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  {plan.id === 'enterprise' ? 'Contact Sales' : 'Start Free Trial'}
+                  {plan.id === 'enterprise' ? translate('mind.pricing.contact') : translate('mind.pricing.trial')}
                 </button>
               </div>
             ))}
@@ -563,7 +561,7 @@ const MindProduct: React.FC = () => {
 
           <div className="text-center mt-16">
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              All plans include 30-day free trial • No setup fees • Cancel anytime
+              {translate('mind.pricing.features')}
             </p>
             <div className="flex justify-center space-x-8 text-sm text-gray-500 dark:text-gray-400">
               <div className="flex items-center space-x-2">
@@ -588,10 +586,10 @@ const MindProduct: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Trusted by Industry Leaders
+              {translate('mind.testimonials.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              Real results from real clients who chose MIND for their AI transformation.
+              {translate('mind.testimonials.subtitle')}
             </p>
           </div>
 
@@ -640,10 +638,10 @@ const MindProduct: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
-              Calculate Your ROI
+              {translate('mind.roi.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 font-light">
-              See how much MIND can save your organization with our intelligent ROI calculator.
+              {translate('mind.roi.subtitle')}
             </p>
           </div>
 
@@ -658,7 +656,7 @@ const MindProduct: React.FC = () => {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Number of Employees
+                      {translate('mind.roi.employees')}
                     </label>
                     <input
                       type="range"
@@ -677,7 +675,7 @@ const MindProduct: React.FC = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Annual Revenue (€)
+                      {translate('mind.roi.revenue')}
                     </label>
                     <input
                       type="range"
@@ -697,7 +695,7 @@ const MindProduct: React.FC = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Industry
+                      {translate('mind.roi.industry')}
                     </label>
                     <select 
                       value={industry}
@@ -715,7 +713,7 @@ const MindProduct: React.FC = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Selected Plan
+                      {translate('mind.roi.plan')}
                     </label>
                     <select 
                       value={selectedPlan}
@@ -739,14 +737,14 @@ const MindProduct: React.FC = () => {
                 </h3>
                 <div className="space-y-6">
                   <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Monthly Net Savings</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">{translate('mind.roi.monthly')}</div>
                     <div className="text-3xl font-bold text-green-600 dark:text-green-400">
                       €{roiResults.monthlySavings.toLocaleString()}
                     </div>
                   </div>
 
                   <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Annual Net Savings</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">{translate('mind.roi.annual')}</div>
                     <div className="text-3xl font-bold text-green-600 dark:text-green-400">
                       €{roiResults.annualSavings.toLocaleString()}
                     </div>
@@ -760,7 +758,7 @@ const MindProduct: React.FC = () => {
                       </div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-                      <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Payback</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">{translate('mind.roi.payback')}</div>
                       <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                         {roiResults.paybackMonths}mo
                       </div>
@@ -768,7 +766,7 @@ const MindProduct: React.FC = () => {
                   </div>
 
                   <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-700">
-                    <h4 className="font-medium text-gray-900 dark:text-white mb-3">Projected Benefits</h4>
+                    <h4 className="font-medium text-gray-900 dark:text-white mb-3">{translate('mind.roi.benefits')}</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500" />
@@ -790,7 +788,7 @@ const MindProduct: React.FC = () => {
                   </div>
 
                   <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow-lg">
-                    Get Detailed ROI Report
+                    {translate('mind.roi.report')}
                   </button>
                 </div>
               </div>
@@ -813,23 +811,23 @@ const MindProduct: React.FC = () => {
           </div>
           
           <h2 className="text-4xl md:text-6xl font-light mb-8 tracking-tight">
-            Ready to Unleash Your Organization's Mind?
+            {translate('mind.cta.title')}
           </h2>
           <p className="text-xl text-gray-300 dark:text-gray-400 mb-12 font-light max-w-4xl mx-auto">
-            Join the AI revolution. Transform your business. Unlock unlimited potential with MIND's universal intelligence.
+            {translate('mind.cta.subtitle')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
             <button className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-4 rounded-full text-lg font-medium hover:from-purple-500 hover:to-pink-500 transition-all duration-300 transform hover:scale-105 shadow-xl">
               <div className="flex items-center space-x-2">
                 <Rocket className="h-5 w-5 group-hover:animate-bounce" />
-                <span>Start Free Trial</span>
+                <span>{translate('mind.cta.trial')}</span>
               </div>
             </button>
             <button className="group border-2 border-white text-white px-12 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-gray-900 transition-all duration-300">
               <div className="flex items-center space-x-2">
                 <Phone className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                <span>Schedule Demo</span>
+                <span>{translate('mind.cta.schedule')}</span>
               </div>
             </button>
           </div>
