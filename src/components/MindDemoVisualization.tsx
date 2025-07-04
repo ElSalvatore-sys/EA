@@ -275,7 +275,7 @@ const MindDemoVisualization: React.FC<MindDemoVisualizationProps> = ({ isOpen, o
                     cx={x}
                     cy={y}
                     r="0.8"
-                    fill="url(#gradient-" + connection.from + ")"
+                    fill={`url(#gradient-${connection.from})`}
                     filter="url(#glow)"
                     className="animate-pulse"
                   />
