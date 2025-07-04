@@ -158,6 +158,92 @@ const SmartLiving: React.FC = () => {
         </div>
       </section>
 
+      {/* Why Home Automation Section */}
+      <section className="py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
+              Why Home Automation?
+            </h2>
+            <p className="text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light italic">
+              Because life's too short for busywork — let your home handle it.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: '🛒',
+                title: 'Errand-Free Living',
+                description: 'Your Personal AI predicts when you\'re running low on groceries or household essentials, places the order, and schedules delivery while you focus on what matters.',
+                gradient: 'from-green-500 to-emerald-600'
+              },
+              {
+                icon: '🎫',
+                title: 'Instant Bookings & Plans',
+                description: 'From concerts to flight check-ins, one voice command secures tickets, reserves tables, and updates your calendar — no apps, no queues, no stress.',
+                gradient: 'from-purple-500 to-violet-600'
+              },
+              {
+                icon: '🌡️',
+                title: 'Perfect Climate, Always',
+                description: 'Adaptive sensors learn your comfort patterns and the local weather, fine-tuning heating, cooling, and air-quality in real time. Save up to 40% on energy without lifting a finger.',
+                gradient: 'from-blue-500 to-cyan-600'
+              },
+              {
+                icon: '🛡️',
+                title: 'Shield-Level Security & Fire Guard',
+                description: 'AI-driven cameras, smart locks, and smoke/CO detectors detect anomalies in milliseconds, trigger alerts, and can even call emergency services — whether you\'re downstairs or thousands of miles away.',
+                gradient: 'from-red-500 to-orange-600'
+              },
+              {
+                icon: '👥',
+                title: 'Care Beyond Distance',
+                description: 'Discreet fall sensors, medication reminders, and two-way video check-ins keep older parents safe and connected. If something\'s wrong, you and emergency responders know immediately.',
+                gradient: 'from-pink-500 to-rose-600'
+              },
+              {
+                icon: '🎛️',
+                title: 'Unified Control, Effortless Routine',
+                description: 'Lights, blinds, music, appliances — everything choreographed through a single dashboard or a simple "Good night" voice cue.',
+                gradient: 'from-indigo-500 to-purple-600'
+              }
+            ].map((benefit, index) => (
+              <div key={index} className="group bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700">
+                <div className={`w-20 h-20 bg-gradient-to-br ${benefit.gradient} rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                  <div className="text-3xl">{benefit.icon}</div>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{benefit.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-16">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Make the leap from connected devices to a truly intelligent lifestyle.
+              </h3>
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+                Explore our bundles or book a live demo today and see how Smart Living turns houses into responsive, caring partners — 24/7.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  to="/solutions/smart-living/products"
+                  className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow-lg"
+                >
+                  Explore Smart Bundles
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+                <button className="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-8 py-4 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300">
+                  Book Live Demo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Key Solutions */}
       <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
