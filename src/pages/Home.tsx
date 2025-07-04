@@ -214,6 +214,16 @@ const Home: React.FC = () => {
                   </div>
                 </div>
               </div>
+              
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <Link
+                  to="/services"
+                  className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+                >
+                  View All Services & Pricing
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
             </div>
             
             {/* Services */}

@@ -38,6 +38,7 @@ const Footer: React.FC<FooterProps> = ({ onBookingClick }) => {
               <li><Link to="/" className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors">{translate('nav.home')}</Link></li>
               <li><Link to="/solutions" className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors">{translate('nav.solutions')}</Link></li>
               <li><Link to="/mind" className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors">MIND</Link></li>
+              <li><Link to="/services" className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors">Services</Link></li>
               <li><Link to="/ea-method" className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors">{translate('nav.method')}</Link></li>
               <li><Link to="/why-ea" className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors">{translate('nav.why')}</Link></li>
               <li><Link to="/contact" className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors">{translate('nav.contact')}</Link></li>

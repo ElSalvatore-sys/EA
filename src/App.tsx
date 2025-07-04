@@ -19,6 +19,7 @@ import Contact from './pages/Contact';
 import Datenschutz from './pages/Datenschutz';
 import Impressum from './pages/Impressum';
 import HotelPillars from './pages/HotelPillars';
+import Services from './pages/Services';
 
 // Component to handle scroll to top on route change
 const ScrollToTop: React.FC = () => {
@@ -55,6 +56,7 @@ function App() {
               <Route path="/datenschutz" element={<Datenschutz />} />
               <Route path="/impressum" element={<Impressum />} />
               <Route path="/hotel-pillars" element={<HotelPillars />} />
+              <Route path="/services" element={<Services />} />
             </Routes>
           </Layout>
         </Router>
