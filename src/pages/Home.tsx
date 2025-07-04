@@ -446,10 +446,13 @@ const Home: React.FC = () => {
                     Visit Hotel
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
-                  <button className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  <Link
+                    to="/hotel-pillars"
+                    className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  >
                     <Play className="mr-2 h-4 w-4" />
                     View 8 Pillars
-                  </button>
+                  </Link>
                 </div>
               </div>
               
