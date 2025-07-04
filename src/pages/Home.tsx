@@ -88,13 +88,13 @@ const Home: React.FC = () => {
                   <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white tracking-tight">
                     MIND
                   </h2>
-                  <p className="text-lg text-purple-600 dark:text-purple-400 font-medium">Universal AI Solution</p>
+                  <p className="text-lg text-purple-600 dark:text-purple-400 font-medium italic">"One brain, infinite workflows."</p>
                 </div>
               </div>
               
               <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 font-light leading-relaxed">
-                One intelligent system that adapts to every industry, every workflow, every challenge. 
-                MIND transforms how businesses think, learn, and grow.
+                The Universal AI Solution that adapts to every industry, every workflow, every challenge. 
+                One intelligent system that transforms how businesses think, learn, and grow.
               </p>
               
               <div className="grid grid-cols-2 gap-6 mb-8">
@@ -148,9 +148,12 @@ const Home: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
               AI-Powered Websites & Apps
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              We build intelligent websites and applications with AI booking systems, chatbots, and automation. 
-              40-60% cost savings compared to big companies.
+            <p className="text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light italic mb-4">
+              "Websites that think; apps that anticipate."
+            </p>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
+              We build intelligent websites and applications with AI integration, smart automation, 
+              and modern design. 40-60% cost savings compared to big companies.
             </p>
           </div>
 
@@ -232,7 +235,8 @@ const Home: React.FC = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <Code className="h-6 w-6 text-white" />
                 </div>
-                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Smart Development</h4>
+                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Smart Development</h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-3">"Code once, let AI cut the cost in half."</p>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                   AI-assisted development process that reduces costs while maintaining enterprise-grade quality.
                 </p>
@@ -242,7 +246,8 @@ const Home: React.FC = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <MessageSquare className="h-6 w-6 text-white" />
                 </div>
-                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-3">AI Chatbots</h4>
+                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">AI Chatbots</h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-3">"Customer service that never sleeps (and never says, 'Please hold')."</p>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                   Intelligent chatbots that handle customer service, bookings, and support automatically.
                 </p>
@@ -252,7 +257,8 @@ const Home: React.FC = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <Calendar className="h-6 w-6 text-white" />
                 </div>
-                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Booking Systems</h4>
+                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Booking Systems</h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-3">"Your calendar, already handled."</p>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                   Smart booking and scheduling systems with AI optimization and automation.
                 </p>
@@ -352,7 +358,7 @@ const Home: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 tracking-tight">
               Industry Solutions
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-light">
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-light">
               Specialized AI solutions for your industry's unique challenges.
             </p>
           </div>
@@ -362,21 +368,24 @@ const Home: React.FC = () => {
               {
                 icon: '🏨',
                 title: 'Hospitality',
-                description: 'Smart reservations, guest services, and operations',
+                description: '"From check-in to check-out, pure wow."',
+                details: 'Smart reservations, guest services, and operations',
                 link: '/solutions/gastronomy-hospitality',
                 available: true
               },
               {
                 icon: '🏭',
                 title: 'Manufacturing',
-                description: 'Predictive maintenance and quality control',
+                description: '"Machines that fix themselves before they fail."',
+                details: 'Predictive maintenance and quality control',
                 link: '/solutions/industrial-manufacturing',
                 available: true
               },
               {
                 icon: '🏥',
                 title: 'Healthcare',
-                description: 'Diagnostic support and patient management',
+                description: '"Sharper diagnoses, happier patients."',
+                details: 'Diagnostic support and patient management',
                 link: '/solutions/healthcare',
                 available: true
               }
@@ -387,7 +396,8 @@ const Home: React.FC = () => {
               >
                 <div className="text-4xl mb-6">{industry.icon}</div>
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-4">{industry.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">{industry.description}</p>
+                <p className="text-blue-600 dark:text-blue-400 mb-3 italic font-medium">{industry.description}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed text-sm">{industry.details}</p>
                 
                 {industry.available ? (
                   <Link
@@ -425,7 +435,7 @@ const Home: React.FC = () => {
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="text-3xl">🏨</div>
                   <div>
-                    <h3 className="text-2xl font-medium text-gray-900 dark:text-white">Hotel am Kochbrunnen</h3>
+                <p className="text-lg text-blue-600 dark:text-blue-400 font-medium italic">"Turn four walls into a living, caring ally."</p>
                     <p className="text-orange-600 dark:text-orange-400">Complete AI Transformation</p>
                   </div>
                 </div>
@@ -485,7 +495,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+              Complete Smart Home Solutions that transform your living space with curated smart devices from leading brands. 
 
       {/* Client Trust Indicators */}
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
