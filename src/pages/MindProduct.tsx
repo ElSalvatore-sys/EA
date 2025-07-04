@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import MindDemoVisualization from '../components/MindDemoVisualization';
 import { 
   Brain, 
   Zap, 
@@ -40,6 +41,7 @@ import { useLanguage } from '../components/LanguageSelector';
 
 const MindProduct: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState('growth');
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [employees, setEmployees] = useState(100);
   const [revenue, setRevenue] = useState(5000000);
   const [industry, setIndustry] = useState('manufacturing');
@@ -347,7 +349,7 @@ const MindProduct: React.FC = () => {
               <button className="group border-2 border-white/30 text-white px-12 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300">
                 <div className="flex items-center space-x-2">
                   <Play className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span>{translate('mind.cta.demo')}</span>
+                  <span onClick={() => setIsDemoOpen(true)}>{translate('mind.cta.demo')}</span>
                 </div>
               </button>
             </div>
@@ -849,6 +851,12 @@ const MindProduct: React.FC = () => {
           </div>
         </div>
       </section>
+      
+      {/* Demo Visualization Modal */}
+      <MindDemoVisualization 
+        isOpen={isDemoOpen} 
+        onClose={() => setIsDemoOpen(false)} 
+      />
     </div>
   );
 };
