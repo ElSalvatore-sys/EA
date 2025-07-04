@@ -18,6 +18,7 @@ import WhyEA from './pages/WhyEA';
 import Contact from './pages/Contact';
 import Datenschutz from './pages/Datenschutz';
 import Impressum from './pages/Impressum';
+import HotelPillars from './pages/HotelPillars';
 
 // Component to handle scroll to top on route change
 const ScrollToTop: React.FC = () => {
@@ -53,6 +54,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/datenschutz" element={<Datenschutz />} />
               <Route path="/impressum" element={<Impressum />} />
+              <Route path="/hotel-pillars" element={<HotelPillars />} />
             </Routes>
           </Layout>
         </Router>
