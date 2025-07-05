@@ -332,7 +332,7 @@ const MindProduct: React.FC = () => {
             </h1>
             
             <p className="text-3xl md:text-4xl mb-6 text-gray-300 dark:text-gray-400 font-light">
-              {translate('mind.title')}
+              Unleash one intelligence to connect dots humans didn't know existed.
             </p>
             
             <p className="text-xl md:text-2xl mb-12 text-gray-300 dark:text-gray-400 max-w-5xl mx-auto font-light leading-relaxed">
